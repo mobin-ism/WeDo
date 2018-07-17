@@ -15,7 +15,6 @@ class LandingViewController: UIViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 20
         return imageView
     }()
     
@@ -41,12 +40,14 @@ class LandingViewController: UIViewController {
         
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            self.navigationController?.pushViewController(HomeViewController(), animated: true)
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Show the navigation bar on other view controllers
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }

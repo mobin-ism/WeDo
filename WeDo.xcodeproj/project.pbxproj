@@ -12,6 +12,12 @@
 		08320EDD20FDE01F00D98704 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08320EDC20FDE01F00D98704 /* Assets.xcassets */; };
 		08320EE020FDE01F00D98704 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08320EDE20FDE01F00D98704 /* LaunchScreen.storyboard */; };
 		08320EE920FDE49000D98704 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EE820FDE49000D98704 /* LandingViewController.swift */; };
+		08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EEC20FDEBC000D98704 /* HomeViewController.swift */; };
+		08320EF020FDF2AF00D98704 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EEF20FDF2AF00D98704 /* Slider.swift */; };
+		08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EF220FDF30B00D98704 /* SliderCell.swift */; };
+		08320EF620FDF37800D98704 /* SliderImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EF520FDF37800D98704 /* SliderImages.swift */; };
+		08320EF920FDF49500D98704 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EF820FDF49500D98704 /* Helper.swift */; };
+		08320EFB20FDF57400D98704 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EFA20FDF57400D98704 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		08320EDF20FDE01F00D98704 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08320EE120FDE01F00D98704 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08320EE820FDE49000D98704 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		08320EEC20FDEBC000D98704 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		08320EEF20FDF2AF00D98704 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
+		08320EF220FDF30B00D98704 /* SliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
+		08320EF520FDF37800D98704 /* SliderImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderImages.swift; sourceTree = "<group>"; };
+		08320EF820FDF49500D98704 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		08320EFA20FDF57400D98704 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,9 @@
 		08320ED120FDE01400D98704 /* WeDo */ = {
 			isa = PBXGroup;
 			children = (
+				08320EF720FDF48700D98704 /* Utility */,
+				08320EF420FDF36800D98704 /* Models */,
+				08320EEE20FDF2A300D98704 /* Views */,
 				08320EE720FDE47700D98704 /* Controllers */,
 				08320ED220FDE01400D98704 /* AppDelegate.swift */,
 				08320EDC20FDE01F00D98704 /* Assets.xcassets */,
@@ -68,8 +83,43 @@
 			isa = PBXGroup;
 			children = (
 				08320EE820FDE49000D98704 /* LandingViewController.swift */,
+				08320EEC20FDEBC000D98704 /* HomeViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		08320EEE20FDF2A300D98704 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08320EF120FDF2F200D98704 /* CollectionViewCells */,
+				08320EEF20FDF2AF00D98704 /* Slider.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		08320EF120FDF2F200D98704 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				08320EF220FDF30B00D98704 /* SliderCell.swift */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		08320EF420FDF36800D98704 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				08320EF520FDF37800D98704 /* SliderImages.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		08320EF720FDF48700D98704 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				08320EF820FDF49500D98704 /* Helper.swift */,
+				08320EFA20FDF57400D98704 /* Config.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,7 +194,13 @@
 			files = (
 				08320EDB20FDE01400D98704 /* WeDo.xcdatamodeld in Sources */,
 				08320EE920FDE49000D98704 /* LandingViewController.swift in Sources */,
+				08320EFB20FDF57400D98704 /* Config.swift in Sources */,
 				08320ED320FDE01400D98704 /* AppDelegate.swift in Sources */,
+				08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */,
+				08320EF620FDF37800D98704 /* SliderImages.swift in Sources */,
+				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
+				08320EF020FDF2AF00D98704 /* Slider.swift in Sources */,
+				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = F3GWQ2Y6WA;
 				INFOPLIST_FILE = WeDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,7 +355,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = F3GWQ2Y6WA;
 				INFOPLIST_FILE = WeDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
