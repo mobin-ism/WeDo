@@ -18,14 +18,20 @@
 		08320EF620FDF37800D98704 /* SliderImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EF520FDF37800D98704 /* SliderImages.swift */; };
 		08320EF920FDF49500D98704 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EF820FDF49500D98704 /* Helper.swift */; };
 		08320EFB20FDF57400D98704 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EFA20FDF57400D98704 /* Config.swift */; };
+		084A03BC20FF1DE6000E532E /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084A03B820FF1DE5000E532E /* OpenSans-Regular.ttf */; };
+		084A03BD20FF1DE6000E532E /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084A03B920FF1DE6000E532E /* OpenSans-LightItalic.ttf */; };
+		084A03BE20FF1DE6000E532E /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084A03BA20FF1DE6000E532E /* OpenSans-SemiBold.ttf */; };
+		084A03BF20FF1DE6000E532E /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084A03BB20FF1DE6000E532E /* OpenSans-Bold.ttf */; };
+		084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */; };
+		084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */; };
+		084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */; };
+		084A03EE20FF746A000E532E /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03ED20FF746A000E532E /* ServiceDetailsViewController.swift */; };
+		084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03F120FF7813000E532E /* ServiceDetailsCell.swift */; };
+		854CEC902907D94E1A3E5786 /* Pods_WeDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */; };
 		E98CCFE420FE797100799029 /* MasterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE320FE797100799029 /* MasterCollectionViewCell.swift */; };
 		E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE520FE79BC00799029 /* ServiceCell.swift */; };
 		E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE720FE7D1B00799029 /* Menu.swift */; };
 		E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFEA20FE7D7200799029 /* MenuCell.swift */; };
-		E98CCFF420FE8A8200799029 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98CCFF020FE8A8100799029 /* OpenSans-Regular.ttf */; };
-		E98CCFF520FE8A8200799029 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98CCFF120FE8A8100799029 /* OpenSans-Bold.ttf */; };
-		E98CCFF620FE8A8200799029 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98CCFF220FE8A8200799029 /* OpenSans-LightItalic.ttf */; };
-		E98CCFF720FE8A8200799029 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98CCFF320FE8A8200799029 /* OpenSans-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,14 +48,22 @@
 		08320EF520FDF37800D98704 /* SliderImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderImages.swift; sourceTree = "<group>"; };
 		08320EF820FDF49500D98704 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		08320EFA20FDF57400D98704 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		084A03B820FF1DE5000E532E /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../../../../800Handyman/11/800handyman/800Handyman/Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		084A03B920FF1DE6000E532E /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "../../../../../../../800Handyman/11/800handyman/800Handyman/Resources/Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		084A03BA20FF1DE6000E532E /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiBold.ttf"; path = "../../../../../../../800Handyman/11/800handyman/800Handyman/Resources/Fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		084A03BB20FF1DE6000E532E /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../../../../../../../800Handyman/11/800handyman/800Handyman/Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListViewController.swift; sourceTree = "<group>"; };
+		084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListCollectionViewCell.swift; sourceTree = "<group>"; };
+		084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
+		084A03ED20FF746A000E532E /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
+		084A03F120FF7813000E532E /* ServiceDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsCell.swift; sourceTree = "<group>"; };
+		1CD9AB98BE6B45E7F39176FA /* Pods-WeDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.release.xcconfig"; sourceTree = "<group>"; };
+		49DB9D0DB3ABD83CB09CBC25 /* Pods-WeDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.debug.xcconfig"; sourceTree = "<group>"; };
+		7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98CCFE320FE797100799029 /* MasterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterCollectionViewCell.swift; sourceTree = "<group>"; };
 		E98CCFE520FE79BC00799029 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		E98CCFE720FE7D1B00799029 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		E98CCFEA20FE7D7200799029 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
-		E98CCFF020FE8A8100799029 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../800handyman/800Handyman/Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		E98CCFF120FE8A8100799029 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../../../../800handyman/800Handyman/Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		E98CCFF220FE8A8200799029 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "../../../../800handyman/800Handyman/Resources/Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
-		E98CCFF320FE8A8200799029 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiBold.ttf"; path = "../../../../800handyman/800Handyman/Resources/Fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				854CEC902907D94E1A3E5786 /* Pods_WeDo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +83,8 @@
 			children = (
 				08320ED120FDE01400D98704 /* WeDo */,
 				08320ED020FDE01400D98704 /* Products */,
+				25776C88FDB7AD1E262E4081 /* Pods */,
+				99CBE29B4F33FF18FD8C6563 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +118,8 @@
 			children = (
 				08320EE820FDE49000D98704 /* LandingViewController.swift */,
 				08320EEC20FDEBC000D98704 /* HomeViewController.swift */,
+				084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */,
+				084A03ED20FF746A000E532E /* ServiceDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -122,6 +141,8 @@
 				08320EF220FDF30B00D98704 /* SliderCell.swift */,
 				E98CCFE320FE797100799029 /* MasterCollectionViewCell.swift */,
 				E98CCFE520FE79BC00799029 /* ServiceCell.swift */,
+				084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */,
+				084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -143,10 +164,39 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		084A03B720FF1DCA000E532E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				084A03BB20FF1DE6000E532E /* OpenSans-Bold.ttf */,
+				084A03B920FF1DE6000E532E /* OpenSans-LightItalic.ttf */,
+				084A03B820FF1DE5000E532E /* OpenSans-Regular.ttf */,
+				084A03BA20FF1DE6000E532E /* OpenSans-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		25776C88FDB7AD1E262E4081 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				49DB9D0DB3ABD83CB09CBC25 /* Pods-WeDo.debug.xcconfig */,
+				1CD9AB98BE6B45E7F39176FA /* Pods-WeDo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		99CBE29B4F33FF18FD8C6563 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E98CCFE920FE7D5C00799029 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
 				E98CCFEA20FE7D7200799029 /* MenuCell.swift */,
+				084A03F120FF7813000E532E /* ServiceDetailsCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -154,20 +204,9 @@
 		E98CCFEC20FE89ED00799029 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E98CCFED20FE8A3500799029 /* Fonts */,
+				084A03B720FF1DCA000E532E /* Fonts */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		E98CCFED20FE8A3500799029 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				E98CCFF120FE8A8100799029 /* OpenSans-Bold.ttf */,
-				E98CCFF220FE8A8200799029 /* OpenSans-LightItalic.ttf */,
-				E98CCFF020FE8A8100799029 /* OpenSans-Regular.ttf */,
-				E98CCFF320FE8A8200799029 /* OpenSans-SemiBold.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,9 +216,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08320EE420FDE01F00D98704 /* Build configuration list for PBXNativeTarget "WeDo" */;
 			buildPhases = (
+				744B5673C822761348067BD3 /* [CP] Check Pods Manifest.lock */,
 				08320ECB20FDE01400D98704 /* Sources */,
 				08320ECC20FDE01400D98704 /* Frameworks */,
 				08320ECD20FDE01400D98704 /* Resources */,
+				082AAD249757B29ED100D726 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -229,15 +270,54 @@
 			buildActionMask = 2147483647;
 			files = (
 				08320EE020FDE01F00D98704 /* LaunchScreen.storyboard in Resources */,
-				E98CCFF420FE8A8200799029 /* OpenSans-Regular.ttf in Resources */,
-				E98CCFF520FE8A8200799029 /* OpenSans-Bold.ttf in Resources */,
+				084A03BC20FF1DE6000E532E /* OpenSans-Regular.ttf in Resources */,
+				084A03BF20FF1DE6000E532E /* OpenSans-Bold.ttf in Resources */,
+				084A03BE20FF1DE6000E532E /* OpenSans-SemiBold.ttf in Resources */,
+				084A03BD20FF1DE6000E532E /* OpenSans-LightItalic.ttf in Resources */,
 				08320EDD20FDE01F00D98704 /* Assets.xcassets in Resources */,
-				E98CCFF720FE8A8200799029 /* OpenSans-SemiBold.ttf in Resources */,
-				E98CCFF620FE8A8200799029 /* OpenSans-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		082AAD249757B29ED100D726 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WeDo/Pods-WeDo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeDo/Pods-WeDo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		744B5673C822761348067BD3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WeDo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		08320ECB20FDE01400D98704 /* Sources */ = {
@@ -250,13 +330,18 @@
 				08320ED320FDE01400D98704 /* AppDelegate.swift in Sources */,
 				E98CCFE420FE797100799029 /* MasterCollectionViewCell.swift in Sources */,
 				08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */,
+				084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */,
 				E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */,
 				E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */,
+				084A03EE20FF746A000E532E /* ServiceDetailsViewController.swift in Sources */,
+				084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */,
 				08320EF620FDF37800D98704 /* SliderImages.swift in Sources */,
+				084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */,
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
 				08320EF020FDF2AF00D98704 /* Slider.swift in Sources */,
 				E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */,
 				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
+				084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +475,7 @@
 		};
 		08320EE520FDE01F00D98704 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49DB9D0DB3ABD83CB09CBC25 /* Pods-WeDo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -408,6 +494,7 @@
 		};
 		08320EE620FDE01F00D98704 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CD9AB98BE6B45E7F39176FA /* Pods-WeDo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

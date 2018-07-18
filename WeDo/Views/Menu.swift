@@ -11,6 +11,7 @@ import UIKit
 class Menu: NSObject {
     
     var homeController = HomeViewController()
+    var allServicesListController = AllServicesListViewController()
     
     lazy var backgroundView: UIView = {
         let view = UIView()

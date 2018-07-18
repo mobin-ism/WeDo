@@ -72,11 +72,9 @@ class HomeViewController: UIViewController {
     
     private func setNavigationBar() {
         navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
-    
         let logo = UIImage(named: "logo.png")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        self.navigationController?.navigationBar.center = imageView.center
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
     }
     
@@ -132,7 +130,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
+        self.navigationController?.pushViewController(AllServicesListViewController(), animated: true)
     }
     
 }
@@ -150,7 +148,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
+        return 20
     }
     
 }

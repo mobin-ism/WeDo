@@ -1,14 +1,14 @@
 //
-//  MasterCollectionViewCell.swift
+//  AllServicesListCollectionViewCell.swift
 //  WeDo
 //
-//  Created by Al Mobin on 18/7/18.
+//  Created by Creativeitem on 18/7/18.
 //  Copyright © 2018 Creativeitem. All rights reserved.
 //
 
 import UIKit
 
-class MasterCollectionViewCell: UICollectionViewCell {
+class AllServicesListCollectionViewCell: UICollectionViewCell {
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -23,7 +23,7 @@ class MasterCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 11)
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -50,9 +50,8 @@ class MasterCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
-        layer.borderColor = UIColor(red:0.74, green:0.74, blue:0.74, alpha:0.4).cgColor
-        layer.borderWidth = 1
-        layer.cornerRadius = 4
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor(red:0.74, green:0.74, blue:0.74, alpha:0.2).cgColor
         layout()
     }
     
@@ -67,19 +66,18 @@ class MasterCollectionViewCell: UICollectionViewCell {
     
     private func setImageView() {
         addSubview(imageView)
-        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7).isActive = true
-        imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
-    
+
     private func setTitleLabel() {
         addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 10).isActive = true
     }
     
 }
+
 
