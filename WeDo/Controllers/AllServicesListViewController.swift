@@ -136,7 +136,7 @@ extension AllServicesListViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.verticalCollectionView {
-            self.navigationController?.pushViewController(ServiceDetailsViewController(), animated: true)
+            self.navigationController?.pushViewController(ServiceDescriptionOneViewController(), animated: true)
         }
         else {
             

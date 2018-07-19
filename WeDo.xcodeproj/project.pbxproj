@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		082E5FF22100B6C00081D26D /* ServiceDescriptionOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5FF12100B6C00081D26D /* ServiceDescriptionOneViewController.swift */; };
+		082E5FF42100B7340081D26D /* ServiceDescriptionTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5FF32100B7340081D26D /* ServiceDescriptionTwoViewController.swift */; };
 		08320ED320FDE01400D98704 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320ED220FDE01400D98704 /* AppDelegate.swift */; };
 		08320EDB20FDE01400D98704 /* WeDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08320ED920FDE01400D98704 /* WeDo.xcdatamodeld */; };
 		08320EDD20FDE01F00D98704 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08320EDC20FDE01F00D98704 /* Assets.xcassets */; };
@@ -25,7 +27,6 @@
 		084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */; };
 		084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */; };
 		084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */; };
-		084A03EE20FF746A000E532E /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03ED20FF746A000E532E /* ServiceDetailsViewController.swift */; };
 		084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03F120FF7813000E532E /* ServiceDetailsCell.swift */; };
 		854CEC902907D94E1A3E5786 /* Pods_WeDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */; };
 		E98CCFE420FE797100799029 /* MasterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE320FE797100799029 /* MasterCollectionViewCell.swift */; };
@@ -35,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		082E5FF12100B6C00081D26D /* ServiceDescriptionOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDescriptionOneViewController.swift; sourceTree = "<group>"; };
+		082E5FF32100B7340081D26D /* ServiceDescriptionTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDescriptionTwoViewController.swift; sourceTree = "<group>"; };
 		08320ECF20FDE01400D98704 /* WeDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08320ED220FDE01400D98704 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08320EDA20FDE01400D98704 /* WeDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeDo.xcdatamodel; sourceTree = "<group>"; };
@@ -55,7 +58,6 @@
 		084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListViewController.swift; sourceTree = "<group>"; };
 		084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListCollectionViewCell.swift; sourceTree = "<group>"; };
 		084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
-		084A03ED20FF746A000E532E /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		084A03F120FF7813000E532E /* ServiceDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsCell.swift; sourceTree = "<group>"; };
 		1CD9AB98BE6B45E7F39176FA /* Pods-WeDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.release.xcconfig"; sourceTree = "<group>"; };
 		49DB9D0DB3ABD83CB09CBC25 /* Pods-WeDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,7 +121,8 @@
 				08320EE820FDE49000D98704 /* LandingViewController.swift */,
 				08320EEC20FDEBC000D98704 /* HomeViewController.swift */,
 				084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */,
-				084A03ED20FF746A000E532E /* ServiceDetailsViewController.swift */,
+				082E5FF12100B6C00081D26D /* ServiceDescriptionOneViewController.swift */,
+				082E5FF32100B7340081D26D /* ServiceDescriptionTwoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				082E5FF22100B6C00081D26D /* ServiceDescriptionOneViewController.swift in Sources */,
 				08320EDB20FDE01400D98704 /* WeDo.xcdatamodeld in Sources */,
 				08320EE920FDE49000D98704 /* LandingViewController.swift in Sources */,
 				08320EFB20FDF57400D98704 /* Config.swift in Sources */,
@@ -333,13 +337,13 @@
 				084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */,
 				E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */,
 				E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */,
-				084A03EE20FF746A000E532E /* ServiceDetailsViewController.swift in Sources */,
 				084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */,
 				08320EF620FDF37800D98704 /* SliderImages.swift in Sources */,
 				084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */,
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
 				08320EF020FDF2AF00D98704 /* Slider.swift in Sources */,
 				E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */,
+				082E5FF42100B7340081D26D /* ServiceDescriptionTwoViewController.swift in Sources */,
 				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
 				084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */,
 			);

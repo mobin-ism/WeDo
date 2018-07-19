@@ -33,4 +33,7 @@ class Helper {
         return dateString
     }
     
+    public static var barHeight : CGFloat {
+        return UIApplication.shared.statusBarFrame.height
+    }
 }

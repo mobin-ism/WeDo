@@ -80,7 +80,12 @@ class HomeViewController: UIViewController {
     
     private func setSlider() {
         view.addSubview(slider)
-        slider.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
+        if Helper.isIphoneX {
+            slider.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        } else {
+            slider.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
+        }
+        
         slider.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         slider.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         if Helper.isIphoneX {
