@@ -53,8 +53,8 @@ class Slider: UIView {
     private func setCollectionView() {
         self.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        collectionView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
@@ -89,7 +89,7 @@ extension Slider: UICollectionViewDelegate, UICollectionViewDataSource {
 extension Slider: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = self.frame.width * 0.9
+        let width: CGFloat = self.frame.width - 16
         let height: CGFloat = self.frame.height
         return CGSize(width: width, height: height)
     }

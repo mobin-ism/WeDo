@@ -1,13 +1,13 @@
 //
-//  ServiceDescriptionOneViewController.swift
+//  ServiceLocationOneViewController.swift
 //  WeDo
 //
-//  Created by Creativeitem on 19/7/18.
+//  Created by Al Mobin on 21/7/18.
 //  Copyright © 2018 Creativeitem. All rights reserved.
 //
 
 import UIKit
-class ServiceDescriptionOneViewController: UIViewController {
+class ServiceLocationOneViewController: UIViewController {
     
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
@@ -59,7 +59,7 @@ class ServiceDescriptionOneViewController: UIViewController {
         button.clipsToBounds = true
         button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
         button.setTitle("Description", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
         button.tag = 1
         button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
@@ -72,7 +72,7 @@ class ServiceDescriptionOneViewController: UIViewController {
         button.clipsToBounds = true
         button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
         button.setTitle("Location", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
         button.tag = 2
         button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
@@ -152,14 +152,11 @@ class ServiceDescriptionOneViewController: UIViewController {
         button.setTitle("POST YOUR JOB FOR BID", for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
-        button.addTarget(self, action: #selector(handlePostButton), for: .touchUpInside)
         return button
     }()
     
     let cellId = "serviceDetailsCell"
     let subServices = ["1 Bed Room", "2 Bed Room", "3 Bed Room"]
-    
-    var serviceDescriptionTwoVC = ServiceDescriptionTwoViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -305,8 +302,8 @@ class ServiceDescriptionOneViewController: UIViewController {
     
     @objc func navigationButtonTapped(_ sender: UIButton) {
         switch sender.tag {
-        case 2:
-            self.navigationController?.pushViewController(ServiceLocationOneViewController(), animated: false)
+        case 1:
+            self.navigationController?.pushViewController(ServiceDescriptionOneViewController(), animated: false)
         case 3:
             self.navigationController?.pushViewController(ServiceDateAndTimeOneViewController(), animated: false)
         case 4:
@@ -315,12 +312,9 @@ class ServiceDescriptionOneViewController: UIViewController {
             print("current view controller")
         }
     }
-    @objc func handlePostButton() {
-        self.navigationController?.pushViewController(serviceDescriptionTwoVC, animated: true)
-    }
 }
 
-extension ServiceDescriptionOneViewController: UITableViewDelegate, UITableViewDataSource {
+extension ServiceLocationOneViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
