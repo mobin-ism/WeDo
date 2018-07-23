@@ -7,4 +7,6 @@ target 'WeDo' do
 
   # Pods for WeDo
 	pod 'Alamofire'
+	pod 'GoogleMaps'
+  	pod 'GooglePlaces'
 end

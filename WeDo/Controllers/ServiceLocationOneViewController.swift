@@ -7,7 +7,47 @@
 //
 
 import UIKit
+import GoogleMaps
+import GooglePlaces
+
 class ServiceLocationOneViewController: UIViewController {
+    
+    var markedLatitude : Double?
+    var markedLongitude : Double?
+    
+    var latitude: Double? = 0.0 {
+        didSet {
+            self.markedLatitude = latitude!
+        }
+    }
+    
+    var longitude: Double? = 0.0 {
+        didSet {
+            self.markedLongitude = longitude!
+        }
+    }
+    
+    lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView(frame: .zero)
+        scroll.keyboardDismissMode = .interactive
+        scroll.backgroundColor = UIColor.clear
+        scroll.delegate = self
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.isUserInteractionEnabled = true
+        scroll.isScrollEnabled = true
+        scroll.showsVerticalScrollIndicator = true
+        return scroll
+    }()
+    
+    lazy var mapView: GMSMapView = {
+        let view = GMSMapView()
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        view.isMyLocationEnabled = true
+        view.settings.myLocationButton = true
+        return view
+    }()
     
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
@@ -17,40 +57,6 @@ class ServiceLocationOneViewController: UIViewController {
         imageView.backgroundColor = .clear
         imageView.image = #imageLiteral(resourceName: "bigger-logo")
         return imageView
-    }()
-    
-    lazy var serviceIconImageView : UIImageView = {
-        var imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .clear
-        imageView.image = #imageLiteral(resourceName: "dummy2")
-        return imageView
-    }()
-    
-    lazy var serviceTitleLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.clipsToBounds = true
-        label.textAlignment = .left
-        label.text = "Cleaning"
-        label.numberOfLines = 0
-        label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 16)
-        return label
-    }()
-    
-    lazy var serviceSubTitleLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.clipsToBounds = true
-        label.textAlignment = .left
-        label.text = "Full House Cleaning"
-        label.numberOfLines = 0
-        label.textColor = UIColor.gray
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
-        return label
     }()
     
     lazy var descriptionButton : UIButton = {
@@ -105,66 +111,145 @@ class ServiceLocationOneViewController: UIViewController {
         return button
     }()
     
-    lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = UIColor.clear
-        table.separatorColor = UIColor.black
-        table.clipsToBounds = true
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.delegate = self
-        table.dataSource = self
-        return table
-    }()
-    
-    lazy var leftHorizontalLine : UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.clipsToBounds = true
-        view.backgroundColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5)
-        return view
-    }()
-    
-    lazy var rightHorizontalLine : UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.clipsToBounds = true
-        view.backgroundColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5)
-        return view
-    }()
-    
-    lazy var orLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.clipsToBounds = true
-        label.textAlignment = .center
-        label.text = "OR"
-        label.numberOfLines = 0
+    let addressLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
         label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
+        label.text = "Address"
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    lazy var postButton : UIButton = {
+    let addressLineOneLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = UIColor.black
+        label.text = "P Block, Emaar Bussiness Park"
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    let addressLineTwoLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = UIColor.black
+        label.text = "341 Jake Island Suite 419"
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
+        label.clipsToBounds = true
+        label.numberOfLines = 2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var horizontalLine : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.backgroundColor = UIColor(red:0.74, green:0.74, blue:0.74, alpha:0.5)
+        return view
+    }()
+    
+    let extraDirectionLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = UIColor.black
+        label.text = "Extra Directions"
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let extraDirectionTextField : PaddedTextField = {
+       var textfield = PaddedTextField()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.clipsToBounds = true
+        textfield.placeholder = "Extra Direction"
+        textfield.layer.cornerRadius = 5
+        textfield.layer.borderWidth = 1
+        textfield.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
+        return textfield
+    }()
+    
+    let apartmentNoLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = UIColor.black
+        label.text = "Apartment no / Villa no"
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let apartmentNoTextField : PaddedTextField = {
+        var textfield = PaddedTextField()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.clipsToBounds = true
+        textfield.placeholder = "Extra Direction"
+        textfield.layer.cornerRadius = 5
+        textfield.layer.borderWidth = 1
+        textfield.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
+        return textfield
+    }()
+    
+    lazy var nextButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.clipsToBounds = true
         button.backgroundColor = UIColor(red:0.17, green:0.67, blue:0.31, alpha:1.0)
-        button.setTitle("POST YOUR JOB FOR BID", for: .normal)
+        button.setTitle("NEXT", for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
         return button
     }()
     
-    let cellId = "serviceDetailsCell"
-    let subServices = ["1 Bed Room", "2 Bed Room", "3 Bed Room"]
+    let mapPinImageView: UIImageView = {
+        let view = UIImageView(image: #imageLiteral(resourceName: "mappin"))
+        view.contentMode = .scaleAspectFit
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
+    private let locationManager = CLLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         setNavigationBar()
         layout()
         
-        tableView.register(ServiceDetailsCell.self, forCellReuseIdentifier: cellId)
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        
+        self.mapView.delegate = self
+        _ = UITapGestureRecognizer(target: self, action: #selector(self.touchTapped(_:)))
+
+        let currentLocation = CLLocationCoordinate2DMake(23.865811, 90.399213)
+        let marker = GMSMarker(position: currentLocation)
+        marker.map = self.mapView
+        
+        // Adding outside tap will dismiss the keyboard
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        var contentHeight: CGFloat = 0
+        for view in scrollView.subviews {
+            contentHeight = contentHeight + view.frame.size.height
+        }
+        scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 540)
     }
     
     private func setNavigationBar() {
@@ -184,14 +269,18 @@ class ServiceLocationOneViewController: UIViewController {
         setupLocationButton()
         setupDateTimeButton()
         setupPaymentButton()
-        setupServiceIconImageView()
-        setupServiceTitleLabel()
-        setupServiceSubTitleLabel()
-        setupTableView()
-        setupOrLabel()
-        setupLeftHorizontalLine()
-        setupRighttHorizontalLine()
-        setupPostButton()
+        setupMapView()
+        setMapPinImageView()
+        setupScrollView()
+        setupAddressLabel()
+        setupAddressLineOneLabel()
+        setupAddressLineTwoLabel()
+        setupHorizontalLine()
+        setupExtraDirectionLabel()
+        setupExtraDirectionTextField()
+        setupApartmentLabel()
+        setupApartmentTextField()
+        setupnextButton()
     }
     
     func setupBackgroundImageView() {
@@ -234,63 +323,95 @@ class ServiceLocationOneViewController: UIViewController {
         paymentButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
     }
     
-    func setupServiceIconImageView() {
-        view.addSubview(serviceIconImageView)
-        serviceIconImageView.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
-        serviceIconImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        serviceIconImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        serviceIconImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+    func setupMapView() {
+        view.addSubview(mapView)
+        mapView.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor).isActive = true
+        mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        if Helper.isIphoneX {
+            mapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35).isActive = true
+        } else {
+            mapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.40).isActive = true
+        }
+    }
+    private func setMapPinImageView() {
+        mapView.addSubview(mapPinImageView)
+        mapPinImageView.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
+        mapPinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor).isActive = true
+        mapPinImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        mapPinImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    func setupServiceTitleLabel() {
-        view.addSubview(serviceTitleLabel)
-        serviceTitleLabel.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
-        serviceTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
-        
+    func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    func setupServiceSubTitleLabel() {
-        view.addSubview(serviceSubTitleLabel)
-        serviceSubTitleLabel.topAnchor.constraint(equalTo: serviceTitleLabel.bottomAnchor, constant: 5).isActive = true
-        serviceSubTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
+    func setupAddressLabel() {
+        self.scrollView.addSubview(addressLabel)
+        addressLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 16).isActive = true
+        addressLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
     }
     
-    func setupTableView() {
-        view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: serviceIconImageView.bottomAnchor, constant: 20).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.33).isActive = true
+    func setupAddressLineOneLabel() {
+        self.scrollView.addSubview(addressLineOneLabel)
+        addressLineOneLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 5).isActive = true
+        addressLineOneLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        addressLineOneLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
     }
     
-    func setupOrLabel() {
-        view.addSubview(orLabel)
-        orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        orLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20).isActive = true
+    func setupAddressLineTwoLabel() {
+        self.scrollView.addSubview(addressLineTwoLabel)
+        addressLineTwoLabel.topAnchor.constraint(equalTo: addressLineOneLabel.bottomAnchor, constant: 5).isActive = true
+        addressLineTwoLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        addressLineTwoLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
     }
     
-    func setupLeftHorizontalLine() {
-        view.addSubview(leftHorizontalLine)
-        leftHorizontalLine.centerYAnchor.constraint(equalTo: orLabel.centerYAnchor).isActive = true
-        leftHorizontalLine.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        leftHorizontalLine.rightAnchor.constraint(equalTo: orLabel.leftAnchor, constant: -16).isActive = true
-        leftHorizontalLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    func setupHorizontalLine() {
+        self.scrollView.addSubview(horizontalLine)
+        horizontalLine.topAnchor.constraint(equalTo: addressLineTwoLabel.bottomAnchor, constant: 20).isActive = true
+        horizontalLine.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        horizontalLine.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        horizontalLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
     }
     
-    func setupRighttHorizontalLine() {
-        view.addSubview(rightHorizontalLine)
-        rightHorizontalLine.centerYAnchor.constraint(equalTo: orLabel.centerYAnchor).isActive = true
-        rightHorizontalLine.leftAnchor.constraint(equalTo: orLabel.rightAnchor, constant: 16).isActive = true
-        rightHorizontalLine.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
-        rightHorizontalLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    func setupExtraDirectionLabel() {
+        self.scrollView.addSubview(extraDirectionLabel)
+        extraDirectionLabel.topAnchor.constraint(equalTo: horizontalLine.bottomAnchor, constant: 20).isActive = true
+        extraDirectionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
     }
     
-    func setupPostButton() {
-        view.addSubview(postButton)
-        postButton.topAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 20).isActive = true
-        postButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        postButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        postButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    func setupExtraDirectionTextField() {
+        self.scrollView.addSubview(extraDirectionTextField)
+        extraDirectionTextField.topAnchor.constraint(equalTo: extraDirectionLabel.bottomAnchor, constant: 5).isActive = true
+        extraDirectionTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        extraDirectionTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        extraDirectionTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setupApartmentLabel() {
+        self.scrollView.addSubview(apartmentNoLabel)
+        apartmentNoLabel.topAnchor.constraint(equalTo: extraDirectionTextField.bottomAnchor, constant: 16).isActive = true
+        apartmentNoLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+    }
+    
+    func setupApartmentTextField() {
+        self.scrollView.addSubview(apartmentNoTextField)
+        apartmentNoTextField.topAnchor.constraint(equalTo: apartmentNoLabel.bottomAnchor, constant: 5).isActive = true
+        apartmentNoTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        apartmentNoTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        apartmentNoTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setupnextButton() {
+        self.scrollView.addSubview(nextButton)
+        nextButton.topAnchor.constraint(equalTo: apartmentNoTextField.bottomAnchor, constant: 20).isActive = true
+        nextButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        nextButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
     @objc func rightBarButtonTapped() {
         
@@ -312,35 +433,85 @@ class ServiceLocationOneViewController: UIViewController {
             print("current view controller")
         }
     }
+    
+    @objc func touchTapped(_ sender: UITapGestureRecognizer) {
+        
+    }
+    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
+    }
 }
 
-extension ServiceLocationOneViewController: UITableViewDelegate, UITableViewDataSource {
+extension ServiceLocationOneViewController : UIScrollViewDelegate {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+}
+
+extension ServiceLocationOneViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else { return }
+        locationManager.startUpdatingLocation()
+        mapView.isMyLocationEnabled = true
     }
+}
+
+
+extension ServiceLocationOneViewController : GMSMapViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subServices.count
+    // MARK: GMSMapViewDelegate
+    
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        let bottomPoint: CGPoint = CGPoint(x: mapPinImageView.center.x, y: mapPinImageView.center.y + mapPinImageView.frame.height / 2)
+        let coordinate = mapView.projection.coordinate(for: bottomPoint)
+        
+        let geocoder = GMSGeocoder()
+        geocoder.reverseGeocodeCoordinate(coordinate) { (response, error) in
+            guard let response = response else { return }
+            guard let address = response.firstResult() else { return }
+            guard let lines = address.lines, let country = address.country else { return }
+            var formattedAddress: String = ""
+            for line in lines {
+                if line != "" {
+                    formattedAddress = "\(formattedAddress) \(line),"
+                }
+            }
+            formattedAddress.removeLast()
+            self.addressLineOneLabel.text = formattedAddress
+            self.addressLineTwoLabel.text = country
+            
+            self.markedLatitude = coordinate.latitude
+            self.markedLongitude = coordinate.longitude
+        }
+        
     }
+}
+
+
+extension ServiceLocationOneViewController : UITextFieldDelegate {
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ServiceDetailsCell {
-            cell.titleText = subServices[indexPath.row]
-            cell.priceText = "101 AED"
-            return cell
-        } else {
-            let cell = tableView.cellForRow(at: indexPath)!
-            return cell
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if textField == self.extraDirectionTextField {
+            
+            scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
+        }
+        else if textField == self.apartmentNoTextField {
+            
+            scrollView.setContentOffset(CGPoint(x: 0, y: 120), animated: true)
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        view.resignFirstResponder()
+        return true
     
+    }
 }

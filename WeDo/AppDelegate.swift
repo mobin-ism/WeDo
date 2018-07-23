@@ -8,7 +8,8 @@
 
 import UIKit
 import CoreData
-
+import GoogleMaps
+import GooglePlaces
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -20,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = UINavigationController(rootViewController: LandingViewController())
+        
+        
+        GMSServices.provideAPIKey(GOOGLE_MAP_API_KEY)
+        GMSPlacesClient.provideAPIKey(GOOGLE_MAP_API_KEY)
         return true
     }
 

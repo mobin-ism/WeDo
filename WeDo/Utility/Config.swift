@@ -15,3 +15,5 @@ let OPENSANS_REGULAR = "OpenSans-Regular"
 let OPENSANS_SEMIBOLD = "OpenSans-SemiBold"
 let OPENSANS_BOLD = "OpenSans-Bold"
 let OPENSANS_LIGHTITALIC = "OpenSans-LightItalic"
+
+let GOOGLE_MAP_API_KEY = "AIzaSyCSP0XXoHJi6PAGVk32g9bwDsq0bqKgupU"
