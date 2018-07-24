@@ -11,21 +11,9 @@ import GoogleMaps
 import GooglePlaces
 
 class ServiceLocationOneViewController: UIViewController {
-    
     var markedLatitude : Double?
     var markedLongitude : Double?
     
-    var latitude: Double? = 0.0 {
-        didSet {
-            self.markedLatitude = latitude!
-        }
-    }
-    
-    var longitude: Double? = 0.0 {
-        didSet {
-            self.markedLongitude = longitude!
-        }
-    }
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -46,6 +34,7 @@ class ServiceLocationOneViewController: UIViewController {
         view.isUserInteractionEnabled = true
         view.isMyLocationEnabled = true
         view.settings.myLocationButton = true
+        view.delegate = self
         return view
     }()
     
@@ -227,21 +216,25 @@ class ServiceLocationOneViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
-        self.mapView.delegate = self
-        _ = UITapGestureRecognizer(target: self, action: #selector(self.touchTapped(_:)))
-
-        let currentLocation = CLLocationCoordinate2DMake(23.865811, 90.399213)
-        let marker = GMSMarker(position: currentLocation)
-        marker.map = self.mapView
+        // set map view to current location
+        self.setMapViewToCurrentLocation()
         
         // Adding outside tap will dismiss the keyboard
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
     }
     
+    func setMapViewToCurrentLocation() {
+        
+        guard let currentLatitude  = locationManager.location?.coordinate.latitude else { return }
+        guard let currentLongitude = locationManager.location?.coordinate.longitude else { return }
+        
+        let currentLocation = CLLocationCoordinate2DMake(currentLatitude, currentLongitude)
+        mapView.animate(toLocation: currentLocation)
+        mapView.animate(toZoom: 16)
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -337,7 +330,7 @@ class ServiceLocationOneViewController: UIViewController {
     private func setMapPinImageView() {
         mapView.addSubview(mapPinImageView)
         mapPinImageView.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
-        mapPinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor).isActive = true
+        mapPinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor, constant: -25).isActive = true
         mapPinImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         mapPinImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }

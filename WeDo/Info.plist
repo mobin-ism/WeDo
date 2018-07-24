@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>This application will need the access of your media library</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>By accessing your location, this app will automatically trace your address if required</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Regular.ttf</string>
