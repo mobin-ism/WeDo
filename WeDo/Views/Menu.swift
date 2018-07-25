@@ -204,6 +204,7 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         hide()
+        
         print(indexPath.row)
     }
     

@@ -9,6 +9,7 @@
 import UIKit
 class ServicePaymentOneViewController: UIViewController {
     
+    
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -19,38 +20,16 @@ class ServicePaymentOneViewController: UIViewController {
         return imageView
     }()
     
-    lazy var serviceIconImageView : UIImageView = {
-        var imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .clear
-        imageView.image = #imageLiteral(resourceName: "dummy2")
-        return imageView
-    }()
-    
-    lazy var serviceTitleLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.clipsToBounds = true
-        label.textAlignment = .left
-        label.text = "Cleaning"
-        label.numberOfLines = 0
-        label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 16)
-        return label
-    }()
-    
-    lazy var serviceSubTitleLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.clipsToBounds = true
-        label.textAlignment = .left
-        label.text = "Full House Cleaning"
-        label.numberOfLines = 0
-        label.textColor = UIColor.gray
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
-        return label
+    lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView(frame: .zero)
+        scroll.keyboardDismissMode = .interactive
+        scroll.backgroundColor = UIColor.clear
+        scroll.delegate = self
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.isUserInteractionEnabled = true
+        scroll.isScrollEnabled = true
+        scroll.showsVerticalScrollIndicator = true
+        return scroll
     }()
     
     lazy var descriptionButton : UIButton = {
@@ -105,68 +84,134 @@ class ServicePaymentOneViewController: UIViewController {
         return button
     }()
     
-    lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = UIColor.clear
-        table.separatorColor = UIColor.black
-        table.clipsToBounds = true
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.delegate = self
-        table.dataSource = self
-        return table
-    }()
-    
-    lazy var leftHorizontalLine : UIView = {
-        let view = UIView()
+    lazy var jobTitleView : UIView = {
+        var view = UIView()
+        view.backgroundColor = UIColor(red:252/255, green:251/255, blue:252/255, alpha:0.9)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
-        view.backgroundColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5)
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(red:0.91, green:0.91, blue:0.91, alpha:0.5).cgColor
         return view
     }()
     
-    lazy var rightHorizontalLine : UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+    let jobTitleImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
-        view.backgroundColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = #imageLiteral(resourceName: "dummy2")
+        view.backgroundColor = GREENISH_COLOR
+        view.layer.cornerRadius = 5
         return view
     }()
     
-    lazy var orLabel : UILabel = {
+    let jobTitleLabel : UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
-        label.textAlignment = .center
-        label.text = "OR"
         label.numberOfLines = 0
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
         label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
+        label.text = "Job Title:"
         return label
     }()
     
-    lazy var postButton : UIButton = {
+    let jobLabel : UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.clipsToBounds = true
+        label.numberOfLines = 0
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 16)
+        label.textColor = GREENISH_COLOR
+        label.text = "Full House Cleaning"
+        return label
+    }()
+    
+    lazy var amountToBePaidView : UIView = {
+        var view = UIView()
+        view.backgroundColor = UIColor(red:252/255, green:251/255, blue:252/255, alpha:0.9)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(red:0.91, green:0.91, blue:0.91, alpha:0.5).cgColor
+        return view
+    }()
+    
+    let amountToBePaidImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = #imageLiteral(resourceName: "dummy2")
+        view.backgroundColor = GREENISH_COLOR
+        view.layer.cornerRadius = 5
+        return view
+    }()
+    
+    let amountToBePaidLabel : UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.clipsToBounds = true
+        label.numberOfLines = 0
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 16)
+        label.textColor = GREENISH_COLOR
+        label.text = "AED 150"
+        label.textAlignment = .left
+        return label
+    }()
+    
+    let amountToBePaidTitleLabel : UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.clipsToBounds = true
+        label.numberOfLines = 0
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        label.textColor = UIColor.black
+        label.text = "Amount To Be Paid:"
+        return label
+    }()
+    
+    lazy var payThroughCardButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.clipsToBounds = true
         button.backgroundColor = UIColor(red:0.17, green:0.67, blue:0.31, alpha:1.0)
-        button.setTitle("POST YOUR JOB FOR BID", for: .normal)
+        button.setTitle("PAY THROUGH CARD", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
         return button
     }()
     
-    let cellId = "serviceDetailsCell"
-    let subServices = ["1 Bed Room", "2 Bed Room", "3 Bed Room"]
+    lazy var cashOnDeliveryButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:24/255, green:151/255, blue:155/255, alpha:1.0)
+        button.setTitle("CASH ON DELIVERY", for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.layer.cornerRadius = 5
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        setNavigationBar()
         layout()
-        
-        tableView.register(ServiceDetailsCell.self, forCellReuseIdentifier: cellId)
+        setNavigationBar()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.layoutIfNeeded()
+        var contentHeight: CGFloat = 0
+        for view in scrollView.subviews {
+            contentHeight = contentHeight + view.frame.size.height
+        }
+        scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 140)
+    }
+
     private func setNavigationBar() {
         navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
         let logo = UIImage(named: "logo.png")
@@ -177,21 +222,23 @@ class ServicePaymentOneViewController: UIViewController {
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
-    
     func layout() {
         setupBackgroundImageView()
         setupDescriptionButton()
         setupLocationButton()
         setupDateTimeButton()
         setupPaymentButton()
-        setupServiceIconImageView()
-        setupServiceTitleLabel()
-        setupServiceSubTitleLabel()
-        setupTableView()
-        setupOrLabel()
-        setupLeftHorizontalLine()
-        setupRighttHorizontalLine()
-        setupPostButton()
+        setupScrollView()
+        setupJobTitleView()
+        setupJobTitleImageView()
+        setupJobTitleLabel()
+        setupJobLabel()
+        setupAmountToBePaidView()
+        setupAmountToBePaidImageView()
+        setupAmountToBePaidTitleLabel()
+        setupAmountToBePaidLabel()
+        setupPayThroughCardButton()
+        setupCashOnDeliveryButton()
     }
     
     func setupBackgroundImageView() {
@@ -234,64 +281,86 @@ class ServicePaymentOneViewController: UIViewController {
         paymentButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
     }
     
-    func setupServiceIconImageView() {
-        view.addSubview(serviceIconImageView)
-        serviceIconImageView.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
-        serviceIconImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        serviceIconImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        serviceIconImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+    func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 16).isActive = true
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    func setupServiceTitleLabel() {
-        view.addSubview(serviceTitleLabel)
-        serviceTitleLabel.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
-        serviceTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
-        
+    func setupJobTitleView() {
+        scrollView.addSubview(jobTitleView)
+        jobTitleView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        jobTitleView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        jobTitleView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        jobTitleView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
-    func setupServiceSubTitleLabel() {
-        view.addSubview(serviceSubTitleLabel)
-        serviceSubTitleLabel.topAnchor.constraint(equalTo: serviceTitleLabel.bottomAnchor, constant: 5).isActive = true
-        serviceSubTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
+    func setupJobTitleImageView() {
+        jobTitleView.addSubview(jobTitleImageView)
+        jobTitleImageView.centerYAnchor.constraint(equalTo: jobTitleView.centerYAnchor).isActive = true
+        jobTitleImageView.leftAnchor.constraint(equalTo: jobTitleView.leftAnchor, constant: 16).isActive = true
+        jobTitleImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        jobTitleImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
-    func setupTableView() {
-        view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: serviceIconImageView.bottomAnchor, constant: 20).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.33).isActive = true
+    func setupJobTitleLabel() {
+        jobTitleView.addSubview(jobTitleLabel)
+        jobTitleLabel.centerYAnchor.constraint(equalTo: jobTitleImageView.centerYAnchor).isActive = true
+        jobTitleLabel.leftAnchor.constraint(equalTo: jobTitleImageView.rightAnchor, constant: 16).isActive = true
     }
     
-    func setupOrLabel() {
-        view.addSubview(orLabel)
-        orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        orLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20).isActive = true
+    func setupJobLabel() {
+        jobTitleView.addSubview(jobLabel)
+        jobLabel.centerYAnchor.constraint(equalTo: jobTitleImageView.centerYAnchor).isActive = true
+        jobLabel.leftAnchor.constraint(equalTo: jobTitleLabel.rightAnchor, constant: 5).isActive = true
+        jobLabel.rightAnchor.constraint(equalTo: jobTitleView.rightAnchor, constant: -16).isActive = true
     }
     
-    func setupLeftHorizontalLine() {
-        view.addSubview(leftHorizontalLine)
-        leftHorizontalLine.centerYAnchor.constraint(equalTo: orLabel.centerYAnchor).isActive = true
-        leftHorizontalLine.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        leftHorizontalLine.rightAnchor.constraint(equalTo: orLabel.leftAnchor, constant: -16).isActive = true
-        leftHorizontalLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    func setupAmountToBePaidView() {
+        scrollView.addSubview(amountToBePaidView)
+        amountToBePaidView.topAnchor.constraint(equalTo: jobTitleView.bottomAnchor, constant: -1).isActive = true
+        amountToBePaidView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        amountToBePaidView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        amountToBePaidView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
-    func setupRighttHorizontalLine() {
-        view.addSubview(rightHorizontalLine)
-        rightHorizontalLine.centerYAnchor.constraint(equalTo: orLabel.centerYAnchor).isActive = true
-        rightHorizontalLine.leftAnchor.constraint(equalTo: orLabel.rightAnchor, constant: 16).isActive = true
-        rightHorizontalLine.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
-        rightHorizontalLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    func setupAmountToBePaidImageView() {
+        amountToBePaidView.addSubview(amountToBePaidImageView)
+        amountToBePaidImageView.centerYAnchor.constraint(equalTo: amountToBePaidView.centerYAnchor).isActive = true
+        amountToBePaidImageView.leftAnchor.constraint(equalTo: amountToBePaidView.leftAnchor, constant: 16).isActive = true
+        amountToBePaidImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        amountToBePaidImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
-    func setupPostButton() {
-        view.addSubview(postButton)
-        postButton.topAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 20).isActive = true
-        postButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        postButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        postButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    func setupAmountToBePaidTitleLabel() {
+        amountToBePaidView.addSubview(amountToBePaidTitleLabel)
+        amountToBePaidTitleLabel.centerYAnchor.constraint(equalTo: amountToBePaidImageView.centerYAnchor).isActive = true
+        amountToBePaidTitleLabel.leftAnchor.constraint(equalTo: amountToBePaidImageView.rightAnchor, constant: 16).isActive = true
     }
+    
+    func setupAmountToBePaidLabel() {
+        amountToBePaidView.addSubview(amountToBePaidLabel)
+        amountToBePaidLabel.centerYAnchor.constraint(equalTo: amountToBePaidImageView.centerYAnchor).isActive = true
+        amountToBePaidLabel.leftAnchor.constraint(equalTo: amountToBePaidTitleLabel.rightAnchor, constant: 5).isActive = true
+    }
+    
+    func setupPayThroughCardButton() {
+        scrollView.addSubview(payThroughCardButton)
+        payThroughCardButton.topAnchor.constraint(equalTo: amountToBePaidView.bottomAnchor, constant: 20).isActive = true
+        payThroughCardButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        payThroughCardButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        payThroughCardButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    }
+    func setupCashOnDeliveryButton() {
+        scrollView.addSubview(cashOnDeliveryButton)
+        cashOnDeliveryButton.topAnchor.constraint(equalTo: payThroughCardButton.bottomAnchor, constant: 15).isActive = true
+        cashOnDeliveryButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        cashOnDeliveryButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        cashOnDeliveryButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    }
+    
     @objc func rightBarButtonTapped() {
         
     }
@@ -314,33 +383,6 @@ class ServicePaymentOneViewController: UIViewController {
     }
 }
 
-extension ServicePaymentOneViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subServices.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ServiceDetailsCell {
-            cell.titleText = subServices[indexPath.row]
-            cell.priceText = "101 AED"
-            return cell
-        } else {
-            let cell = tableView.cellForRow(at: indexPath)!
-            return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
+extension ServicePaymentOneViewController : UIScrollViewDelegate {
     
 }

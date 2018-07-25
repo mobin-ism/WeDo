@@ -213,6 +213,9 @@ class ServiceLocationOneViewController: UIViewController {
         setNavigationBar()
         layout()
         
+        extraDirectionTextField.delegate = self
+        apartmentNoTextField.delegate = self
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
@@ -238,11 +241,12 @@ class ServiceLocationOneViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        view.layoutIfNeeded()
         var contentHeight: CGFloat = 0
         for view in scrollView.subviews {
             contentHeight = contentHeight + view.frame.size.height
         }
-        scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 540)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 140)
     }
     
     private func setNavigationBar() {
@@ -262,9 +266,9 @@ class ServiceLocationOneViewController: UIViewController {
         setupLocationButton()
         setupDateTimeButton()
         setupPaymentButton()
+        setupScrollView()
         setupMapView()
         setMapPinImageView()
-        setupScrollView()
         setupAddressLabel()
         setupAddressLineOneLabel()
         setupAddressLineTwoLabel()
@@ -316,9 +320,17 @@ class ServiceLocationOneViewController: UIViewController {
         paymentButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
     }
     
+    func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor).isActive = true
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
     func setupMapView() {
-        view.addSubview(mapView)
-        mapView.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor).isActive = true
+        scrollView.addSubview(mapView)
+        mapView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         if Helper.isIphoneX {
@@ -333,14 +345,6 @@ class ServiceLocationOneViewController: UIViewController {
         mapPinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor, constant: -25).isActive = true
         mapPinImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         mapPinImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    }
-    
-    func setupScrollView() {
-        view.addSubview(scrollView)
-        scrollView.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
-        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     func setupAddressLabel() {
@@ -487,11 +491,11 @@ extension ServiceLocationOneViewController : UITextFieldDelegate {
         
         if textField == self.extraDirectionTextField {
             
-            scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
+            scrollView.setContentOffset(CGPoint(x: 0, y: 320), animated: true)
         }
         else if textField == self.apartmentNoTextField {
             
-            scrollView.setContentOffset(CGPoint(x: 0, y: 120), animated: true)
+            scrollView.setContentOffset(CGPoint(x: 0, y: 320), animated: true)
         }
     }
     
