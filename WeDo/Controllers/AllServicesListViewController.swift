@@ -63,7 +63,8 @@ class AllServicesListViewController: UIViewController {
         let logo = UIImage(named: "logo.png")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "All Services", style: .plain, target: self, action: #selector(allServicesButtonTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
     }
@@ -91,6 +92,10 @@ class AllServicesListViewController: UIViewController {
     
     @objc func menuIconTapped() {
         self.menu.show()
+    }
+    
+    @objc func backTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func allServicesButtonTapped() {

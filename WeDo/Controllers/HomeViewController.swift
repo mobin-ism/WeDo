@@ -78,6 +78,15 @@ class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
     }
     
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        switch indexNumber {
+        case 0:
+            print("Current View Controller")
+        default:
+            print("Wrong Index")
+        }
+    }
+    
     private func setSlider() {
         view.addSubview(slider)
         if Helper.isIphoneX {

@@ -20,6 +20,11 @@
 		08320EF620FDF37800D98704 /* SliderImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EF520FDF37800D98704 /* SliderImages.swift */; };
 		08320EF920FDF49500D98704 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EF820FDF49500D98704 /* Helper.swift */; };
 		08320EFB20FDF57400D98704 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EFA20FDF57400D98704 /* Config.swift */; };
+		083B2AF32109A372004F9A0F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2AF22109A372004F9A0F /* RegisterViewController.swift */; };
+		083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B152109BBD4004F9A0F /* LoginViewController.swift */; };
+		083B2B182109CB51004F9A0F /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B172109CB51004F9A0F /* OrdersViewController.swift */; };
+		083B2B1A2109CCC3004F9A0F /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B192109CCC3004F9A0F /* OrderTableViewCell.swift */; };
+		083B2B1C2109EF4F004F9A0F /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B1B2109EF4F004F9A0F /* ServiceDetailsViewController.swift */; };
 		084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */; };
 		084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */; };
 		084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */; };
@@ -56,6 +61,11 @@
 		08320EF520FDF37800D98704 /* SliderImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderImages.swift; sourceTree = "<group>"; };
 		08320EF820FDF49500D98704 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		08320EFA20FDF57400D98704 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		083B2AF22109A372004F9A0F /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		083B2B152109BBD4004F9A0F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		083B2B172109CB51004F9A0F /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
+		083B2B192109CCC3004F9A0F /* OrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
+		083B2B1B2109EF4F004F9A0F /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListViewController.swift; sourceTree = "<group>"; };
 		084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListCollectionViewCell.swift; sourceTree = "<group>"; };
 		084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -136,6 +146,10 @@
 				E912818121033BBF0010A242 /* ServiceLocationOneViewController.swift */,
 				E912818521033C030010A242 /* ServiceDateAndTimeOneviewController.swift */,
 				E912818721033C1A0010A242 /* ServicePaymentOneViewController.swift */,
+				083B2AF22109A372004F9A0F /* RegisterViewController.swift */,
+				083B2B152109BBD4004F9A0F /* LoginViewController.swift */,
+				083B2B172109CB51004F9A0F /* OrdersViewController.swift */,
+				083B2B1B2109EF4F004F9A0F /* ServiceDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -215,6 +229,7 @@
 			children = (
 				E98CCFEA20FE7D7200799029 /* MenuCell.swift */,
 				084A03F120FF7813000E532E /* ServiceDetailsCell.swift */,
+				083B2B192109CCC3004F9A0F /* OrderTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -373,19 +388,24 @@
 				08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */,
 				E912818621033C030010A242 /* ServiceDateAndTimeOneviewController.swift in Sources */,
 				084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */,
+				083B2B1A2109CCC3004F9A0F /* OrderTableViewCell.swift in Sources */,
 				E912818E2103C3D00010A242 /* PaddedText.swift in Sources */,
 				E912818221033BBF0010A242 /* ServiceLocationOneViewController.swift in Sources */,
 				E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */,
 				E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */,
 				084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */,
 				08320EF620FDF37800D98704 /* SliderImages.swift in Sources */,
+				083B2AF32109A372004F9A0F /* RegisterViewController.swift in Sources */,
 				084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */,
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
 				E912818821033C1A0010A242 /* ServicePaymentOneViewController.swift in Sources */,
 				08320EF020FDF2AF00D98704 /* Slider.swift in Sources */,
 				E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */,
+				083B2B182109CB51004F9A0F /* OrdersViewController.swift in Sources */,
 				082E5FF42100B7340081D26D /* ServiceDescriptionTwoViewController.swift in Sources */,
 				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
+				083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */,
+				083B2B1C2109EF4F004F9A0F /* ServiceDetailsViewController.swift in Sources */,
 				084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,7 +550,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem5.WeDo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem.WeDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -549,7 +569,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem5.WeDo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem.WeDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

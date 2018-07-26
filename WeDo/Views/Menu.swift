@@ -12,6 +12,7 @@ class Menu: NSObject {
     
     var homeController = HomeViewController()
     var allServicesListController = AllServicesListViewController()
+    var registerVC = RegisterViewController()
     
     lazy var backgroundView: UIView = {
         let view = UIView()
@@ -83,6 +84,7 @@ class Menu: NSObject {
         table.translatesAutoresizingMaskIntoConstraints = false
         table.delegate = self
         table.dataSource = self
+        table.showsVerticalScrollIndicator = false
         return table
     }()
     
@@ -204,12 +206,11 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         hide()
-        
-        print(indexPath.row)
+        homeController.selectedViewControllerFromMenu(indexNumber: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height * 0.15
+        return 70
     }
     
 }

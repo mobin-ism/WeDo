@@ -180,6 +180,7 @@ class ServicePaymentOneViewController: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(checkLoginStatus), for: .touchUpInside)
         return button
     }()
     
@@ -192,6 +193,7 @@ class ServicePaymentOneViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.setTitleColor(UIColor.white, for: .normal)
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(checkLoginStatus), for: .touchUpInside)
         return button
     }()
     
@@ -366,7 +368,13 @@ class ServicePaymentOneViewController: UIViewController {
     }
     
     @objc func backTapped() {
-        self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+        for aViewController in viewControllers {
+            if aViewController is AllServicesListViewController {
+                self.navigationController!.popToViewController(aViewController, animated: true)
+            }
+        }
     }
     
     @objc func navigationButtonTapped(_ sender: UIButton) {
@@ -380,6 +388,10 @@ class ServicePaymentOneViewController: UIViewController {
         default:
             print("current view controller")
         }
+    }
+    
+    @objc func checkLoginStatus() {
+        self.navigationController?.pushViewController(LoginViewController(), animated: true)
     }
 }
 
