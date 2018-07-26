@@ -9,4 +9,5 @@ target 'WeDo' do
 	pod 'Alamofire'
 	pod 'GoogleMaps'
   	pod 'GooglePlaces'
+	pod "BouncyLayout"
 end

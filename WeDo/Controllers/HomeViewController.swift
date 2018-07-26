@@ -7,7 +7,11 @@
 //
 
 import UIKit
+import BouncyLayout
+
 class HomeViewController: UIViewController {
+    
+    let bouncyLayout = BouncyLayout()
     
     var sliderImages = [SliderImages]()
     lazy var slider: Slider = {
@@ -24,7 +28,7 @@ class HomeViewController: UIViewController {
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: bouncyLayout)
         collection.backgroundColor = UIColor.clear
         collection.alwaysBounceVertical = true
         collection.showsVerticalScrollIndicator = false
@@ -130,7 +134,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return 48
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

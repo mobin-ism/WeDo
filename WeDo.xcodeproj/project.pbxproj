@@ -22,17 +22,12 @@
 		08320EFB20FDF57400D98704 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08320EFA20FDF57400D98704 /* Config.swift */; };
 		083B2AF32109A372004F9A0F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2AF22109A372004F9A0F /* RegisterViewController.swift */; };
 		083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B152109BBD4004F9A0F /* LoginViewController.swift */; };
-		083B2B182109CB51004F9A0F /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B172109CB51004F9A0F /* OrdersViewController.swift */; };
 		083B2B1A2109CCC3004F9A0F /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B192109CCC3004F9A0F /* OrderTableViewCell.swift */; };
 		083B2B1C2109EF4F004F9A0F /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B1B2109EF4F004F9A0F /* ServiceDetailsViewController.swift */; };
 		084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */; };
 		084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */; };
 		084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */; };
 		084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03F120FF7813000E532E /* ServiceDetailsCell.swift */; };
-		0897462B21086E8800074565 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0897462721086E8800074565 /* OpenSans-Regular.ttf */; };
-		0897462C21086E8800074565 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0897462821086E8800074565 /* OpenSans-LightItalic.ttf */; };
-		0897462D21086E8800074565 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0897462921086E8800074565 /* OpenSans-SemiBold.ttf */; };
-		0897462E21086E8800074565 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0897462A21086E8800074565 /* OpenSans-Bold.ttf */; };
 		854CEC902907D94E1A3E5786 /* Pods_WeDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */; };
 		E912818221033BBF0010A242 /* ServiceLocationOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912818121033BBF0010A242 /* ServiceLocationOneViewController.swift */; };
 		E912818621033C030010A242 /* ServiceDateAndTimeOneviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912818521033C030010A242 /* ServiceDateAndTimeOneviewController.swift */; };
@@ -43,6 +38,13 @@
 		E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE520FE79BC00799029 /* ServiceCell.swift */; };
 		E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE720FE7D1B00799029 /* Menu.swift */; };
 		E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFEA20FE7D7200799029 /* MenuCell.swift */; };
+		E9F10160210A5122007CEE7F /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F1015C210A5122007CEE7F /* OpenSans-Bold.ttf */; };
+		E9F10161210A5122007CEE7F /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F1015D210A5122007CEE7F /* OpenSans-LightItalic.ttf */; };
+		E9F10162210A5122007CEE7F /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F1015E210A5122007CEE7F /* OpenSans-Regular.ttf */; };
+		E9F10163210A5122007CEE7F /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F1015F210A5122007CEE7F /* OpenSans-SemiBold.ttf */; };
+		E9F10165210A6C34007CEE7F /* ActiveOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F10164210A6C34007CEE7F /* ActiveOrderViewController.swift */; };
+		E9F10167210A6C8A007CEE7F /* OrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F10166210A6C8A007CEE7F /* OrderHistoryViewController.swift */; };
+		E9F10169210A6C9D007CEE7F /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F10168210A6C9D007CEE7F /* CompanyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,17 +65,12 @@
 		08320EFA20FDF57400D98704 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		083B2AF22109A372004F9A0F /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		083B2B152109BBD4004F9A0F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		083B2B172109CB51004F9A0F /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		083B2B192109CCC3004F9A0F /* OrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
 		083B2B1B2109EF4F004F9A0F /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListViewController.swift; sourceTree = "<group>"; };
 		084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListCollectionViewCell.swift; sourceTree = "<group>"; };
 		084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
 		084A03F120FF7813000E532E /* ServiceDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsCell.swift; sourceTree = "<group>"; };
-		0897462721086E8800074565 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../../../../800Handyman/11/800handyman/800Handyman/Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		0897462821086E8800074565 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "../../../../../../../800Handyman/11/800handyman/800Handyman/Resources/Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
-		0897462921086E8800074565 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiBold.ttf"; path = "../../../../../../../800Handyman/11/800handyman/800Handyman/Resources/Fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		0897462A21086E8800074565 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../../../../../../../800Handyman/11/800handyman/800Handyman/Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		1CD9AB98BE6B45E7F39176FA /* Pods-WeDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.release.xcconfig"; sourceTree = "<group>"; };
 		49DB9D0DB3ABD83CB09CBC25 /* Pods-WeDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.debug.xcconfig"; sourceTree = "<group>"; };
 		7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +83,13 @@
 		E98CCFE520FE79BC00799029 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		E98CCFE720FE7D1B00799029 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		E98CCFEA20FE7D7200799029 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		E9F1015C210A5122007CEE7F /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../../../../800handyman 2/800Handyman/Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		E9F1015D210A5122007CEE7F /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "../../../../800handyman 2/800Handyman/Resources/Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		E9F1015E210A5122007CEE7F /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../800handyman 2/800Handyman/Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		E9F1015F210A5122007CEE7F /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiBold.ttf"; path = "../../../../800handyman 2/800Handyman/Resources/Fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		E9F10164210A6C34007CEE7F /* ActiveOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderViewController.swift; sourceTree = "<group>"; };
+		E9F10166210A6C8A007CEE7F /* OrderHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryViewController.swift; sourceTree = "<group>"; };
+		E9F10168210A6C9D007CEE7F /* CompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,8 +152,10 @@
 				E912818721033C1A0010A242 /* ServicePaymentOneViewController.swift */,
 				083B2AF22109A372004F9A0F /* RegisterViewController.swift */,
 				083B2B152109BBD4004F9A0F /* LoginViewController.swift */,
-				083B2B172109CB51004F9A0F /* OrdersViewController.swift */,
 				083B2B1B2109EF4F004F9A0F /* ServiceDetailsViewController.swift */,
+				E9F10164210A6C34007CEE7F /* ActiveOrderViewController.swift */,
+				E9F10166210A6C8A007CEE7F /* OrderHistoryViewController.swift */,
+				E9F10168210A6C9D007CEE7F /* CompanyViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -199,10 +205,10 @@
 		08AC37A02105C66300842BEE /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				0897462A21086E8800074565 /* OpenSans-Bold.ttf */,
-				0897462821086E8800074565 /* OpenSans-LightItalic.ttf */,
-				0897462721086E8800074565 /* OpenSans-Regular.ttf */,
-				0897462921086E8800074565 /* OpenSans-SemiBold.ttf */,
+				E9F1015C210A5122007CEE7F /* OpenSans-Bold.ttf */,
+				E9F1015D210A5122007CEE7F /* OpenSans-LightItalic.ttf */,
+				E9F1015E210A5122007CEE7F /* OpenSans-Regular.ttf */,
+				E9F1015F210A5122007CEE7F /* OpenSans-SemiBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -303,12 +309,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F10162210A5122007CEE7F /* OpenSans-Regular.ttf in Resources */,
 				08320EE020FDE01F00D98704 /* LaunchScreen.storyboard in Resources */,
-				0897462B21086E8800074565 /* OpenSans-Regular.ttf in Resources */,
-				0897462E21086E8800074565 /* OpenSans-Bold.ttf in Resources */,
-				0897462D21086E8800074565 /* OpenSans-SemiBold.ttf in Resources */,
-				0897462C21086E8800074565 /* OpenSans-LightItalic.ttf in Resources */,
 				08320EDD20FDE01F00D98704 /* Assets.xcassets in Resources */,
+				E9F10161210A5122007CEE7F /* OpenSans-LightItalic.ttf in Resources */,
+				E9F10163210A5122007CEE7F /* OpenSans-SemiBold.ttf in Resources */,
+				E9F10160210A5122007CEE7F /* OpenSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,10 +329,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WeDo/Pods-WeDo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BouncyLayout/BouncyLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BouncyLayout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -388,8 +396,10 @@
 				08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */,
 				E912818621033C030010A242 /* ServiceDateAndTimeOneviewController.swift in Sources */,
 				084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */,
+				E9F10169210A6C9D007CEE7F /* CompanyViewController.swift in Sources */,
 				083B2B1A2109CCC3004F9A0F /* OrderTableViewCell.swift in Sources */,
 				E912818E2103C3D00010A242 /* PaddedText.swift in Sources */,
+				E9F10167210A6C8A007CEE7F /* OrderHistoryViewController.swift in Sources */,
 				E912818221033BBF0010A242 /* ServiceLocationOneViewController.swift in Sources */,
 				E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */,
 				E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */,
@@ -401,7 +411,7 @@
 				E912818821033C1A0010A242 /* ServicePaymentOneViewController.swift in Sources */,
 				08320EF020FDF2AF00D98704 /* Slider.swift in Sources */,
 				E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */,
-				083B2B182109CB51004F9A0F /* OrdersViewController.swift in Sources */,
+				E9F10165210A6C34007CEE7F /* ActiveOrderViewController.swift in Sources */,
 				082E5FF42100B7340081D26D /* ServiceDescriptionTwoViewController.swift in Sources */,
 				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
 				083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */,
@@ -544,13 +554,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F3GWQ2Y6WA;
+				DEVELOPMENT_TEAM = H7KTQF7AQ7;
 				INFOPLIST_FILE = WeDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem.WeDo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem1.WeDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -563,13 +573,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F3GWQ2Y6WA;
+				DEVELOPMENT_TEAM = H7KTQF7AQ7;
 				INFOPLIST_FILE = WeDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem.WeDo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem1.WeDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

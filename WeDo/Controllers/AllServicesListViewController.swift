@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import BouncyLayout
 class AllServicesListViewController: UIViewController {
     
+    let bouncyLayout = BouncyLayout()
     let verticalCellID = "AllServicesCell"
     let horizontalCellID = "serviceTypesCell"
     
@@ -16,7 +18,7 @@ class AllServicesListViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: bouncyLayout)
         collection.backgroundColor = UIColor.clear
         collection.alwaysBounceVertical = true
         collection.showsVerticalScrollIndicator = false
@@ -168,7 +170,7 @@ extension AllServicesListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if  collectionView == self.verticalCollectionView {
-            return 0
+            return 10
         }
         else {
             return 10

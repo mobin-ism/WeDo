@@ -1,15 +1,17 @@
 //
-//  OrdersViewController.swift
+//  CompanyViewController.swift
 //  WeDo
 //
-//  Created by Creativeitem on 26/7/18.
+//  Created by Al Mobin on 27/7/18.
 //  Copyright © 2018 Creativeitem. All rights reserved.
 //
 
 import UIKit
-class OrderViewController: UIViewController {
+class CompanyViewController: UIViewController {
     
-    lazy var acticeOrderButton : UIButton = {
+    let serviceDetailsVC = ServiceDetailsViewController()
+    
+    lazy var activeOrderButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.clipsToBounds = true
@@ -41,8 +43,8 @@ class OrderViewController: UIViewController {
         button.clipsToBounds = true
         button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
         button.setTitle("Company", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_SEMIBOLD, size: 12)
         button.tag = 3
         button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
         return button
@@ -65,12 +67,10 @@ class OrderViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         setNavigationBar()
+        
         tableView.register(OrderTableViewCell.self, forCellReuseIdentifier: cellId)
         
-        view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
-        tableView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
-        tableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
+        layout()
     }
     
     private func setNavigationBar() {
@@ -84,22 +84,72 @@ class OrderViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
+    func layout() {
+        setupActiveButton()
+        setupOrderHistoryButton()
+        setupCompanyButton()
+        setupTableView()
+    }
+    
+    func setupActiveButton() {
+        view.addSubview(activeOrderButton)
+        activeOrderButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
+        activeOrderButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        activeOrderButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        activeOrderButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
+    }
+    
+    func setupOrderHistoryButton() {
+        view.addSubview(orderHistoryButton)
+        orderHistoryButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
+        orderHistoryButton.leftAnchor.constraint(equalTo: activeOrderButton.rightAnchor).isActive = true
+        orderHistoryButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        orderHistoryButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
+    }
+    
+    func setupCompanyButton() {
+        view.addSubview(companyButton)
+        companyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
+        companyButton.leftAnchor.constraint(equalTo: orderHistoryButton.rightAnchor).isActive = true
+        companyButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        companyButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    }
+    
+    func setupTableView() {
+        view.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: activeOrderButton.bottomAnchor, constant: 16).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+    }
     @objc func navigationButtonTapped(_ sender: UIButton) {
-        
+        switch sender.tag {
+        case 1:
+            self.navigationController?.pushViewController(ActiveOrderViewController(), animated: false)
+        case 2:
+            self.navigationController?.pushViewController(OrderHistoryViewController(), animated: false)
+        default:
+            print("Current ViewController")
+        }
     }
     @objc func backTapped() {
-        self.navigationController?.popViewController(animated: true)
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+        for aViewController in viewControllers {
+            if aViewController is RegisterViewController {
+                self.navigationController!.popToViewController(aViewController, animated: true)
+            }
+        }
     }
     @objc func rightBarButtonTapped() {
         
     }
     
     @objc func handleExpandButton() {
-        print("Hello there")
+        serviceDetailsVC.show()
     }
 }
 
-extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
+extension CompanyViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -133,4 +183,3 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-

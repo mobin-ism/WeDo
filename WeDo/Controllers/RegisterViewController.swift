@@ -404,7 +404,7 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func registerButtonTapped() {
-        self.navigationController?.pushViewController(OrderViewController(), animated: true)
+        self.navigationController?.pushViewController(ActiveOrderViewController(), animated: true)
     }
 }
 
