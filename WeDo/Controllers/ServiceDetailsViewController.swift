@@ -7,7 +7,23 @@
 //
 
 import UIKit
+import HCSStarRatingView
+
 class ServiceDetailsViewController: UIViewController {
+    
+    lazy var starRatingView : HCSStarRatingView = {
+        var view = HCSStarRatingView()
+        view.maximumValue = 5
+        view.minimumValue = 1
+        view.value = 3.5
+        view.tintColor = UIColor(red:0.94, green:0.42, blue:0.00, alpha:1.0)
+        view.allowsHalfStars = true
+        view.isUserInteractionEnabled = false
+        view.isEnabled = false
+        view.frame = CGRect(x: 76, y: 36 , width: 100, height: 30)
+        view.addTarget(self, action: #selector(didChangeValue(_:)), for: .valueChanged)
+        return view
+    }()
     
     lazy var backgroundView: UIView = {
         let view = UIView()
@@ -146,6 +162,7 @@ class ServiceDetailsViewController: UIViewController {
         setupServiceTitleLabel()
         setupPaymentTypeLabel()
         setupPaymentModeLabel()
+        setupStarRtatingView()
         setupServiceDescriptionLabel()
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
@@ -172,6 +189,7 @@ class ServiceDetailsViewController: UIViewController {
         scrollView.addSubview(serviceTitleLabel)
         serviceTitleLabel.leftAnchor.constraint(equalTo: serviceImageView.rightAnchor, constant: 10).isActive = true
         serviceTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16).isActive = true
+        serviceTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func setupPaymentTypeLabel() {
@@ -184,6 +202,10 @@ class ServiceDetailsViewController: UIViewController {
         scrollView.addSubview(paymentModeLabel)
         paymentModeLabel.centerYAnchor.constraint(equalTo: paymentTypeLabel.centerYAnchor).isActive = true
         paymentModeLabel.rightAnchor.constraint(equalTo: paymentTypeLabel.leftAnchor, constant: -5).isActive = true
+    }
+    
+    func setupStarRtatingView() {
+        scrollView.addSubview(starRatingView)
     }
     
     func setupServiceDescriptionLabel() {
@@ -200,6 +222,10 @@ class ServiceDetailsViewController: UIViewController {
                 self.backgroundView.alpha = 0
             }, completion: nil)
         }
+    }
+    
+    @objc func didChangeValue(_ sender: Any) {
+        print(self.starRatingView.value)
     }
 }
 

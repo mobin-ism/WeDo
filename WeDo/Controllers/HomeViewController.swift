@@ -8,10 +8,12 @@
 
 import UIKit
 import BouncyLayout
+import LIHImageSlider
 
 class HomeViewController: UIViewController {
     
     let bouncyLayout = BouncyLayout()
+    var sliderVc1 : UIViewController!
     
     var sliderImages = [SliderImages]()
     lazy var slider: Slider = {
@@ -69,7 +71,8 @@ class HomeViewController: UIViewController {
         
     }
     private func layout() {
-        setSlider()
+        /*setSlider()*/
+        setLHIImageSlider()
         setCollectionView()
         setupActivityIndicator()
     }
@@ -108,9 +111,34 @@ class HomeViewController: UIViewController {
         }
     }
     
+    func setLHIImageSlider() {
+        let y : CGFloat = Helper.barHeight + (self.navigationController?.navigationBar.frame.height)!
+        let sliderHeight : CGFloat!
+        
+        if Helper.isIphoneX {
+            sliderHeight = self.view.frame.height * 0.25
+        } else {
+            sliderHeight = self.view.frame.height * 0.3
+        }
+        
+        let images: [UIImage] = [#imageLiteral(resourceName: "slider-1"), #imageLiteral(resourceName: "slider-2"), #imageLiteral(resourceName: "slider-3")]
+        let slider1: LIHSlider = LIHSlider(images: images)
+        
+        // title for images
+        /*slider1.sliderDescriptions = ["God Be Praised", "God Be Praised", "God Be Praised"]*/
+        
+        self.sliderVc1  = LIHSliderViewController(slider: slider1)
+        self.addChildViewController(self.sliderVc1)
+        self.view.addSubview(self.sliderVc1.view)
+        self.sliderVc1.didMove(toParentViewController: self)
+        self.sliderVc1.view.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: sliderHeight)
+        
+    }
+    
     private func setCollectionView() {
         view.addSubview(collectionView)
-        collectionView.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 16).isActive = true
+        /*collectionView.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 16).isActive = true*/
+        collectionView.topAnchor.constraint(equalTo: self.sliderVc1.view.bottomAnchor, constant: 16).isActive = true
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

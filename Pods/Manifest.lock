@@ -8,12 +8,18 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (2.6.0):
     - GoogleMaps/Base (= 2.6.0)
+  - HCSStarRatingView (1.5)
+  - LIHImageSlider (1.0.8)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Alamofire
   - BouncyLayout
   - GoogleMaps
   - GooglePlaces
+  - HCSStarRatingView (~> 1.5)
+  - LIHImageSlider
+  - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -21,13 +27,19 @@ SPEC REPOS:
     - BouncyLayout
     - GoogleMaps
     - GooglePlaces
+    - HCSStarRatingView
+    - LIHImageSlider
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
   BouncyLayout: a7955879861375cc4e88bb64d42bcf622cd2694c
   GoogleMaps: 42f91c68b7fa2f84d5c86597b18ceb99f5414c7f
   GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
+  HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
+  LIHImageSlider: ddf90c3a07e6f571b0e57629177a49eaf5bf15a3
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: c22837728b03e5f6dce602a54f3be76208a13adf
+PODFILE CHECKSUM: e9ca2598b85cad64e1ac262a82cf0a44582a5a05
 
 COCOAPODS: 1.5.3

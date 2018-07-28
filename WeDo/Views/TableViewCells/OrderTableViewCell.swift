@@ -15,6 +15,7 @@ class OrderTableViewCell: UITableViewCell {
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.clipsToBounds = true
         imageview.contentMode = .scaleToFill
+        imageview.layer.cornerRadius = 5
         return imageview
     }()
     

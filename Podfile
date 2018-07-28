@@ -9,5 +9,8 @@ target 'WeDo' do
 	pod 'Alamofire'
 	pod 'GoogleMaps'
   	pod 'GooglePlaces'
-	pod "BouncyLayout"
+	pod 'BouncyLayout'
+    pod 'SVProgressHUD'
+    pod 'HCSStarRatingView', '~> 1.5'
+    pod 'LIHImageSlider'
 end
