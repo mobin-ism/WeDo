@@ -61,14 +61,14 @@ class CompanyViewController: UIViewController {
         return table
     }()
     
-    let cellId = "orderCell"
+    let cellId = "companyTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         setNavigationBar()
         
-        tableView.register(OrderTableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(CompanyTableViewCell.self, forCellReuseIdentifier: cellId)
         
         layout()
     }
@@ -143,10 +143,6 @@ class CompanyViewController: UIViewController {
     @objc func rightBarButtonTapped() {
         
     }
-    
-    @objc func handleExpandButton() {
-        serviceDetailsVC.show()
-    }
 }
 
 extension CompanyViewController: UITableViewDelegate, UITableViewDataSource {
@@ -160,13 +156,12 @@ extension CompanyViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? OrderTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? CompanyTableViewCell {
             cell.serviceImageView.image = #imageLiteral(resourceName: "dummy")
             cell.titleText = "Service Title"
-            cell.statusText = "(Repair)"
-            cell.subTitleText = "Sub Title"
-            cell.quoteNumber = "11"
-            cell.expandButton.addTarget(self, action: #selector(handleExpandButton), for: .touchUpInside)
+            cell.subTitleText = "(Carpentry)"
+            cell.dateTimeText = "15th May, 2017 | 11:30 AM"
+            cell.lastJobDateText = "25th May, 2017"
             return cell
         } else {
             let cell = tableView.cellForRow(at: indexPath)!
@@ -176,6 +171,7 @@ extension CompanyViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+        self.navigationController?.pushViewController(JobRequestListViewController(), animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

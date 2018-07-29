@@ -61,14 +61,14 @@ class ActiveOrderViewController: UIViewController {
         return table
     }()
     
-    let cellId = "orderCell"
+    let cellId = "activeOrderCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         setNavigationBar()
         
-        tableView.register(OrderTableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(ActiveOrderTableViewCell.self, forCellReuseIdentifier: cellId)
         
         layout()
     }
@@ -160,7 +160,7 @@ extension ActiveOrderViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? OrderTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ActiveOrderTableViewCell {
             cell.serviceImageView.image = #imageLiteral(resourceName: "dummy")
             cell.titleText = "Service Title"
             cell.statusText = "(Repair)"

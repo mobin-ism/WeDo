@@ -1,17 +1,16 @@
 //
-//  OrderTableViewCell.swift
+//  OrderHistoryTableViewCell.swift
 //  WeDo
 //
-//  Created by Creativeitem on 26/7/18.
+//  Created by Creativeitem on 29/7/18.
 //  Copyright © 2018 Creativeitem. All rights reserved.
 //
 
 import UIKit
-
-class OrderTableViewCell: UITableViewCell {
+class OrderHistoryTableViewCell: UITableViewCell {
     
     let serviceImageView : UIImageView = {
-       var imageview = UIImageView()
+        var imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.clipsToBounds = true
         imageview.contentMode = .scaleToFill
@@ -22,17 +21,7 @@ class OrderTableViewCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
-        label.numberOfLines = 0
-        label.clipsToBounds = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let statusLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -41,41 +30,42 @@ class OrderTableViewCell: UITableViewCell {
     
     let subTitleLabel: UILabel = {
         let label = UILabel()
+        label.textColor = UIColor.gray
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 11)
+        label.numberOfLines = 2
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let dateTimeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.gray
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 11)
+        label.numberOfLines = 1
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let jobLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.black
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.numberOfLines = 0
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let serviceChargeLabel: UILabel = {
+        let label = UILabel()
         label.textColor = UIColor.black
         label.font = UIFont(name: OPENSANS_REGULAR, size: 11)
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }()
-    
-    let quoteLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
-        label.numberOfLines = 0
-        label.clipsToBounds = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Quote: "
-        return label
-    }()
-    
-    let quoteNumberLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
-        label.numberOfLines = 0
-        label.clipsToBounds = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let expandButton : UIButton = {
-       var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.clipsToBounds = true
-        button.setImage(#imageLiteral(resourceName: "down-arrow"), for: .normal)
-        return button
     }()
     
     var titleText: String? = "" {
@@ -90,15 +80,21 @@ class OrderTableViewCell: UITableViewCell {
         }
     }
     
-    var statusText: String? = "" {
+    var dateTimeText: String? = "" {
         didSet {
-            statusLabel.text = statusText
+            dateTimeLabel.text = dateTimeText
         }
     }
     
-    var quoteNumber: String? = "" {
+    var jobText: String? = "" {
         didSet {
-            quoteNumberLabel.text = quoteNumber
+            jobLabel.text = jobText
+        }
+    }
+    
+    var serviceChargeText: String? = "" {
+        didSet {
+            serviceChargeLabel.text = serviceChargeText
         }
     }
     
@@ -115,11 +111,10 @@ class OrderTableViewCell: UITableViewCell {
     func setupSubviews() {
         setupServiceImageView()
         setupTitleLabel()
-        setupStatusLabel()
+        setupDateTimeLabel()
+        setupJobLabel()
+        setupServiceChargeLable()
         setupSubTitleLabel()
-        setupExpandButton()
-        setupQuoteNumber()
-        setupQuoteLable()
     }
     
     func setupServiceImageView() {
@@ -136,36 +131,29 @@ class OrderTableViewCell: UITableViewCell {
         titleLabel.leftAnchor.constraint(equalTo: serviceImageView.rightAnchor, constant: 10).isActive = true
     }
     
-    func setupStatusLabel() {
-        self.addSubview(statusLabel)
-        statusLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-        statusLabel.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 5).isActive = true
-    }
-    
     func setupSubTitleLabel() {
         self.addSubview(subTitleLabel)
-        subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-        subTitleLabel.leftAnchor.constraint(equalTo: serviceImageView.rightAnchor, constant: 10).isActive = true
+        subTitleLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        subTitleLabel.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 5).isActive = true
+        subTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
     }
     
-    func setupExpandButton() {
-        self.addSubview(expandButton)
-        expandButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        expandButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        expandButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
-        expandButton.widthAnchor.constraint(equalToConstant: 55).isActive = true
+    func setupDateTimeLabel() {
+        self.addSubview(dateTimeLabel)
+        dateTimeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+        dateTimeLabel.leftAnchor.constraint(equalTo: serviceImageView.rightAnchor, constant: 10).isActive = true
     }
     
-    func setupQuoteNumber() {
-        self.addSubview(quoteNumberLabel)
-        quoteNumberLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        quoteNumberLabel.rightAnchor.constraint(equalTo: expandButton.leftAnchor).isActive = true
+    func setupJobLabel() {
+        self.addSubview(jobLabel)
+        jobLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
+        jobLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
     }
     
-    func setupQuoteLable() {
-        self.addSubview(quoteLabel)
-        quoteLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        quoteLabel.rightAnchor.constraint(equalTo: quoteNumberLabel.leftAnchor, constant: -10).isActive = true
+    func setupServiceChargeLable() {
+        self.addSubview(serviceChargeLabel)
+        serviceChargeLabel.topAnchor.constraint(equalTo: jobLabel.bottomAnchor, constant: 5).isActive = true
+        serviceChargeLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
     }
     
     
@@ -173,3 +161,4 @@ class OrderTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

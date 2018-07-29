@@ -16,7 +16,7 @@ class ServiceDetailsViewController: UIViewController {
         view.maximumValue = 5
         view.minimumValue = 1
         view.value = 3.5
-        view.tintColor = UIColor(red:0.94, green:0.42, blue:0.00, alpha:1.0)
+        view.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
         view.allowsHalfStars = true
         view.isUserInteractionEnabled = false
         view.isEnabled = false

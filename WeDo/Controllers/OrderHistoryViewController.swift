@@ -61,14 +61,14 @@ class OrderHistoryViewController: UIViewController {
         return table
     }()
     
-    let cellId = "orderCell"
+    let cellId = "orderHistoryCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         setNavigationBar()
         
-        tableView.register(OrderTableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(OrderHistoryTableViewCell.self, forCellReuseIdentifier: cellId)
         
         layout()
     }
@@ -143,10 +143,6 @@ class OrderHistoryViewController: UIViewController {
     @objc func rightBarButtonTapped() {
         
     }
-    
-    @objc func handleExpandButton() {
-        serviceDetailsVC.show()
-    }
 }
 
 extension OrderHistoryViewController: UITableViewDelegate, UITableViewDataSource {
@@ -160,13 +156,13 @@ extension OrderHistoryViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? OrderTableViewCell {
-            cell.serviceImageView.image = #imageLiteral(resourceName: "dummy")
-            cell.titleText = "Service Title"
-            cell.statusText = "(Repair)"
-            cell.subTitleText = "Sub Title"
-            cell.quoteNumber = "11"
-            cell.expandButton.addTarget(self, action: #selector(handleExpandButton), for: .touchUpInside)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? OrderHistoryTableViewCell {
+            cell.serviceImageView.image = #imageLiteral(resourceName: "dummy6")
+            cell.titleText = "Gardening"
+            cell.subTitleText = "(Full House Cleaning)"
+            cell.dateTimeText = "15th May, 2017 | 11:30 AM"
+            cell.jobText = "DU Cleaning"
+            cell.serviceChargeText = "AED 350"
             return cell
         } else {
             let cell = tableView.cellForRow(at: indexPath)!
