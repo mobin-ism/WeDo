@@ -22,6 +22,7 @@ class ServiceDetailsViewController: UIViewController {
         view.isEnabled = false
         view.frame = CGRect(x: 76, y: 36 , width: 100, height: 30)
         view.addTarget(self, action: #selector(didChangeValue(_:)), for: .valueChanged)
+        view.alpha = 1
         return view
     }()
     

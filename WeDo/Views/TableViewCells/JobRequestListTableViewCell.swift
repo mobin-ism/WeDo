@@ -61,6 +61,7 @@ class JobRequestListTableViewCell: UITableViewCell {
         view.allowsHalfStars = true
         view.isUserInteractionEnabled = false
         view.isEnabled = false
+        view.alpha = 1
         return view
     }()
     

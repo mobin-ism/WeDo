@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HCSStarRatingView
 class JobRequestDetails: UIViewController {
     
     var imageArray = [#imageLiteral(resourceName: "placeholder"), #imageLiteral(resourceName: "placeholder"), #imageLiteral(resourceName: "placeholder")]
@@ -45,10 +46,11 @@ class JobRequestDetails: UIViewController {
     lazy var titleLabelOne: UILabel = {
         let label = UILabel()
         label.textColor = GREENISH_COLOR
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 16)
+        label.font = UIFont(name: OPENSANS_SEMIBOLD, size: 18)
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "DU Clean"
         return label
     }()
     
@@ -59,6 +61,7 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Total Completed Job: "
         return label
     }()
     
@@ -69,6 +72,7 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "35"
         return label
     }()
     
@@ -79,6 +83,7 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Phone No.: "
         return label
     }()
     
@@ -89,6 +94,7 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "+8801921040960 "
         return label
     }()
     
@@ -99,6 +105,7 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Email: "
         return label
     }()
     
@@ -109,6 +116,7 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "admin@example.com"
         return label
     }()
     
@@ -119,6 +127,7 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Area: "
         return label
     }()
     
@@ -129,6 +138,7 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Dubai: "
         return label
     }()
     
@@ -139,16 +149,18 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Amount: "
         return label
     }()
     
     lazy var amountLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(red:0.10, green:0.63, blue:0.65, alpha:1.0)
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.font = UIFont(name: OPENSANS_SEMIBOLD, size: 18)
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "AED 200"
         return label
     }()
     
@@ -163,6 +175,33 @@ class JobRequestDetails: UIViewController {
         return button
     }()
     
+    lazy var starRatingView : HCSStarRatingView = {
+        var view = HCSStarRatingView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.maximumValue = 5
+        view.minimumValue = 1
+        view.value = 3
+        view.tintColor = UIColor(red:0.96, green:0.50, blue:0.09, alpha:1.0)
+        view.allowsHalfStars = true
+        view.isUserInteractionEnabled = false
+        view.isEnabled = false
+        view.backgroundColor = .clear
+        view.alpha = 1
+        return view
+    }()
+    
+    let numberOfReviewLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.gray
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 11)
+        label.numberOfLines = 0
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "(10 Reviews)"
+        return label
+    }()
+    
     lazy var titleLabelTwo: UILabel = {
         let label = UILabel()
         label.textColor = GREENISH_COLOR
@@ -170,6 +209,7 @@ class JobRequestDetails: UIViewController {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Full House Cleaninig"
         return label
     }()
     
@@ -265,6 +305,11 @@ class JobRequestDetails: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.layoutIfNeeded()
+        var contentHeight: CGFloat = 0
+        for view in scrollView.subviews {
+            contentHeight = contentHeight + view.frame.size.height
+        }
+        scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 140)
     }
     
     private func setNavigationBar() {
@@ -291,8 +336,18 @@ class JobRequestDetails: UIViewController {
         setupAreaTitleLabel()
         setupAreaLabel()
         setupAmountTitleLabel()
-        setupAreaLabel()
+        setupAmountLabel()
         setupSelectButton()
+        setupNumberOfReviewLabel()
+        setupStarReviewView()
+        setupTitleLabelTwo()
+        setupServiceDescriptionTextView()
+        setupCollectionView()
+        setupAddressTitleLabel()
+        setupAddressLabel()
+        setupDateAndTimeTitleLabel()
+        setupDateLabel()
+        setupTimeLabel()
     }
     
     func setupScrollView() {
@@ -309,15 +364,15 @@ class JobRequestDetails: UIViewController {
         contactDetailsView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         contactDetailsView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         contactDetailsView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        contactDetailsView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: 350).isActive = true
+        contactDetailsView.heightAnchor.constraint(equalToConstant: 210).isActive = true
     }
     
     func setupServiceImageView() {
         contactDetailsView.addSubview(serviceImageView)
         serviceImageView.topAnchor.constraint(equalTo: contactDetailsView.topAnchor, constant: 10).isActive = true
         serviceImageView.leftAnchor.constraint(equalTo: contactDetailsView.leftAnchor, constant: 10).isActive = true
-        serviceImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        serviceImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        serviceImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        serviceImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
     func setupServiceTitleOne() {
@@ -376,8 +431,8 @@ class JobRequestDetails: UIViewController {
     
     func setupAmountTitleLabel() {
         contactDetailsView.addSubview(amountTitleLabel)
+        amountTitleLabel.topAnchor.constraint(equalTo: areaTitleLabel.bottomAnchor, constant: 40).isActive = true
         amountTitleLabel.leftAnchor.constraint(equalTo: contactDetailsView.leftAnchor, constant: 16).isActive = true
-        amountTitleLabel.bottomAnchor.constraint(equalTo: contactDetailsView.bottomAnchor, constant: -16).isActive = true
     }
     
     func setupAmountLabel() {
@@ -390,8 +445,74 @@ class JobRequestDetails: UIViewController {
         contactDetailsView.addSubview(selectButton)
         selectButton.centerYAnchor.constraint(equalTo: amountTitleLabel.centerYAnchor).isActive = true
         selectButton.rightAnchor.constraint(equalTo: contactDetailsView.rightAnchor, constant: -16).isActive = true
-        selectButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        selectButton.widthAnchor.constraint(equalTo: contactDetailsView.widthAnchor, multiplier: 0.5).isActive = true
+        selectButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        selectButton.leftAnchor.constraint(equalTo: amountLabel.rightAnchor, constant: 10).isActive = true
+    }
+    
+    func setupNumberOfReviewLabel() {
+        contactDetailsView.addSubview(numberOfReviewLabel)
+        numberOfReviewLabel.topAnchor.constraint(equalTo: contactDetailsView.topAnchor, constant: 10).isActive = true
+        numberOfReviewLabel.rightAnchor.constraint(equalTo: contactDetailsView.rightAnchor, constant: -10).isActive = true
+    }
+    
+    func setupStarReviewView(){
+        contactDetailsView.addSubview(starRatingView)
+        starRatingView.centerYAnchor.constraint(equalTo: numberOfReviewLabel.centerYAnchor).isActive = true
+        starRatingView.rightAnchor.constraint(equalTo: numberOfReviewLabel.leftAnchor, constant: -5).isActive = true
+        starRatingView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        starRatingView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+    }
+    
+    func setupTitleLabelTwo() {
+        scrollView.addSubview(titleLabelTwo)
+        titleLabelTwo.topAnchor.constraint(equalTo: contactDetailsView.bottomAnchor, constant: 20).isActive = true
+        titleLabelTwo.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+    }
+    
+    func setupServiceDescriptionTextView() {
+        scrollView.addSubview(serviceDescription)
+        serviceDescription.topAnchor.constraint(equalTo: titleLabelTwo.bottomAnchor, constant: 20).isActive = true
+        serviceDescription.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        serviceDescription.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        serviceDescription.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+    }
+    
+    func setupCollectionView() {
+        scrollView.addSubview(collectionView)
+        collectionView.topAnchor.constraint(equalTo: serviceDescription.bottomAnchor, constant: 16).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+    }
+    
+    func setupAddressTitleLabel() {
+        view.addSubview(addressTitleLabel)
+        addressTitleLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16).isActive = true
+        addressTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+    }
+    
+    func setupAddressLabel() {
+        view.addSubview(addressLabel)
+        addressLabel.topAnchor.constraint(equalTo: addressTitleLabel.bottomAnchor, constant: 5).isActive = true
+        addressLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+    }
+    
+    func setupDateAndTimeTitleLabel() {
+        view.addSubview(dateTimeTitleLabel)
+        dateTimeTitleLabel.centerYAnchor.constraint(equalTo: addressTitleLabel.centerYAnchor).isActive = true
+        dateTimeTitleLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+    }
+    
+    func setupDateLabel() {
+        view.addSubview(dateLabel)
+        dateLabel.topAnchor.constraint(equalTo: dateTimeTitleLabel.bottomAnchor, constant: 5).isActive = true
+        dateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+    }
+    
+    func setupTimeLabel() {
+        view.addSubview(timeLabel)
+        timeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
+        timeLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
     }
     
     @objc func backTapped() {
@@ -411,18 +532,14 @@ extension JobRequestDetails: UISearchControllerDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: serviceRequestImageCellID, for: indexPath) as? ServiceRequestImageCell else {
+            
             let cell = collectionView.cellForItem(at: indexPath)!
             return cell
         }
         cell.mainImage = imageArray[indexPath.row]
+        cell.removeButton.alpha = 0
         
         return cell
-    }
-    
-    @objc private func removeImage(sender: UIButton) {
-        
-        self.imageArray.remove(at: sender.tag)
-        self.collectionView.reloadData()
     }
 }
 
