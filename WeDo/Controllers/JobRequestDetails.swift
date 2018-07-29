@@ -10,7 +10,7 @@ import UIKit
 import HCSStarRatingView
 class JobRequestDetails: UIViewController {
     
-    var imageArray = [#imageLiteral(resourceName: "placeholder"), #imageLiteral(resourceName: "placeholder"), #imageLiteral(resourceName: "placeholder")]
+    var imageArray = [#imageLiteral(resourceName: "house-1"), #imageLiteral(resourceName: "house-2"), #imageLiteral(resourceName: "house-3"), #imageLiteral(resourceName: "house-4")]
     var numberOfItems : Int!
     
     lazy var scrollView: UIScrollView = {
@@ -172,6 +172,7 @@ class JobRequestDetails: UIViewController {
         button.backgroundColor = GREENISH_COLOR
         button.setTitle("SELECT", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
+        button.addTarget(self, action: #selector(handleSelectButton), for: .touchUpInside)
         return button
     }()
     
@@ -309,7 +310,8 @@ class JobRequestDetails: UIViewController {
         for view in scrollView.subviews {
             contentHeight = contentHeight + view.frame.size.height
         }
-        scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 140)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 100)
+        print(contentHeight)
     }
     
     private func setNavigationBar() {
@@ -445,8 +447,8 @@ class JobRequestDetails: UIViewController {
         contactDetailsView.addSubview(selectButton)
         selectButton.centerYAnchor.constraint(equalTo: amountTitleLabel.centerYAnchor).isActive = true
         selectButton.rightAnchor.constraint(equalTo: contactDetailsView.rightAnchor, constant: -16).isActive = true
-        selectButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        selectButton.leftAnchor.constraint(equalTo: amountLabel.rightAnchor, constant: 10).isActive = true
+        selectButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        selectButton.leftAnchor.constraint(equalTo: amountLabel.rightAnchor, constant: 30).isActive = true
     }
     
     func setupNumberOfReviewLabel() {
@@ -478,11 +480,13 @@ class JobRequestDetails: UIViewController {
     }
     
     func setupCollectionView() {
+        let rows: CGFloat = (CGFloat(numberOfItems)/3).rounded(.up)
+        let height = (view.frame.width / 3) * (rows) - 32
         scrollView.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: serviceDescription.bottomAnchor, constant: 16).isActive = true
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: height).isActive = true
     }
     
     func setupAddressTitleLabel() {
@@ -517,6 +521,10 @@ class JobRequestDetails: UIViewController {
     
     @objc func backTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func handleSelectButton() {
+        self.navigationController?.pushViewController(CustomerSettingsViewController(), animated: true)
     }
 }
 

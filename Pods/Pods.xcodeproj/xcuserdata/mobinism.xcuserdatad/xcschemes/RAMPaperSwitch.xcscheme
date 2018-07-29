@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6A8D772A204951B19029C25C2A5215A6"
-               BlueprintName = "SVProgressHUD"
+               BlueprintIdentifier = "B45571F113E02E4FC9A3B132CB53744A"
+               BlueprintName = "RAMPaperSwitch"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SVProgressHUD.framework">
+               BuildableName = "RAMPaperSwitch.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

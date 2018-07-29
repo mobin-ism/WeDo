@@ -10,6 +10,7 @@ PODS:
     - GoogleMaps/Base (= 2.6.0)
   - HCSStarRatingView (1.5)
   - LIHImageSlider (1.0.8)
+  - RAMPaperSwitch (2.1.0)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - GooglePlaces
   - HCSStarRatingView (~> 1.5)
   - LIHImageSlider
+  - RAMPaperSwitch
   - SVProgressHUD
 
 SPEC REPOS:
@@ -29,6 +31,7 @@ SPEC REPOS:
     - GooglePlaces
     - HCSStarRatingView
     - LIHImageSlider
+    - RAMPaperSwitch
     - SVProgressHUD
 
 SPEC CHECKSUMS:
@@ -38,8 +41,9 @@ SPEC CHECKSUMS:
   GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   LIHImageSlider: ddf90c3a07e6f571b0e57629177a49eaf5bf15a3
+  RAMPaperSwitch: ef08af0400a040c9850e09253280deb77510becb
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: e9ca2598b85cad64e1ac262a82cf0a44582a5a05
+PODFILE CHECKSUM: ac150f34098ba10c25c6ff5b9c763ca098ee0b3e
 
 COCOAPODS: 1.5.3
