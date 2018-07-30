@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: RegisterViewController())
+        window?.rootViewController = UINavigationController(rootViewController: LandingViewController())
         
         
         GMSServices.provideAPIKey(GOOGLE_MAP_API_KEY)

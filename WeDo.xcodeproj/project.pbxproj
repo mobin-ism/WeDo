@@ -54,6 +54,8 @@
 		E9F10165210A6C34007CEE7F /* ActiveOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F10164210A6C34007CEE7F /* ActiveOrderViewController.swift */; };
 		E9F10167210A6C8A007CEE7F /* OrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F10166210A6C8A007CEE7F /* OrderHistoryViewController.swift */; };
 		E9F10169210A6C9D007CEE7F /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F10168210A6C9D007CEE7F /* CompanyViewController.swift */; };
+		E9FDBAE0210F126C00F4773A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FDBADF210F126C00F4773A /* WelcomeViewController.swift */; };
+		E9FDBAE2210F2C8300F4773A /* VerficationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FDBAE1210F2C8300F4773A /* VerficationCodeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,8 @@
 		E9F10164210A6C34007CEE7F /* ActiveOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderViewController.swift; sourceTree = "<group>"; };
 		E9F10166210A6C8A007CEE7F /* OrderHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryViewController.swift; sourceTree = "<group>"; };
 		E9F10168210A6C9D007CEE7F /* CompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
+		E9FDBADF210F126C00F4773A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		E9FDBAE1210F2C8300F4773A /* VerficationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerficationCodeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,8 @@
 				08855841210DAFA200533A08 /* JobRequestListViewController.swift */,
 				08855845210DD08000533A08 /* JobRequestDetails.swift */,
 				E9A8CE3F210E35E200F4FDF4 /* CustomerSettingsViewController.swift */,
+				E9FDBADF210F126C00F4773A /* WelcomeViewController.swift */,
+				E9FDBAE1210F2C8300F4773A /* VerficationCodeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -435,6 +441,7 @@
 				08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */,
 				E9A8CE7C210E4BEE00F4FDF4 /* Selector.swift in Sources */,
 				E912818621033C030010A242 /* ServiceDateAndTimeOneviewController.swift in Sources */,
+				E9FDBAE2210F2C8300F4773A /* VerficationCodeViewController.swift in Sources */,
 				084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */,
 				08855844210DBC3E00533A08 /* JobRequestListTableViewCell.swift in Sources */,
 				E9F10169210A6C9D007CEE7F /* CompanyViewController.swift in Sources */,
@@ -454,6 +461,7 @@
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
 				E912818821033C1A0010A242 /* ServicePaymentOneViewController.swift in Sources */,
 				08320EF020FDF2AF00D98704 /* Slider.swift in Sources */,
+				E9FDBAE0210F126C00F4773A /* WelcomeViewController.swift in Sources */,
 				E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */,
 				E9F10165210A6C34007CEE7F /* ActiveOrderViewController.swift in Sources */,
 				082E5FF42100B7340081D26D /* ServiceDescriptionTwoViewController.swift in Sources */,

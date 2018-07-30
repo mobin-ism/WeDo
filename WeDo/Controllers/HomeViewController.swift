@@ -121,7 +121,7 @@ class HomeViewController: UIViewController {
             sliderHeight = self.view.frame.height * 0.3
         }
         
-        let images: [UIImage] = [#imageLiteral(resourceName: "slider-1"), #imageLiteral(resourceName: "slider-2"), #imageLiteral(resourceName: "slider-3")]
+        let images: [UIImage] = [#imageLiteral(resourceName: "house-1"), #imageLiteral(resourceName: "house-2"), #imageLiteral(resourceName: "house-3"), #imageLiteral(resourceName: "house-4")]
         let slider1: LIHSlider = LIHSlider(images: images)
         
         // title for images

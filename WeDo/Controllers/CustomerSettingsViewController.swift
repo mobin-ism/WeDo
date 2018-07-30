@@ -297,6 +297,9 @@ class CustomerSettingsViewController: UIViewController {
     
     @objc func toggleNotificationSwitch() {
         print(notificationSwitch.isOn)
+        if notificationSwitch.isOn {
+            self.navigationController?.pushViewController(VerificationCodeViewController(), animated: true)
+        }
     }
     
     @objc func toggleSoundSwitch() {
