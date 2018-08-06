@@ -9,8 +9,11 @@
 import UIKit
 import BouncyLayout
 import LIHImageSlider
+import Alamofire
 
 class HomeViewController: UIViewController {
+    
+    var listOfServices = [NSObject]()
     
     let bouncyLayout = BouncyLayout()
     var sliderVc1 : UIViewController!
@@ -30,7 +33,8 @@ class HomeViewController: UIViewController {
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: bouncyLayout)
+        //let collection = UICollectionView(frame: .zero, collectionViewLayout: bouncyLayout)
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = UIColor.clear
         collection.alwaysBounceVertical = true
         collection.showsVerticalScrollIndicator = false
@@ -68,7 +72,10 @@ class HomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Alert.checkInternetConnection(on: self)
         
+        // API Call
+        self.getServices()
     }
     private func layout() {
         /*setSlider()*/
@@ -83,6 +90,7 @@ class HomeViewController: UIViewController {
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
+        
     }
     
     public func selectedViewControllerFromMenu(indexNumber : Int) {
@@ -162,7 +170,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 48
+        return self.listOfServices.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -170,13 +178,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let cell = collectionView.cellForItem(at: indexPath)!
             return cell
         }
-        cell.mainImage = #imageLiteral(resourceName: "dummy2")
-        cell.mainText = "Dummy"
+        if let data = listOfServices as? [ServicesNSObject] {
+            cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIcon))
+            cell.mainText = "\(data[indexPath.row].serviceTitle)"
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(AllServicesListViewController(), animated: true)
+        let allServicesListOBJ = AllServicesListViewController()
+        if let data = self.listOfServices as? [ServicesNSObject]{
+            allServicesListOBJ.serviceParentId = data[indexPath.row].serviceId
+            self.navigationController?.pushViewController(allServicesListOBJ, animated: true)
+        }
     }
     
 }
@@ -196,5 +210,36 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 20
     }
-    
+}
+
+// API CALLS
+extension HomeViewController {
+    func getServices() {
+        
+        guard let url = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=en") else { return }
+            
+        HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
+            guard let response = response else { return }
+            
+            if !self.listOfServices.isEmpty {
+                self.listOfServices.removeAll()
+            }
+            
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let serviceList = try decoder.decode(Services.self, from: json)
+                    for service in serviceList.services {
+                        //let container = ServicesNSObject(serviceId: service.id, serviceTtile: service.title, serviceIcon: service.smallIconOne)
+                        //self.listOfServices.append(container)
+                        
+                        print(service.child)
+                    }
+                    self.collectionView.reloadData()
+                }catch let err {
+                    print(err)
+                }
+            }
+        }
+    }
 }

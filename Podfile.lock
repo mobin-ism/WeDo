@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.7.1)
-  - BouncyLayout (2.1.0)
+  - BouncyLayout (2.0.0)
   - GoogleMaps (2.6.0):
     - GoogleMaps/Maps (= 2.6.0)
   - GoogleMaps/Base (2.6.0)
@@ -11,6 +11,9 @@ PODS:
   - HCSStarRatingView (1.5)
   - LIHImageSlider (1.0.8)
   - RAMPaperSwitch (2.1.0)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -21,6 +24,7 @@ DEPENDENCIES:
   - HCSStarRatingView (~> 1.5)
   - LIHImageSlider
   - RAMPaperSwitch
+  - SDWebImage
   - SVProgressHUD
 
 SPEC REPOS:
@@ -32,18 +36,20 @@ SPEC REPOS:
     - HCSStarRatingView
     - LIHImageSlider
     - RAMPaperSwitch
+    - SDWebImage
     - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
-  BouncyLayout: a7955879861375cc4e88bb64d42bcf622cd2694c
+  BouncyLayout: f64872d6b2a3e41bb8c89e24d0ff08e2dbeeb304
   GoogleMaps: 42f91c68b7fa2f84d5c86597b18ceb99f5414c7f
   GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   LIHImageSlider: ddf90c3a07e6f571b0e57629177a49eaf5bf15a3
   RAMPaperSwitch: ef08af0400a040c9850e09253280deb77510becb
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: ac150f34098ba10c25c6ff5b9c763ca098ee0b3e
+PODFILE CHECKSUM: a716c0062e9670fc532f12f0afe81853abe85db0
 
 COCOAPODS: 1.5.3

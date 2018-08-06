@@ -10,6 +10,9 @@ import UIKit
 import BouncyLayout
 class AllServicesListViewController: UIViewController {
     
+    var serviceParentId : Int?
+    var listOfSubServices = [NSObject]()
+    
     let bouncyLayout = BouncyLayout()
     let verticalCellID = "AllServicesCell"
     let horizontalCellID = "serviceTypesCell"
@@ -54,11 +57,16 @@ class AllServicesListViewController: UIViewController {
         view.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
         verticalCollectionView.register(AllServicesListCollectionViewCell.self, forCellWithReuseIdentifier: verticalCellID)
         horizontalCollectionView.register(HorizontalCollectionViewCell.self, forCellWithReuseIdentifier: horizontalCellID)
+        setNavigationBar()
         layout()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationBar()
+        Alert.checkInternetConnection(on: self)
+        
+        if let serviceParentId = self.serviceParentId {
+            self.getSubServices(serviceParentId: serviceParentId)
+        }
     }
     private func setNavigationBar() {
         navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
@@ -126,8 +134,10 @@ extension AllServicesListViewController: UICollectionViewDelegate, UICollectionV
                 let cell = collectionView.cellForItem(at: indexPath)!
                 return cell
             }
-            cell.mainImage = #imageLiteral(resourceName: "dummy2")
-            cell.mainText = "Dummy"
+            if let data = listOfSubServices as? [SubServicesNSObject] {
+                cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIcon))
+                cell.mainText = "\(data[indexPath.row].serviceTitle)"
+            }
             return cell
         }
         else {
@@ -185,5 +195,37 @@ extension AllServicesListViewController: UICollectionViewDelegateFlowLayout {
             return 10
         }
     }
-    
+}
+
+// api calls
+extension AllServicesListViewController {
+    func getSubServices(serviceParentId : Int) {
+//        guard let url = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=en") else { return }
+//        
+//        HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
+//            guard let response = response else { return }
+//            
+//            if !self.listOfSubServices.isEmpty {
+//                self.listOfSubServices.removeAll()
+//            }
+//            
+//            if let json = response.data {
+//                let decoder = JSONDecoder()
+//                do {
+//                    let serviceList = try decoder.decode(Services.self, from: json)
+//                    for service in serviceList.services {
+//                        if service.id == serviceParentId {
+//                            for subService in service.child {
+//                                let container = SubServicesNSObject(subServiceId: subService.id, serviceTtile: service.title, serviceIcon: service.smallIconOne)
+//                                self.listOfSubServices.append(container)
+//                            }
+//                        }
+//                    }
+//                    self.verticalCollectionView.reloadData()
+//                }catch let err {
+//                    print(err)
+//                }
+//            }
+//        }
+    }
 }

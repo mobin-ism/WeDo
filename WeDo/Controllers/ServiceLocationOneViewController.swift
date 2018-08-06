@@ -229,6 +229,11 @@ class ServiceLocationOneViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Alert.checkInternetConnection(on: self)
+    }
+    
     func setMapViewToCurrentLocation() {
         
         guard let currentLatitude  = locationManager.location?.coordinate.latitude else { return }

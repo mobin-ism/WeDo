@@ -1,7 +1,6 @@
-import Foundation
 import UIKit
 
-open class BouncyLayout: UICollectionViewFlowLayout {
+public class BouncyLayout: UICollectionViewFlowLayout {
     
     public enum BounceStyle {
         case subtle
@@ -10,8 +9,8 @@ open class BouncyLayout: UICollectionViewFlowLayout {
         
         var damping: CGFloat {
             switch self {
-            case .subtle: return 0.8
-            case .regular: return 0.7
+            case .subtle: return 1
+            case .regular: return 0.75
             case .prominent: return 0.5
             }
         }
@@ -44,9 +43,9 @@ open class BouncyLayout: UICollectionViewFlowLayout {
     
     private lazy var animator: UIDynamicAnimator = UIDynamicAnimator(collectionViewLayout: self)
     
-    open override func prepare() {
+    public override func prepare() {
         super.prepare()
-        guard let view = collectionView, let attributes = super.layoutAttributesForElements(in: view.bounds.insetBy(dx: -200, dy: -200))?.compactMap({ $0.copy() as? UICollectionViewLayoutAttributes }) else { return }
+        guard let view = collectionView, let attributes = super.layoutAttributesForElements(in: view.bounds)?.compactMap({ $0.copy() as? UICollectionViewLayoutAttributes }) else { return }
         
         oldBehaviors(for: attributes).forEach { animator.removeBehavior($0) }
         newBehaviors(for: attributes).forEach { animator.addBehavior($0, damping, frequency) }
@@ -62,18 +61,18 @@ open class BouncyLayout: UICollectionViewFlowLayout {
     
     private func newBehaviors(for attributes: [UICollectionViewLayoutAttributes]) -> [UIAttachmentBehavior] {
         let indexPaths = animator.behaviors.compactMap { (($0 as? UIAttachmentBehavior)?.items.first as? UICollectionViewLayoutAttributes)?.indexPath }
-        return attributes.compactMap { indexPaths.contains($0.indexPath) ? nil : UIAttachmentBehavior(item: $0, attachedToAnchor: $0.center.floored()) }
+        return attributes.compactMap { return indexPaths.contains($0.indexPath) ? nil : UIAttachmentBehavior(item: $0, attachedToAnchor: $0.center) }
     }
     
-    open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    public override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         return animator.items(in: rect) as? [UICollectionViewLayoutAttributes]
     }
     
-    open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+    public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return animator.layoutAttributesForCell(at: indexPath) ?? super.layoutAttributesForItem(at: indexPath)
     }
     
-    open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+    public override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         guard let view = collectionView else { return false }
         
         animator.behaviors.forEach {
@@ -92,8 +91,6 @@ open class BouncyLayout: UICollectionViewFlowLayout {
         case .horizontal: item.center.x += delta.dx < 0 ? max(delta.dx, delta.dx * resistance.dx) : min(delta.dx, delta.dx * resistance.dx)
         case .vertical: item.center.y += delta.dy < 0 ? max(delta.dy, delta.dy * resistance.dy) : min(delta.dy, delta.dy * resistance.dy)
         }
-        
-        item.center.flooredInPlace()
     }
 }
 
@@ -103,16 +100,5 @@ extension UIDynamicAnimator {
         behavior.damping = damping
         behavior.frequency = frequency
         addBehavior(behavior)
-    }
-}
-
-extension CGPoint {
-    
-    func floored() -> CGPoint {
-        return CGPoint(x: floor(x), y: floor(y))
-    }
-    
-    mutating func flooredInPlace() {
-        self = floored()
     }
 }

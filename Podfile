@@ -14,4 +14,5 @@ target 'WeDo' do
     pod 'HCSStarRatingView', '~> 1.5'
     pod 'LIHImageSlider'
     pod 'RAMPaperSwitch'
+    pod 'SDWebImage'
 end

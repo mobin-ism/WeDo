@@ -28,6 +28,15 @@
 		084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */; };
 		084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */; };
 		084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03F120FF7813000E532E /* ServiceDetailsCell.swift */; };
+		08743F4121183DA30077C5EE /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08743F3D21183DA30077C5EE /* OpenSans-Bold.ttf */; };
+		08743F4221183DA30077C5EE /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08743F3E21183DA30077C5EE /* OpenSans-Regular.ttf */; };
+		08743F4321183DA30077C5EE /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08743F3F21183DA30077C5EE /* OpenSans-SemiBold.ttf */; };
+		08743F4421183DA30077C5EE /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08743F4021183DA30077C5EE /* OpenSans-LightItalic.ttf */; };
+		08743F49211848190077C5EE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F48211848190077C5EE /* Reachability.swift */; };
+		08743F4B2118491C0077C5EE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F4A2118491C0077C5EE /* Alert.swift */; };
+		08743F4D211850B50077C5EE /* HTTPRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F4C211850B50077C5EE /* HTTPRequestHandler.swift */; };
+		08743F4F211862780077C5EE /* AreaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F4E211862780077C5EE /* AreaModel.swift */; };
+		08743F51211871600077C5EE /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F50211871600077C5EE /* ServiceModel.swift */; };
 		0885583E210DA2E800533A08 /* OrderHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885583D210DA2E800533A08 /* OrderHistoryTableViewCell.swift */; };
 		08855840210DA2FA00533A08 /* CompanyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885583F210DA2FA00533A08 /* CompanyTableViewCell.swift */; };
 		08855842210DAFA200533A08 /* JobRequestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855841210DAFA200533A08 /* JobRequestListViewController.swift */; };
@@ -43,10 +52,6 @@
 		E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE520FE79BC00799029 /* ServiceCell.swift */; };
 		E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE720FE7D1B00799029 /* Menu.swift */; };
 		E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFEA20FE7D7200799029 /* MenuCell.swift */; };
-		E9A8CE3B210E309100F4FDF4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9A8CE37210E309100F4FDF4 /* OpenSans-Bold.ttf */; };
-		E9A8CE3C210E309100F4FDF4 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9A8CE38210E309100F4FDF4 /* OpenSans-LightItalic.ttf */; };
-		E9A8CE3D210E309100F4FDF4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9A8CE39210E309100F4FDF4 /* OpenSans-Regular.ttf */; };
-		E9A8CE3E210E309100F4FDF4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9A8CE3A210E309100F4FDF4 /* OpenSans-SemiBold.ttf */; };
 		E9A8CE40210E35E200F4FDF4 /* CustomerSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8CE3F210E35E200F4FDF4 /* CustomerSettingsViewController.swift */; };
 		E9A8CE7C210E4BEE00F4FDF4 /* Selector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8CE7B210E4BEE00F4FDF4 /* Selector.swift */; };
 		E9A8CE7E210E4C4200F4FDF4 /* SelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8CE7D210E4C4200F4FDF4 /* SelectorCell.swift */; };
@@ -82,6 +87,16 @@
 		084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListCollectionViewCell.swift; sourceTree = "<group>"; };
 		084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
 		084A03F120FF7813000E532E /* ServiceDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsCell.swift; sourceTree = "<group>"; };
+		08743F3D21183DA30077C5EE /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../../../../../../../800Handyman/12/800handyman/800Handyman/Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		08743F3E21183DA30077C5EE /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../../../../800Handyman/12/800handyman/800Handyman/Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		08743F3F21183DA30077C5EE /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiBold.ttf"; path = "../../../../../../../800Handyman/12/800handyman/800Handyman/Resources/Fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		08743F4021183DA30077C5EE /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "../../../../../../../800Handyman/12/800handyman/800Handyman/Resources/Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		08743F45211846C50077C5EE /* WeDo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeDo-Bridging-Header.h"; sourceTree = "<group>"; };
+		08743F48211848190077C5EE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		08743F4A2118491C0077C5EE /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		08743F4C211850B50077C5EE /* HTTPRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestHandler.swift; sourceTree = "<group>"; };
+		08743F4E211862780077C5EE /* AreaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaModel.swift; sourceTree = "<group>"; };
+		08743F50211871600077C5EE /* ServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceModel.swift; sourceTree = "<group>"; };
 		0885583D210DA2E800533A08 /* OrderHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		0885583F210DA2FA00533A08 /* CompanyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyTableViewCell.swift; sourceTree = "<group>"; };
 		08855841210DAFA200533A08 /* JobRequestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobRequestListViewController.swift; sourceTree = "<group>"; };
@@ -99,10 +114,6 @@
 		E98CCFE520FE79BC00799029 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		E98CCFE720FE7D1B00799029 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		E98CCFEA20FE7D7200799029 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
-		E9A8CE37210E309100F4FDF4 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../../../../800handyman 2/800Handyman/Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		E9A8CE38210E309100F4FDF4 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "../../../../800handyman 2/800Handyman/Resources/Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
-		E9A8CE39210E309100F4FDF4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../800handyman 2/800Handyman/Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		E9A8CE3A210E309100F4FDF4 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiBold.ttf"; path = "../../../../800handyman 2/800Handyman/Resources/Fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		E9A8CE3F210E35E200F4FDF4 /* CustomerSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerSettingsViewController.swift; sourceTree = "<group>"; };
 		E9A8CE7B210E4BEE00F4FDF4 /* Selector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selector.swift; sourceTree = "<group>"; };
 		E9A8CE7D210E4C4200F4FDF4 /* SelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorCell.swift; sourceTree = "<group>"; };
@@ -157,6 +168,7 @@
 				08320EDE20FDE01F00D98704 /* LaunchScreen.storyboard */,
 				08320EE120FDE01F00D98704 /* Info.plist */,
 				08320ED920FDE01400D98704 /* WeDo.xcdatamodeld */,
+				08743F45211846C50077C5EE /* WeDo-Bridging-Header.h */,
 			);
 			path = WeDo;
 			sourceTree = "<group>";
@@ -217,6 +229,8 @@
 			children = (
 				08320EF520FDF37800D98704 /* SliderImages.swift */,
 				E9A8CE7F210E4CD200F4FDF4 /* SelectorModel.swift */,
+				08743F4E211862780077C5EE /* AreaModel.swift */,
+				08743F50211871600077C5EE /* ServiceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -227,17 +241,20 @@
 				08320EF820FDF49500D98704 /* Helper.swift */,
 				08320EFA20FDF57400D98704 /* Config.swift */,
 				E912818D2103C3CF0010A242 /* PaddedText.swift */,
+				08743F48211848190077C5EE /* Reachability.swift */,
+				08743F4A2118491C0077C5EE /* Alert.swift */,
+				08743F4C211850B50077C5EE /* HTTPRequestHandler.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		08855834210D9E7600533A08 /* Fonts */ = {
+		08743F3C21183D890077C5EE /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				E9A8CE37210E309100F4FDF4 /* OpenSans-Bold.ttf */,
-				E9A8CE38210E309100F4FDF4 /* OpenSans-LightItalic.ttf */,
-				E9A8CE39210E309100F4FDF4 /* OpenSans-Regular.ttf */,
-				E9A8CE3A210E309100F4FDF4 /* OpenSans-SemiBold.ttf */,
+				08743F3D21183DA30077C5EE /* OpenSans-Bold.ttf */,
+				08743F4021183DA30077C5EE /* OpenSans-LightItalic.ttf */,
+				08743F3E21183DA30077C5EE /* OpenSans-Regular.ttf */,
+				08743F3F21183DA30077C5EE /* OpenSans-SemiBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -276,7 +293,7 @@
 		E98CCFEC20FE89ED00799029 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				08855834210D9E7600533A08 /* Fonts */,
+				08743F3C21183D890077C5EE /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -316,6 +333,7 @@
 				TargetAttributes = {
 					08320ECE20FDE01400D98704 = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -342,12 +360,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9A8CE3D210E309100F4FDF4 /* OpenSans-Regular.ttf in Resources */,
 				08320EE020FDE01F00D98704 /* LaunchScreen.storyboard in Resources */,
 				08320EDD20FDE01F00D98704 /* Assets.xcassets in Resources */,
-				E9A8CE3C210E309100F4FDF4 /* OpenSans-LightItalic.ttf in Resources */,
-				E9A8CE3E210E309100F4FDF4 /* OpenSans-SemiBold.ttf in Resources */,
-				E9A8CE3B210E309100F4FDF4 /* OpenSans-Bold.ttf in Resources */,
+				08743F4421183DA30077C5EE /* OpenSans-LightItalic.ttf in Resources */,
+				08743F4321183DA30077C5EE /* OpenSans-SemiBold.ttf in Resources */,
+				08743F4221183DA30077C5EE /* OpenSans-Regular.ttf in Resources */,
+				08743F4121183DA30077C5EE /* OpenSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +384,7 @@
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/LIHImageSlider/LIHImageSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/RAMPaperSwitch/RAMPaperSwitch.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -375,6 +394,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LIHImageSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMPaperSwitch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,10 +451,13 @@
 				08320EDB20FDE01400D98704 /* WeDo.xcdatamodeld in Sources */,
 				E9A8CE40210E35E200F4FDF4 /* CustomerSettingsViewController.swift in Sources */,
 				08855842210DAFA200533A08 /* JobRequestListViewController.swift in Sources */,
+				08743F49211848190077C5EE /* Reachability.swift in Sources */,
 				08320EE920FDE49000D98704 /* LandingViewController.swift in Sources */,
 				08855846210DD08000533A08 /* JobRequestDetails.swift in Sources */,
 				08320EFB20FDF57400D98704 /* Config.swift in Sources */,
+				08743F4F211862780077C5EE /* AreaModel.swift in Sources */,
 				08855840210DA2FA00533A08 /* CompanyTableViewCell.swift in Sources */,
+				08743F51211871600077C5EE /* ServiceModel.swift in Sources */,
 				08320ED320FDE01400D98704 /* AppDelegate.swift in Sources */,
 				E912818C2103642F0010A242 /* ServiceRequestImageCell.swift in Sources */,
 				E98CCFE420FE797100799029 /* MasterCollectionViewCell.swift in Sources */,
@@ -452,10 +475,12 @@
 				E912818221033BBF0010A242 /* ServiceLocationOneViewController.swift in Sources */,
 				E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */,
 				E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */,
+				08743F4D211850B50077C5EE /* HTTPRequestHandler.swift in Sources */,
 				E9A8CE80210E4CD200F4FDF4 /* SelectorModel.swift in Sources */,
 				084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */,
 				E9A8CE7E210E4C4200F4FDF4 /* SelectorCell.swift in Sources */,
 				08320EF620FDF37800D98704 /* SliderImages.swift in Sources */,
+				08743F4B2118491C0077C5EE /* Alert.swift in Sources */,
 				083B2AF32109A372004F9A0F /* RegisterViewController.swift in Sources */,
 				084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */,
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
@@ -605,8 +630,9 @@
 			baseConfigurationReference = 49DB9D0DB3ABD83CB09CBC25 /* Pods-WeDo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7KTQF7AQ7;
+				DEVELOPMENT_TEAM = 75LX5BY4KB;
 				INFOPLIST_FILE = WeDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -614,6 +640,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem2.WeDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeDo/WeDo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -624,8 +652,9 @@
 			baseConfigurationReference = 1CD9AB98BE6B45E7F39176FA /* Pods-WeDo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7KTQF7AQ7;
+				DEVELOPMENT_TEAM = 75LX5BY4KB;
 				INFOPLIST_FILE = WeDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -633,6 +662,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem2.WeDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeDo/WeDo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

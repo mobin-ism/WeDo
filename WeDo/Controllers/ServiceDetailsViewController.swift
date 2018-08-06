@@ -119,6 +119,11 @@ class ServiceDetailsViewController: UIViewController {
         view.backgroundColor = UIColor.white
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Alert.checkInternetConnection(on: self)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

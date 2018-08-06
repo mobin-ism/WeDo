@@ -148,6 +148,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/LIHImageSlider/LIHImageSlider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RAMPaperSwitch/RAMPaperSwitch.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -156,6 +157,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/LIHImageSlider/LIHImageSlider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RAMPaperSwitch/RAMPaperSwitch.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

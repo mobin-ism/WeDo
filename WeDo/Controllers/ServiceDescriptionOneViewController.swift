@@ -166,8 +166,12 @@ class ServiceDescriptionOneViewController: UIViewController {
         view.backgroundColor = UIColor.white
         setNavigationBar()
         layout()
-        
         tableView.register(ServiceDetailsCell.self, forCellReuseIdentifier: cellId)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Alert.checkInternetConnection(on: self)
     }
     
     private func setNavigationBar() {

@@ -287,7 +287,7 @@ class ServiceDescriptionTwoViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        Alert.checkInternetConnection(on: self)
         self.collectionView.reloadData()
     }
     override func viewDidLayoutSubviews() {

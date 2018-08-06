@@ -103,6 +103,11 @@ class JobRequestListViewController: UIViewController {
         layout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Alert.checkInternetConnection(on: self)
+    }
+    
     private func setNavigationBar() {
         navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
         let logo = UIImage(named: "logo.png")
