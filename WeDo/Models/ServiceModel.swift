@@ -22,7 +22,6 @@ struct ServicesDetails : Decodable {
 struct SubServices : Decodable {
     let id : Int
     let title : String
-    let subTitle : String
     let smallIconOne : String
 }
 

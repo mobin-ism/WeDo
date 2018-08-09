@@ -8,10 +8,12 @@
 
 import UIKit
 import BouncyLayout
+import SDWebImage
 class AllServicesListViewController: UIViewController {
     
     var serviceParentId : Int?
     var listOfSubServices = [NSObject]()
+    var listOfServices = [NSObject]()
     
     let bouncyLayout = BouncyLayout()
     let verticalCellID = "AllServicesCell"
@@ -121,10 +123,10 @@ extension AllServicesListViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if  collectionView == self.verticalCollectionView {
-            return 12
+            return self.listOfSubServices.count
         }
         else {
-            return 6
+            return self.listOfServices.count
         }
     }
     
@@ -134,9 +136,9 @@ extension AllServicesListViewController: UICollectionViewDelegate, UICollectionV
                 let cell = collectionView.cellForItem(at: indexPath)!
                 return cell
             }
-            if let data = listOfSubServices as? [SubServicesNSObject] {
+            if let data = self.listOfSubServices as? [SubServicesNSObject] {
                 cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIcon))
-                cell.mainText = "\(data[indexPath.row].serviceTitle)"
+                cell.mainText = data[indexPath.row].serviceTitle
             }
             return cell
         }
@@ -145,18 +147,23 @@ extension AllServicesListViewController: UICollectionViewDelegate, UICollectionV
                 let cell = collectionView.cellForItem(at: indexPath)!
                 return cell
             }
-            cell.mainImage = #imageLiteral(resourceName: "dummy2")
-            cell.mainText = "Dummy"
+            
+            if let data = listOfServices as? [ServicesNSObject] {
+                cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIcon))
+                cell.mainText = "\(data[indexPath.row].serviceTitle)"
+            }
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.verticalCollectionView {
-            self.navigationController?.pushViewController(ServiceDescriptionOneViewController(), animated: true)
+           
         }
         else {
-            
+            if let data = self.listOfServices as? [ServicesNSObject] {
+                self.getSubServices(serviceParentId: data[indexPath.row].serviceId)
+            }
         }
     }
     
@@ -200,32 +207,41 @@ extension AllServicesListViewController: UICollectionViewDelegateFlowLayout {
 // api calls
 extension AllServicesListViewController {
     func getSubServices(serviceParentId : Int) {
-//        guard let url = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=en") else { return }
-//        
-//        HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
-//            guard let response = response else { return }
-//            
-//            if !self.listOfSubServices.isEmpty {
-//                self.listOfSubServices.removeAll()
-//            }
-//            
-//            if let json = response.data {
-//                let decoder = JSONDecoder()
-//                do {
-//                    let serviceList = try decoder.decode(Services.self, from: json)
-//                    for service in serviceList.services {
-//                        if service.id == serviceParentId {
-//                            for subService in service.child {
-//                                let container = SubServicesNSObject(subServiceId: subService.id, serviceTtile: service.title, serviceIcon: service.smallIconOne)
-//                                self.listOfSubServices.append(container)
-//                            }
-//                        }
-//                    }
-//                    self.verticalCollectionView.reloadData()
-//                }catch let err {
-//                    print(err)
-//                }
-//            }
-//        }
+        guard let serviceParentId = self.serviceParentId else { return }
+        guard let url = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=en") else { return }
+        HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
+            guard let response = response else { return }
+            
+            if !self.listOfServices.isEmpty {
+                self.listOfServices.removeAll()
+            }
+            
+            if !self.listOfSubServices.isEmpty {
+                self.listOfSubServices.removeAll()
+            }
+            
+            
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let serviceList = try decoder.decode(Services.self, from: json)
+                    for service in serviceList.services {
+                        let container = ServicesNSObject(serviceId: service.id, serviceTtile: service.title, serviceIcon: service.smallIconOne)
+                        self.listOfServices.append(container)
+                        
+                        if  serviceParentId == service.id {
+                            for subService in service.child {
+                                let container2 = SubServicesNSObject(subServiceId: subService.id, serviceTtile: subService.title, serviceIcon: subService.smallIconOne)
+                                self.listOfSubServices.append(container2)
+                            }
+                        }
+                    }
+                    self.verticalCollectionView.reloadData()
+                    self.horizontalCollectionView.reloadData()
+                }catch let err {
+                    print(err)
+                }
+            }
+        }
     }
 }

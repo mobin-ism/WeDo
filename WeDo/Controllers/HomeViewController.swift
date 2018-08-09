@@ -230,11 +230,10 @@ extension HomeViewController {
                 do {
                     let serviceList = try decoder.decode(Services.self, from: json)
                     for service in serviceList.services {
-                        //let container = ServicesNSObject(serviceId: service.id, serviceTtile: service.title, serviceIcon: service.smallIconOne)
-                        //self.listOfServices.append(container)
-                        
-                        print(service.child)
+                        let container = ServicesNSObject(serviceId: service.id, serviceTtile: service.title, serviceIcon: service.smallIconOne)
+                        self.listOfServices.append(container)
                     }
+                    
                     self.collectionView.reloadData()
                 }catch let err {
                     print(err)
