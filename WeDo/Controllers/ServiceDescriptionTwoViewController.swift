@@ -473,13 +473,13 @@ class ServiceDescriptionTwoViewController: UIViewController {
     }
     
     @objc func backTapped() {
-        //self.navigationController?.popViewController(animated: true)
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+        self.navigationController?.popViewController(animated: false)
+        /*let viewControllers: [UIViewController] = self.navigationController!.viewControllers
         for aViewController in viewControllers {
             if aViewController is AllServicesListViewController {
                 self.navigationController!.popToViewController(aViewController, animated: true)
             }
-        }
+        }*/
     }
     
     @objc func navigationButtonTapped(_ sender: UIButton) {

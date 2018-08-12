@@ -16,6 +16,7 @@ struct ServicesDetails : Decodable {
     let id : Int
     let title : String
     let smallIconOne : String
+    let smallIconTwo : String
     let child : [SubServices]
 }
 
@@ -25,10 +26,24 @@ struct SubServices : Decodable {
     let smallIconOne : String
 }
 
+struct SubServiceDetails : Decodable {
+    let data : SubServiceDetailsData
+}
+
+struct SubServiceDetailsData : Decodable {
+    let services : [SubServiceDetailsServices]
+}
+
+struct SubServiceDetailsServices : Decodable {
+    let title : String
+    let rate : Int
+}
+
 class ServicesNSObject : NSObject {
     private var _id : Int
     private var _title : String
     private var _smallIconOne : String
+    private var _smallIconTwo : String
     
     var serviceId : Int {
         get {
@@ -42,16 +57,23 @@ class ServicesNSObject : NSObject {
         }
     }
     
-    var serviceIcon : String {
+    var serviceIconRegular : String {
         get {
             return _smallIconOne
         }
     }
     
-    init(serviceId : Int, serviceTtile : String, serviceIcon : String) {
+    var serviceIconWhite : String {
+        get {
+            return _smallIconTwo
+        }
+    }
+    
+    init(serviceId : Int, serviceTtile : String, serviceIconRegular : String, serviceIconWhite : String) {
         self._id = serviceId
         self._title = serviceTtile
-        self._smallIconOne = serviceIcon
+        self._smallIconOne = serviceIconRegular
+        self._smallIconTwo  = serviceIconWhite
     }
 }
 

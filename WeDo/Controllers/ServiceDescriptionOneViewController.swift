@@ -9,6 +9,9 @@
 import UIKit
 class ServiceDescriptionOneViewController: UIViewController {
     
+    var rightBarButtonTitle : String?
+    var subServiceId : Int?
+    
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +28,6 @@ class ServiceDescriptionOneViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
-        imageView.image = #imageLiteral(resourceName: "dummy2")
         return imageView
     }()
     
@@ -34,7 +36,6 @@ class ServiceDescriptionOneViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.textAlignment = .left
-        label.text = "Cleaning"
         label.numberOfLines = 0
         label.textColor = UIColor.black
         label.font = UIFont(name: OPENSANS_REGULAR, size: 16)
@@ -46,7 +47,7 @@ class ServiceDescriptionOneViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.textAlignment = .left
-        label.text = "Full House Cleaning"
+        label.text = self.rightBarButtonTitle
         label.numberOfLines = 0
         label.textColor = UIColor.gray
         label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
@@ -157,7 +158,8 @@ class ServiceDescriptionOneViewController: UIViewController {
     }()
     
     let cellId = "serviceDetailsCell"
-    let subServices = ["1 Bed Room", "2 Bed Room", "3 Bed Room"]
+    var jobTitleList = [String]()
+    var jobRateList = [Int]()
     
     var serviceDescriptionTwoVC = ServiceDescriptionTwoViewController()
     
@@ -167,6 +169,10 @@ class ServiceDescriptionOneViewController: UIViewController {
         setNavigationBar()
         layout()
         tableView.register(ServiceDetailsCell.self, forCellReuseIdentifier: cellId)
+        
+        if let subServiceId = self.subServiceId {
+            self.getServiceAndSubServiceDetails(subServiceId: subServiceId)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -175,12 +181,14 @@ class ServiceDescriptionOneViewController: UIViewController {
     }
     
     private func setNavigationBar() {
+        guard let rightBarButtonTitle = self.rightBarButtonTitle else { return }
+        
         navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
         let logo = UIImage(named: "logo.png")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Full Hosue Cleaning", style: .plain, target: self, action: #selector(rightBarButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightBarButtonTitle, style: .plain, target: self, action: #selector(rightBarButtonTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -337,13 +345,13 @@ extension ServiceDescriptionOneViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subServices.count
+        return jobTitleList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ServiceDetailsCell {
-            cell.titleText = subServices[indexPath.row]
-            cell.priceText = "101 AED"
+            cell.titleText = self.jobTitleList[indexPath.row]
+            cell.priceText = "\(self.jobRateList[indexPath.row]) AED"
             return cell
         } else {
             let cell = tableView.cellForRow(at: indexPath)!
@@ -358,5 +366,58 @@ extension ServiceDescriptionOneViewController: UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
+}
+
+// API Calls
+extension ServiceDescriptionOneViewController {
     
+    func getServiceAndSubServiceDetails(subServiceId: Int) {
+        guard let url1 = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=\(UserDefaults.standard.value(forKey: LANGUAGE) as! String)") else { return }
+        HTTPRequestHandler.makeGetHttpRequest(url: url1, parameter: [:]) { (response, nil) in
+            guard let response = response else { return }
+            
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let serviceList = try decoder.decode(Services.self, from: json)
+                    for service in serviceList.services {
+                        if  UserDefaults.standard.value(forKey: PARENT_SERVICE_ID) as! Int == service.id {
+                            self.serviceTitleLabel.text = service.title
+                            self.serviceIconImageView.sd_setImage(with: URL(string: service.smallIconOne))
+                        }
+                    }
+                }catch let err {
+                    print(err)
+                }
+            }
+        }
+        
+        guard let url2 = URL(string: "\(BASE_URL)api/v2/general/child/sub/services/\(subServiceId)") else { return }
+        HTTPRequestHandler.makeGetHttpRequest(url: url2, parameter: [:]) { (response, nil) in
+            guard let response = response else { return }
+            
+            if !self.jobTitleList.isEmpty {
+                self.jobTitleList.removeAll()
+            }
+            if !self.jobRateList.isEmpty {
+                self.jobRateList.removeAll()
+            }
+            
+            print(response)
+            
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let subServiceDetailsList = try decoder.decode(SubServiceDetails.self, from: json)
+                    for jobList in subServiceDetailsList.data.services {
+                        self.jobTitleList.append(jobList.title)
+                        self.jobRateList.append(jobList.rate)
+                    }
+                    self.tableView.reloadData()
+                }catch let err {
+                    print(err)
+                }
+            }
+        }
+    }
 }

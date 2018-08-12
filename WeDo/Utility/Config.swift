@@ -24,4 +24,5 @@ let GOOGLE_MAP_API_KEY = "AIzaSyCSP0XXoHJi6PAGVk32g9bwDsq0bqKgupU"
 let BASE_URL      = "http://wedo.r-y-x.com/"
 let AUTH_KEY      = "Basic YWRtaW46MTIzNA=="
 
+let PARENT_SERVICE_ID = "parent_service_id"
 

@@ -14,7 +14,6 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.backgroundColor = .clear
-        
         return view
     }()
     

@@ -77,6 +77,8 @@ class HomeViewController: UIViewController {
         // API Call
         self.getServices()
     }
+    
+    
     private func layout() {
         /*setSlider()*/
         setLHIImageSlider()
@@ -179,7 +181,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         }
         if let data = listOfServices as? [ServicesNSObject] {
-            cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIcon))
+            cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIconRegular))
             cell.mainText = "\(data[indexPath.row].serviceTitle)"
         }
         return cell
@@ -188,11 +190,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let allServicesListOBJ = AllServicesListViewController()
         if let data = self.listOfServices as? [ServicesNSObject]{
+            UserDefaults.standard.set(data[indexPath.row].serviceId, forKey: PARENT_SERVICE_ID)
             allServicesListOBJ.serviceParentId = data[indexPath.row].serviceId
+            allServicesListOBJ.selectedIndexPath = indexPath.item
             self.navigationController?.pushViewController(allServicesListOBJ, animated: true)
         }
     }
-    
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
@@ -216,7 +219,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController {
     func getServices() {
         
-        guard let url = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=en") else { return }
+        guard let url = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=\(UserDefaults.standard.value(forKey: LANGUAGE) as! String)") else { return }
             
         HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
             guard let response = response else { return }
@@ -230,7 +233,7 @@ extension HomeViewController {
                 do {
                     let serviceList = try decoder.decode(Services.self, from: json)
                     for service in serviceList.services {
-                        let container = ServicesNSObject(serviceId: service.id, serviceTtile: service.title, serviceIcon: service.smallIconOne)
+                        let container = ServicesNSObject(serviceId: service.id, serviceTtile: service.title, serviceIconRegular: service.smallIconOne.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!, serviceIconWhite: service.smallIconTwo.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
                         self.listOfServices.append(container)
                     }
                     

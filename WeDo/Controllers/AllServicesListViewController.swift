@@ -14,7 +14,7 @@ class AllServicesListViewController: UIViewController {
     var serviceParentId : Int?
     var listOfSubServices = [NSObject]()
     var listOfServices = [NSObject]()
-    
+    var selectedIndexPath : Int?
     let bouncyLayout = BouncyLayout()
     let verticalCellID = "AllServicesCell"
     let horizontalCellID = "serviceTypesCell"
@@ -45,6 +45,7 @@ class AllServicesListViewController: UIViewController {
         collection.dataSource = self
         collection.clipsToBounds = true
         collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.isPagingEnabled = true
         return collection
     }()
     
@@ -70,6 +71,15 @@ class AllServicesListViewController: UIViewController {
             self.getSubServices(serviceParentId: serviceParentId)
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let selectedIndexPath = self.selectedIndexPath else { return }
+        let indexPath = IndexPath(item: selectedIndexPath, section: 0)
+        //self.horizontalCollectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+        print(indexPath)
+    }
+    
     private func setNavigationBar() {
         navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
         let logo = UIImage(named: "logo.png")
@@ -149,8 +159,19 @@ extension AllServicesListViewController: UICollectionViewDelegate, UICollectionV
             }
             
             if let data = listOfServices as? [ServicesNSObject] {
-                cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIcon))
-                cell.mainText = "\(data[indexPath.row].serviceTitle)"
+                if  self.serviceParentId == data[indexPath.row].serviceId {
+                    cell.backgroundColor = GREENISH_COLOR
+                    cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIconWhite))
+                    cell.mainText = "\(data[indexPath.row].serviceTitle)"
+                    cell.titleLabel.textColor = GREENISH_COLOR
+                    cell.layer.cornerRadius = 4
+                }else {
+                    cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIconRegular))
+                    cell.mainText = "\(data[indexPath.row].serviceTitle)"
+                    cell.backgroundColor = .white
+                    cell.titleLabel.textColor = .black
+                    cell.layer.cornerRadius = 4
+                }
             }
             return cell
         }
@@ -158,15 +179,21 @@ extension AllServicesListViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.verticalCollectionView {
-           
+            if let data = self.listOfSubServices as? [SubServicesNSObject] {
+                let serviceDescriptionOne = ServiceDescriptionOneViewController()
+                serviceDescriptionOne.rightBarButtonTitle = data[indexPath.row].serviceTitle
+                serviceDescriptionOne.subServiceId = data[indexPath.row].subServiceId
+                self.navigationController?.pushViewController(serviceDescriptionOne, animated: true)
+            }
         }
         else {
             if let data = self.listOfServices as? [ServicesNSObject] {
+                UserDefaults.standard.set(data[indexPath.row].serviceId, forKey: PARENT_SERVICE_ID)
+                self.serviceParentId = data[indexPath.row].serviceId
                 self.getSubServices(serviceParentId: data[indexPath.row].serviceId)
             }
         }
     }
-    
 }
 
 extension AllServicesListViewController: UICollectionViewDelegateFlowLayout {
@@ -208,7 +235,7 @@ extension AllServicesListViewController: UICollectionViewDelegateFlowLayout {
 extension AllServicesListViewController {
     func getSubServices(serviceParentId : Int) {
         guard let serviceParentId = self.serviceParentId else { return }
-        guard let url = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=en") else { return }
+        guard let url = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=\(UserDefaults.standard.value(forKey: LANGUAGE) as! String)") else { return }
         HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
             guard let response = response else { return }
             
@@ -219,20 +246,21 @@ extension AllServicesListViewController {
             if !self.listOfSubServices.isEmpty {
                 self.listOfSubServices.removeAll()
             }
-            
-            
+        
             if let json = response.data {
                 let decoder = JSONDecoder()
                 do {
                     let serviceList = try decoder.decode(Services.self, from: json)
                     for service in serviceList.services {
-                        let container = ServicesNSObject(serviceId: service.id, serviceTtile: service.title, serviceIcon: service.smallIconOne)
+                        let container = ServicesNSObject(serviceId: service.id, serviceTtile: service.title, serviceIconRegular: service.smallIconOne.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!, serviceIconWhite: service.smallIconTwo.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
                         self.listOfServices.append(container)
                         
                         if  serviceParentId == service.id {
                             for subService in service.child {
-                                let container2 = SubServicesNSObject(subServiceId: subService.id, serviceTtile: subService.title, serviceIcon: subService.smallIconOne)
+                                let container2 = SubServicesNSObject(subServiceId: subService.id, serviceTtile: subService.title, serviceIcon: subService.smallIconOne.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
                                 self.listOfSubServices.append(container2)
+                                
+                                print(subService.id)
                             }
                         }
                     }
