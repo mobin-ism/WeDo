@@ -195,20 +195,20 @@ class ServiceDescriptionTwoViewController: UIViewController {
     }()
     
     /*lazy var descriptionTextField : PaddedTextField = {
-       var textField = PaddedTextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.clipsToBounds = true
-        textField.placeholder = "Write your job details"
-        textField.font = UIFont(name: OPENSANS_REGULAR, size: 15)
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
-        textField.layer.cornerRadius = 5
-        textField.delegate = self
-        return textField
-    }()*/
+     var textField = PaddedTextField()
+     textField.translatesAutoresizingMaskIntoConstraints = false
+     textField.clipsToBounds = true
+     textField.placeholder = "Write your job details"
+     textField.font = UIFont(name: OPENSANS_REGULAR, size: 15)
+     textField.layer.borderWidth = 1
+     textField.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
+     textField.layer.cornerRadius = 5
+     textField.delegate = self
+     return textField
+     }()*/
     
     lazy var descriptionTextField : PaddedTextView = {
-       var textview = PaddedTextView()
+        var textview = PaddedTextView()
         textview.isEditable = true
         textview.translatesAutoresizingMaskIntoConstraints = false
         textview.clipsToBounds = true
@@ -287,7 +287,7 @@ class ServiceDescriptionTwoViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     override func viewWillAppear(_ animated: Bool) {
-        Alert.checkInternetConnection(on: self)
+        
         self.collectionView.reloadData()
     }
     override func viewDidLayoutSubviews() {
@@ -299,7 +299,7 @@ class ServiceDescriptionTwoViewController: UIViewController {
         scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 140)
         self.addImageButton.layer.cornerRadius = addImageButton.frame.height / 2
     }
-
+    
     private func setNavigationBar() {
         navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
         let logo = UIImage(named: "logo.png")
@@ -474,12 +474,6 @@ class ServiceDescriptionTwoViewController: UIViewController {
     
     @objc func backTapped() {
         self.navigationController?.popViewController(animated: false)
-        /*let viewControllers: [UIViewController] = self.navigationController!.viewControllers
-        for aViewController in viewControllers {
-            if aViewController is AllServicesListViewController {
-                self.navigationController!.popToViewController(aViewController, animated: true)
-            }
-        }*/
     }
     
     @objc func navigationButtonTapped(_ sender: UIButton) {

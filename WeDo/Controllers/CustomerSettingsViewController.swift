@@ -177,8 +177,6 @@ class CustomerSettingsViewController: UIViewController {
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(rightBarButtonTapped))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
@@ -316,7 +314,17 @@ class CustomerSettingsViewController: UIViewController {
     }
     
     @objc func handleLanguageSelector() {
-        self.languageSelector.show(withData: self.languageNSObject)
+        self.makeLanguageNSObject()
     }
     
+    func makeLanguageNSObject() {
+        if !self.languageNSObject.isEmpty {
+            self.languageNSObject.removeAll()
+        }
+        let englishLanguage = LanguageNSObject(languageId: 1, languageName: "English")
+        let arabicLanguagge = LanguageNSObject(languageId: 2, languageName: "Arabic")
+        self.languageNSObject.append(englishLanguage)
+        self.languageNSObject.append(arabicLanguagge)
+        self.languageSelector.show(withData: self.languageNSObject)
+    }
 }

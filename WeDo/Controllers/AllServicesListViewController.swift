@@ -181,8 +181,8 @@ extension AllServicesListViewController: UICollectionViewDelegate, UICollectionV
         if collectionView == self.verticalCollectionView {
             if let data = self.listOfSubServices as? [SubServicesNSObject] {
                 let serviceDescriptionOne = ServiceDescriptionOneViewController()
-                serviceDescriptionOne.rightBarButtonTitle = data[indexPath.row].serviceTitle
-                serviceDescriptionOne.subServiceId = data[indexPath.row].subServiceId
+                UserDefaults.standard.set(data[indexPath.row].subServiceId, forKey: SUB_SERVICE_ID)
+                UserDefaults.standard.set(data[indexPath.row].serviceTitle, forKey: SUB_SERVICE_TITLE)
                 self.navigationController?.pushViewController(serviceDescriptionOne, animated: true)
             }
         }

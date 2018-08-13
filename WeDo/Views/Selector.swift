@@ -133,6 +133,12 @@ extension Selector : UITableViewDelegate, UITableViewDataSource {
             if let data = self.selectorData as? [LanguageNSObject] {
                 self.customerSettingsVC.changeSelectorTitle(withString: "\(data[indexPath.row].languageName)")
                 self.customerSettingsVC.selectedLanguageID = data[indexPath.row].languageId
+                if data[indexPath.row].languageId == 1 {
+                    UserDefaults.standard.set("en", forKey: LANGUAGE)
+                }
+                else if data[indexPath.row].languageId == 2 {
+                    UserDefaults.standard.set("ar", forKey: LANGUAGE)
+                }
             }
         })
     }

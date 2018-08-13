@@ -9,9 +9,7 @@
 import UIKit
 class ServiceDescriptionOneViewController: UIViewController {
     
-    var rightBarButtonTitle : String?
-    var subServiceId : Int?
-    
+    var subServiceTitle : String?
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,6 +26,7 @@ class ServiceDescriptionOneViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
+        
         return imageView
     }()
     
@@ -36,6 +35,7 @@ class ServiceDescriptionOneViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.textAlignment = .left
+        
         label.numberOfLines = 0
         label.textColor = UIColor.black
         label.font = UIFont(name: OPENSANS_REGULAR, size: 16)
@@ -47,7 +47,7 @@ class ServiceDescriptionOneViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.textAlignment = .left
-        label.text = self.rightBarButtonTitle
+        
         label.numberOfLines = 0
         label.textColor = UIColor.gray
         label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
@@ -166,29 +166,25 @@ class ServiceDescriptionOneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        setNavigationBar()
-        layout()
         tableView.register(ServiceDetailsCell.self, forCellReuseIdentifier: cellId)
-        
-        if let subServiceId = self.subServiceId {
-            self.getServiceAndSubServiceDetails(subServiceId: subServiceId)
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Alert.checkInternetConnection(on: self)
+        setNavigationBar()
+        self.serviceSubTitleLabel.text = UserDefaults.standard.value(forKey: SUB_SERVICE_TITLE) as? String
+        self.getServiceAndSubServiceDetails(subServiceId: UserDefaults.standard.value(forKey: SUB_SERVICE_ID) as! Int)
+        
+        layout()
     }
     
     private func setNavigationBar() {
-        guard let rightBarButtonTitle = self.rightBarButtonTitle else { return }
-        
         navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
         let logo = UIImage(named: "logo.png")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightBarButtonTitle, style: .plain, target: self, action: #selector(rightBarButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "\(UserDefaults.standard.value(forKey: SUB_SERVICE_TITLE) as! String)", style: .plain, target: self, action: #selector(rightBarButtonTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -312,7 +308,7 @@ class ServiceDescriptionOneViewController: UIViewController {
     }
     
     @objc func backTapped() {
-        //self.navigationController?.popViewController(animated: true)        
+        //self.navigationController?.popViewController(animated: true)
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers
         for aViewController in viewControllers {
             if aViewController is AllServicesListViewController {
@@ -345,7 +341,7 @@ extension ServiceDescriptionOneViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return jobTitleList.count
+        return self.jobTitleList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

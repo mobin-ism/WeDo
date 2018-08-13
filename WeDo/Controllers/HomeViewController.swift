@@ -92,7 +92,7 @@ class HomeViewController: UIViewController {
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(customerSettings))
     }
     
     public func selectedViewControllerFromMenu(indexNumber : Int) {
@@ -163,6 +163,10 @@ class HomeViewController: UIViewController {
     @objc func menuIconTapped() {
         self.menu.show()
     }
+    
+    @objc func customerSettings() {
+        self.navigationController?.pushViewController(CustomerSettingsViewController(), animated: false)
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -218,7 +222,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 // API CALLS
 extension HomeViewController {
     func getServices() {
-        
         guard let url = URL(string: "\(BASE_URL)api/v2/general/services?id=8&language=\(UserDefaults.standard.value(forKey: LANGUAGE) as! String)") else { return }
             
         HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
