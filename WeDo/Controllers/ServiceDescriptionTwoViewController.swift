@@ -9,8 +9,8 @@
 import UIKit
 class ServiceDescriptionTwoViewController: UIViewController {
     
+    var skipServiceOneViewController : Bool = false
     var imagePicker = UIImagePickerController()
-    
     var imageArray = [#imageLiteral(resourceName: "placeholder"), #imageLiteral(resourceName: "placeholder"), #imageLiteral(resourceName: "placeholder")]
     var isImageSelected : Bool = false
     var numberOfItems : Int!
@@ -30,7 +30,7 @@ class ServiceDescriptionTwoViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
-        imageView.image = #imageLiteral(resourceName: "dummy2")
+        //imageView.image = #imageLiteral(resourceName: "dummy2")
         return imageView
     }()
     
@@ -48,19 +48,19 @@ class ServiceDescriptionTwoViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.textAlignment = .left
-        label.text = "Cleaning"
+        //label.text = "Cleaning"
         label.numberOfLines = 0
         label.textColor = UIColor.black
         label.font = UIFont(name: OPENSANS_REGULAR, size: 16)
         return label
     }()
     
-    lazy var serviceSubTitleLabel : UILabel = {
+    lazy var subServiceTitleLabel : UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.textAlignment = .left
-        label.text = "Full House Cleaning"
+        //label.text = "Full House Cleaning"
         label.numberOfLines = 0
         label.textColor = UIColor.gray
         label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
@@ -135,12 +135,12 @@ class ServiceDescriptionTwoViewController: UIViewController {
         return view
     }()
     
-    lazy var subServiceTitileLabel : UILabel = {
+    lazy var jobTitleLabel : UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.textAlignment = .left
-        label.text = "1 Bed Room"
+        //label.text = "1 Bed Room"
         label.numberOfLines = 0
         label.textColor = UIColor.black
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
@@ -152,7 +152,7 @@ class ServiceDescriptionTwoViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.textAlignment = .right
-        label.text = "100 AED"
+        //label.text = "100 AED"
         label.numberOfLines = 0
         label.textColor = UIColor.black
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
@@ -191,21 +191,9 @@ class ServiceDescriptionTwoViewController: UIViewController {
         button.setTitle("Next", for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleNextButton), for: .touchUpInside)
         return button
     }()
-    
-    /*lazy var descriptionTextField : PaddedTextField = {
-     var textField = PaddedTextField()
-     textField.translatesAutoresizingMaskIntoConstraints = false
-     textField.clipsToBounds = true
-     textField.placeholder = "Write your job details"
-     textField.font = UIFont(name: OPENSANS_REGULAR, size: 15)
-     textField.layer.borderWidth = 1
-     textField.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
-     textField.layer.cornerRadius = 5
-     textField.delegate = self
-     return textField
-     }()*/
     
     lazy var descriptionTextField : PaddedTextView = {
         var textview = PaddedTextView()
@@ -287,8 +275,11 @@ class ServiceDescriptionTwoViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(animated)
         self.collectionView.reloadData()
+        if !self.skipServiceOneViewController {
+            self.getSubServiceDetails(subServiceId: UserDefaults.standard.value(forKey: SUB_SERVICE_ID) as! Int, selectedJobId: UserDefaults.standard.value(forKey: JOB_ID) as! Int)
+        }
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -306,8 +297,6 @@ class ServiceDescriptionTwoViewController: UIViewController {
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Full Hosue Cleaning", style: .plain, target: self, action: #selector(rightBarButtonTapped))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
@@ -316,15 +305,17 @@ class ServiceDescriptionTwoViewController: UIViewController {
         setupDescriptionButton()
         setupLocationButton()
         setupDateTimeButton()
-        setupPaymentButton()
+        //setupPaymentButton()
         setupScrollView()
-        setupServiceIconImageView()
-        setupServiceTitleLabel()
-        setupServiceSubTitleLabel()
-        setupHorizontalLabelOne()
-        setupSubServiceTitleLabel()
-        setupServicePriceLabel()
-        setupHorizontalLabelTwo()
+        if !self.skipServiceOneViewController {
+            setupServiceIconImageView()
+            setupServiceTitleLabel()
+            setupSubServiceTitleLabel()
+            setupHorizontalLabelOne()
+            setupJobTitleLabel()
+            setupServicePriceLabel()
+            setupHorizontalLabelTwo()
+        }
         setupDescriptionLabel()
         setupDescriptionTextField()
         setupNextButton()
@@ -345,7 +336,7 @@ class ServiceDescriptionTwoViewController: UIViewController {
         descriptionButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
         descriptionButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         descriptionButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        descriptionButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        descriptionButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
     }
     
     func setupLocationButton() {
@@ -353,7 +344,7 @@ class ServiceDescriptionTwoViewController: UIViewController {
         locationButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
         locationButton.leftAnchor.constraint(equalTo: descriptionButton.rightAnchor).isActive = true
         locationButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        locationButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        locationButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
     }
     
     func setupDateTimeButton() {
@@ -361,7 +352,7 @@ class ServiceDescriptionTwoViewController: UIViewController {
         dateAndTimeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
         dateAndTimeButton.leftAnchor.constraint(equalTo: locationButton.rightAnchor).isActive = true
         dateAndTimeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        dateAndTimeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        dateAndTimeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.34).isActive = true
     }
     
     func setupPaymentButton() {
@@ -394,10 +385,10 @@ class ServiceDescriptionTwoViewController: UIViewController {
         serviceTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
     }
     
-    func setupServiceSubTitleLabel() {
-        scrollView.addSubview(serviceSubTitleLabel)
-        serviceSubTitleLabel.topAnchor.constraint(equalTo: serviceTitleLabel.bottomAnchor, constant: 5).isActive = true
-        serviceSubTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
+    func setupSubServiceTitleLabel() {
+        scrollView.addSubview(subServiceTitleLabel)
+        subServiceTitleLabel.topAnchor.constraint(equalTo: serviceTitleLabel.bottomAnchor, constant: 5).isActive = true
+        subServiceTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
     }
     
     func setupHorizontalLabelOne() {
@@ -407,30 +398,34 @@ class ServiceDescriptionTwoViewController: UIViewController {
         horizontalLineOne.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
-    func setupSubServiceTitleLabel() {
-        scrollView.addSubview(subServiceTitileLabel)
-        subServiceTitileLabel.topAnchor.constraint(equalTo: horizontalLineOne.bottomAnchor, constant: 16).isActive = true
-        subServiceTitileLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        subServiceTitileLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
+    func setupJobTitleLabel() {
+        scrollView.addSubview(jobTitleLabel)
+        jobTitleLabel.topAnchor.constraint(equalTo: horizontalLineOne.bottomAnchor, constant: 16).isActive = true
+        jobTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        jobTitleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
     }
     
     func setupServicePriceLabel() {
         scrollView.addSubview(servicePriceLabel)
-        servicePriceLabel.centerYAnchor.constraint(equalTo: subServiceTitileLabel.centerYAnchor).isActive = true
+        servicePriceLabel.centerYAnchor.constraint(equalTo: jobTitleLabel.centerYAnchor).isActive = true
         servicePriceLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
         servicePriceLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
     }
     
     func setupHorizontalLabelTwo() {
         view.addSubview(horizontalLineTwo)
-        horizontalLineTwo.topAnchor.constraint(equalTo: subServiceTitileLabel.bottomAnchor, constant: 16).isActive = true
+        horizontalLineTwo.topAnchor.constraint(equalTo: jobTitleLabel.bottomAnchor, constant: 16).isActive = true
         horizontalLineTwo.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         horizontalLineTwo.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
     func setupDescriptionLabel() {
         scrollView.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: horizontalLineTwo.bottomAnchor, constant: 16).isActive = true
+        if self.skipServiceOneViewController {
+            descriptionLabel.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
+        }else {
+            descriptionLabel.topAnchor.constraint(equalTo: horizontalLineTwo.bottomAnchor, constant: 16).isActive = true
+        }
         descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
     }
     
@@ -473,17 +468,43 @@ class ServiceDescriptionTwoViewController: UIViewController {
     }
     
     @objc func backTapped() {
-        self.navigationController?.popViewController(animated: false)
+        if self.skipServiceOneViewController {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+            for aViewController in viewControllers {
+                if aViewController is AllServicesListViewController {
+                    self.navigationController!.popToViewController(aViewController, animated: true)
+                }
+            }
+        }else {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+            for aViewController in viewControllers {
+                if aViewController is ServiceDescriptionOneViewController {
+                    self.navigationController!.popToViewController(aViewController, animated: true)
+                }
+            }
+        }
     }
     
     @objc func navigationButtonTapped(_ sender: UIButton) {
         switch sender.tag {
         case 2:
-            self.navigationController?.pushViewController(ServiceLocationOneViewController(), animated: false)
+            let locationVC = ServiceLocationOneViewController()
+            locationVC.isImageSelected = self.isImageSelected
+            locationVC.imageArray = self.imageArray
+            locationVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(locationVC, animated: false)
         case 3:
-            self.navigationController?.pushViewController(ServiceDateAndTimeOneViewController(), animated: false)
+            let dateTimeVC = ServiceDateAndTimeOneViewController()
+            dateTimeVC.isImageSelected = self.isImageSelected
+            dateTimeVC.imageArray = self.imageArray
+            dateTimeVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(dateTimeVC, animated: false)
         case 4:
-            self.navigationController?.pushViewController(ServicePaymentOneViewController(), animated: false)
+            let paymentVC  = ServicePaymentOneViewController()
+            paymentVC.isImageSelected = self.isImageSelected
+            paymentVC.imageArray = self.imageArray
+            paymentVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(paymentVC, animated: false)
         default:
             print("current view controller")
         }
@@ -491,22 +512,62 @@ class ServiceDescriptionTwoViewController: UIViewController {
     
     @objc private func cancelButtonTapped(_ sender: UIButton){
         
-        self.navigationController?.popViewController(animated: true)
     }
     
     @objc private func addNewImageButtonTapped(_ sender: UIButton){
+        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.openCamera()
+        }))
         
-        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+            self.openGallary()
+        }))
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func openCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
             
-            imagePicker.sourceType = .savedPhotosAlbum;
+            imagePicker.sourceType = .camera
             imagePicker.allowsEditing = false
             
             self.present(imagePicker, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    private func openGallary() {
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = false
+            
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     @objc func dismissKeyboard(){
         view.endEditing(true)
+    }
+    
+    @objc func handleNextButton() {
+        let locationVC = ServiceLocationOneViewController()
+        locationVC.isImageSelected = self.isImageSelected
+        locationVC.imageArray = self.imageArray
+        locationVC.skipServiceOneViewController = self.skipServiceOneViewController
+        self.navigationController?.pushViewController(locationVC, animated: false)
     }
 }
 
@@ -578,7 +639,6 @@ extension ServiceDescriptionTwoViewController : UIImagePickerControllerDelegate,
             }
             
             self.imageArray.append(image)
-            
             self.isImageSelected = true
             self.numberOfItems = self.imageArray.count
             
@@ -649,6 +709,35 @@ extension ServiceDescriptionTwoViewController : UITextViewDelegate {
         if textView.text.isEmpty {
             textView.text = "Write your job details"
             textView.textColor = UIColor.lightGray
+        }
+    }
+}
+
+
+// API CALLS
+extension ServiceDescriptionTwoViewController {
+    func getSubServiceDetails(subServiceId : Int, selectedJobId : Int) {
+        guard let url2 = URL(string: "\(BASE_URL)api/v2/general/child/sub/services/\(subServiceId)") else { return }
+        HTTPRequestHandler.makeGetHttpRequest(url: url2, parameter: [:]) { (response, nil) in
+            guard let response = response else { return }
+            
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let subServiceDetailsList = try decoder.decode(SubServiceDetails.self, from: json)
+                    for jobList in subServiceDetailsList.data.services {
+                        if  jobList.id == selectedJobId {
+                            self.serviceTitleLabel.text = jobList.parentTitle
+                            self.subServiceTitleLabel.text = jobList.childTitle
+                            self.serviceIconImageView.sd_setImage(with: URL(string: jobList.parentSmallIconOne), placeholderImage: #imageLiteral(resourceName: "cloud-download"), options: [.continueInBackground], completed: nil)
+                            self.jobTitleLabel.text = jobList.title
+                            self.servicePriceLabel.text = "\(jobList.rate) AED"
+                        }
+                    }
+                }catch let err {
+                    print(err)
+                }
+            }
         }
     }
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SVProgressHUD
+
 class ServiceDescriptionOneViewController: UIViewController {
     
     var subServiceTitle : String?
@@ -158,6 +160,8 @@ class ServiceDescriptionOneViewController: UIViewController {
     }()
     
     let cellId = "serviceDetailsCell"
+    
+    var jobIdList = [Int]()
     var jobTitleList = [String]()
     var jobRateList = [Int]()
     
@@ -167,6 +171,7 @@ class ServiceDescriptionOneViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         tableView.register(ServiceDetailsCell.self, forCellReuseIdentifier: cellId)
+        layout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -174,8 +179,6 @@ class ServiceDescriptionOneViewController: UIViewController {
         setNavigationBar()
         self.serviceSubTitleLabel.text = UserDefaults.standard.value(forKey: SUB_SERVICE_TITLE) as? String
         self.getServiceAndSubServiceDetails(subServiceId: UserDefaults.standard.value(forKey: SUB_SERVICE_ID) as! Int)
-        
-        layout()
     }
     
     private func setNavigationBar() {
@@ -191,10 +194,10 @@ class ServiceDescriptionOneViewController: UIViewController {
     
     func layout() {
         setupBackgroundImageView()
-        setupDescriptionButton()
+        /*setupDescriptionButton()
         setupLocationButton()
         setupDateTimeButton()
-        setupPaymentButton()
+        setupPaymentButton()*/
         setupServiceIconImageView()
         setupServiceTitleLabel()
         setupServiceSubTitleLabel()
@@ -247,7 +250,7 @@ class ServiceDescriptionOneViewController: UIViewController {
     
     func setupServiceIconImageView() {
         view.addSubview(serviceIconImageView)
-        serviceIconImageView.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
+        serviceIconImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)! + 20).isActive = true
         serviceIconImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         serviceIconImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         serviceIconImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
@@ -255,7 +258,7 @@ class ServiceDescriptionOneViewController: UIViewController {
     
     func setupServiceTitleLabel() {
         view.addSubview(serviceTitleLabel)
-        serviceTitleLabel.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
+        serviceTitleLabel.topAnchor.constraint(equalTo: serviceIconImageView.topAnchor).isActive = true
         serviceTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
         
     }
@@ -330,7 +333,9 @@ class ServiceDescriptionOneViewController: UIViewController {
         }
     }
     @objc func handlePostButton() {
-        self.navigationController?.pushViewController(serviceDescriptionTwoVC, animated: false)
+        let serviceDescriptionTwoVC = ServiceDescriptionTwoViewController()
+        serviceDescriptionTwoVC.skipServiceOneViewController = true
+        self.navigationController?.pushViewController(serviceDescriptionTwoVC, animated: true)
     }
 }
 
@@ -356,7 +361,8 @@ extension ServiceDescriptionOneViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        UserDefaults.standard.set(self.jobIdList[indexPath.row], forKey: JOB_ID)
+        self.navigationController?.pushViewController(serviceDescriptionTwoVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -388,10 +394,15 @@ extension ServiceDescriptionOneViewController {
             }
         }
         
+        SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.show(withStatus: "Please Wait...")
         guard let url2 = URL(string: "\(BASE_URL)api/v2/general/child/sub/services/\(subServiceId)") else { return }
         HTTPRequestHandler.makeGetHttpRequest(url: url2, parameter: [:]) { (response, nil) in
             guard let response = response else { return }
             
+            if !self.jobIdList.isEmpty {
+                self.jobIdList.removeAll()
+            }
             if !self.jobTitleList.isEmpty {
                 self.jobTitleList.removeAll()
             }
@@ -399,13 +410,13 @@ extension ServiceDescriptionOneViewController {
                 self.jobRateList.removeAll()
             }
             
-            print(response)
-            
             if let json = response.data {
                 let decoder = JSONDecoder()
                 do {
                     let subServiceDetailsList = try decoder.decode(SubServiceDetails.self, from: json)
                     for jobList in subServiceDetailsList.data.services {
+                        
+                        self.jobIdList.append(jobList.id)
                         self.jobTitleList.append(jobList.title)
                         self.jobRateList.append(jobList.rate)
                     }
@@ -415,5 +426,6 @@ extension ServiceDescriptionOneViewController {
                 }
             }
         }
+        SVProgressHUD.dismiss()
     }
 }

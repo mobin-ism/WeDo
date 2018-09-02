@@ -9,7 +9,9 @@
 import UIKit
 class ServicePaymentOneViewController: UIViewController {
     
-    
+    var skipServiceOneViewController : Bool = false
+    var imageArray : [UIImage] = []
+    var isImageSelected : Bool = false
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -373,11 +375,19 @@ class ServicePaymentOneViewController: UIViewController {
     }
     
     @objc func backTapped() {
-        //self.navigationController?.popViewController(animated: true)
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
-        for aViewController in viewControllers {
-            if aViewController is AllServicesListViewController {
-                self.navigationController!.popToViewController(aViewController, animated: true)
+        if self.skipServiceOneViewController {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+            for aViewController in viewControllers {
+                if aViewController is AllServicesListViewController {
+                    self.navigationController!.popToViewController(aViewController, animated: true)
+                }
+            }
+        }else {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+            for aViewController in viewControllers {
+                if aViewController is ServiceDescriptionOneViewController {
+                    self.navigationController!.popToViewController(aViewController, animated: true)
+                }
             }
         }
     }
@@ -385,11 +395,23 @@ class ServicePaymentOneViewController: UIViewController {
     @objc func navigationButtonTapped(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            self.navigationController?.pushViewController(ServiceDescriptionOneViewController(), animated: false)
+            let serviceDescriptionVC = ServiceDescriptionTwoViewController()
+            serviceDescriptionVC.isImageSelected = self.isImageSelected
+            serviceDescriptionVC.imageArray = self.imageArray
+            serviceDescriptionVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(serviceDescriptionVC, animated: false)
         case 2:
-            self.navigationController?.pushViewController(ServiceLocationOneViewController(), animated: false)
+            let serviceLocationVC = ServiceLocationOneViewController()
+            serviceLocationVC.isImageSelected = self.isImageSelected
+            serviceLocationVC.imageArray = self.imageArray
+            serviceLocationVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(serviceLocationVC, animated: false)
         case 3:
-            self.navigationController?.pushViewController(ServiceDateAndTimeOneViewController(), animated: false)
+            let dateTimeVC = ServiceDateAndTimeOneViewController()
+            dateTimeVC.isImageSelected = self.isImageSelected
+            dateTimeVC.imageArray = self.imageArray
+            dateTimeVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(dateTimeVC, animated: false)
         default:
             print("current view controller")
         }

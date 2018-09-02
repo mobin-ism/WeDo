@@ -185,7 +185,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         }
         if let data = listOfServices as? [ServicesNSObject] {
-            cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIconRegular))
+            cell.imageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIconRegular), placeholderImage: #imageLiteral(resourceName: "cloud-download"), options: [.continueInBackground], completed: nil)
             cell.mainText = "\(data[indexPath.row].serviceTitle)"
         }
         return cell

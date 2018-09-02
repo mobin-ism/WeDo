@@ -13,7 +13,9 @@ import GooglePlaces
 class ServiceLocationOneViewController: UIViewController {
     var markedLatitude : Double?
     var markedLongitude : Double?
-    
+    var skipServiceOneViewController : Bool = false
+    var imageArray : [UIImage] = []
+    var isImageSelected : Bool = false
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -195,6 +197,7 @@ class ServiceLocationOneViewController: UIViewController {
         button.setTitle("NEXT", for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleNextButton), for: .touchUpInside)
         return button
     }()
     
@@ -260,7 +263,6 @@ class ServiceLocationOneViewController: UIViewController {
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Full Hosue Cleaning", style: .plain, target: self, action: #selector(rightBarButtonTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -270,7 +272,7 @@ class ServiceLocationOneViewController: UIViewController {
         setupDescriptionButton()
         setupLocationButton()
         setupDateTimeButton()
-        setupPaymentButton()
+        //setupPaymentButton()
         setupScrollView()
         setupMapView()
         setMapPinImageView()
@@ -298,7 +300,7 @@ class ServiceLocationOneViewController: UIViewController {
         descriptionButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
         descriptionButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         descriptionButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        descriptionButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        descriptionButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
     }
     
     func setupLocationButton() {
@@ -306,7 +308,7 @@ class ServiceLocationOneViewController: UIViewController {
         locationButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
         locationButton.leftAnchor.constraint(equalTo: descriptionButton.rightAnchor).isActive = true
         locationButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        locationButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        locationButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
     }
     
     func setupDateTimeButton() {
@@ -314,7 +316,7 @@ class ServiceLocationOneViewController: UIViewController {
         dateAndTimeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
         dateAndTimeButton.leftAnchor.constraint(equalTo: locationButton.rightAnchor).isActive = true
         dateAndTimeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        dateAndTimeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        dateAndTimeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.34).isActive = true
     }
     
     func setupPaymentButton() {
@@ -415,16 +417,21 @@ class ServiceLocationOneViewController: UIViewController {
         nextButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
-    @objc func rightBarButtonTapped() {
-        
-    }
     
     @objc func backTapped() {
-        //self.navigationController?.popViewController(animated: true)
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
-        for aViewController in viewControllers {
-            if aViewController is AllServicesListViewController {
-                self.navigationController!.popToViewController(aViewController, animated: true)
+        if self.skipServiceOneViewController {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+            for aViewController in viewControllers {
+                if aViewController is AllServicesListViewController {
+                    self.navigationController!.popToViewController(aViewController, animated: true)
+                }
+            }
+        }else {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+            for aViewController in viewControllers {
+                if aViewController is ServiceDescriptionOneViewController {
+                    self.navigationController!.popToViewController(aViewController, animated: true)
+                }
             }
         }
     }
@@ -432,14 +439,34 @@ class ServiceLocationOneViewController: UIViewController {
     @objc func navigationButtonTapped(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            self.navigationController?.pushViewController(ServiceDescriptionOneViewController(), animated: false)
+            let serviceDescriptionVC = ServiceDescriptionTwoViewController()
+            serviceDescriptionVC.isImageSelected = self.isImageSelected
+            serviceDescriptionVC.imageArray = self.imageArray
+            serviceDescriptionVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(serviceDescriptionVC, animated: false)
         case 3:
-            self.navigationController?.pushViewController(ServiceDateAndTimeOneViewController(), animated: false)
+            let dateTimeVC = ServiceDateAndTimeOneViewController()
+            dateTimeVC.isImageSelected = self.isImageSelected
+            dateTimeVC.imageArray = self.imageArray
+            dateTimeVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(dateTimeVC, animated: false)
         case 4:
-            self.navigationController?.pushViewController(ServicePaymentOneViewController(), animated: false)
+            let servicePaymentVC = ServicePaymentOneViewController()
+            servicePaymentVC.isImageSelected = self.isImageSelected
+            servicePaymentVC.imageArray = self.imageArray
+            servicePaymentVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(servicePaymentVC, animated: false)
         default:
             print("current view controller")
         }
+    }
+    
+    @objc func handleNextButton() {
+        let dateTimeVC = ServiceDateAndTimeOneViewController()
+        dateTimeVC.isImageSelected = self.isImageSelected
+        dateTimeVC.imageArray = self.imageArray
+        dateTimeVC.skipServiceOneViewController = self.skipServiceOneViewController
+        self.navigationController?.pushViewController(dateTimeVC, animated: false)
     }
     
     @objc func touchTapped(_ sender: UITapGestureRecognizer) {

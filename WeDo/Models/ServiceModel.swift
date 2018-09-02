@@ -35,6 +35,10 @@ struct SubServiceDetailsData : Decodable {
 }
 
 struct SubServiceDetailsServices : Decodable {
+    let parentTitle : String
+    let parentSmallIconOne : String
+    let childTitle : String
+    let id : Int
     let title : String
     let rate : Int
 }

@@ -9,6 +9,13 @@
 import UIKit
 class ServiceDateAndTimeOneViewController: UIViewController {
     
+    var skipServiceOneViewController : Bool = false
+    var imageArray : [UIImage] = []
+    var isImageSelected : Bool = false
+    var isTimeSelected : Bool = false
+    var selectedDate : String?
+    var selectedTime : String?
+    var availableTimeSlots = ["12-3 AM", "3-6 AM", "6-9 AM", "9-12 PM", "12-3 PM", "3-6 PM", "6-9 PM", "9-12 PM"]
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -17,40 +24,6 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         imageView.backgroundColor = .clear
         imageView.image = #imageLiteral(resourceName: "bigger-logo")
         return imageView
-    }()
-    
-    lazy var serviceIconImageView : UIImageView = {
-        var imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .clear
-        imageView.image = #imageLiteral(resourceName: "dummy2")
-        return imageView
-    }()
-    
-    lazy var serviceTitleLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.clipsToBounds = true
-        label.textAlignment = .left
-        label.text = "Cleaning"
-        label.numberOfLines = 0
-        label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 16)
-        return label
-    }()
-    
-    lazy var serviceSubTitleLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.clipsToBounds = true
-        label.textAlignment = .left
-        label.text = "Full House Cleaning"
-        label.numberOfLines = 0
-        label.textColor = UIColor.gray
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
-        return label
     }()
     
     lazy var descriptionButton : UIButton = {
@@ -105,71 +78,103 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         return button
     }()
     
-    lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = UIColor.clear
-        table.separatorColor = UIColor.black
-        table.clipsToBounds = true
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.delegate = self
-        table.dataSource = self
-        return table
-    }()
-    
-    lazy var leftHorizontalLine : UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.clipsToBounds = true
-        view.backgroundColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5)
-        return view
-    }()
-    
-    lazy var rightHorizontalLine : UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.clipsToBounds = true
-        view.backgroundColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5)
-        return view
-    }()
-    
-    lazy var orLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.clipsToBounds = true
-        label.textAlignment = .center
-        label.text = "OR"
-        label.numberOfLines = 0
+    let selectDateLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .natural
         label.textColor = UIColor.black
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
+        label.text = "Select date"
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
+    lazy var dateHolder: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 4
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showDatePicker)))
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        return view
+    }()
+    let dateLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .natural
+        label.textColor = UIColor.black
+        label.text = "MM-DD-YYYY"
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    lazy var downArrowIcon: UIImageView = {
+        let view = UIImageView()
+        view.image = #imageLiteral(resourceName: "downArrowIcon")
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        return view
+    }()
     lazy var postButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.clipsToBounds = true
         button.backgroundColor = UIColor(red:0.17, green:0.67, blue:0.31, alpha:1.0)
-        button.setTitle("POST YOUR JOB FOR BID", for: .normal)
+        button.setTitle("SUBMIT", for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
         return button
     }()
     
-    let cellId = "serviceDetailsCell"
-    let subServices = ["1 Bed Room", "2 Bed Room", "3 Bed Room"]
+    lazy var calendarSelector: CalendarSelector = {
+        let calendar = CalendarSelector()
+        calendar.dateTimeVC = self
+        return calendar
+    }()
     
+    let selectTimeLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .natural
+        label.textColor = UIColor.black
+        label.text = "Select Time"
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var horizontalCollectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
+        collection.alwaysBounceHorizontal = true
+        collection.showsHorizontalScrollIndicator = false
+        collection.delegate = self
+        collection.dataSource = self
+        collection.clipsToBounds = true
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = .white
+        return collection
+    }()
+    let horizontalCellID = "availableTimeSlots"
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        horizontalCollectionView.register(TimeCell.self, forCellWithReuseIdentifier: horizontalCellID)
         setNavigationBar()
         layout()
-        
-        tableView.register(ServiceDetailsCell.self, forCellReuseIdentifier: cellId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
+        self.getCurrentDate()
     }
     
     private func setNavigationBar() {
@@ -178,7 +183,6 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Full Hosue Cleaning", style: .plain, target: self, action: #selector(rightBarButtonTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -188,14 +192,13 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         setupDescriptionButton()
         setupLocationButton()
         setupDateTimeButton()
-        setupPaymentButton()
-        setupServiceIconImageView()
-        setupServiceTitleLabel()
-        setupServiceSubTitleLabel()
-        setupTableView()
-        setupOrLabel()
-        setupLeftHorizontalLine()
-        setupRighttHorizontalLine()
+        //setupPaymentButton()
+        setSelectDateLabel()
+        setDateHolder()
+        setDateLabel()
+        setDownArrowIcon()
+        setupSelectTimeLabel()
+        setupHorizontalCollectionView()
         setupPostButton()
     }
     
@@ -212,7 +215,7 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         descriptionButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
         descriptionButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         descriptionButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        descriptionButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        descriptionButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
     }
     
     func setupLocationButton() {
@@ -220,7 +223,7 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         locationButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
         locationButton.leftAnchor.constraint(equalTo: descriptionButton.rightAnchor).isActive = true
         locationButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        locationButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        locationButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
     }
     
     func setupDateTimeButton() {
@@ -228,7 +231,7 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         dateAndTimeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
         dateAndTimeButton.leftAnchor.constraint(equalTo: locationButton.rightAnchor).isActive = true
         dateAndTimeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        dateAndTimeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        dateAndTimeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.34).isActive = true
     }
     
     func setupPaymentButton() {
@@ -239,74 +242,76 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         paymentButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
     }
     
-    func setupServiceIconImageView() {
-        view.addSubview(serviceIconImageView)
-        serviceIconImageView.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
-        serviceIconImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        serviceIconImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        serviceIconImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+    private func setSelectDateLabel() {
+        view.addSubview(selectDateLabel)
+        selectDateLabel.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
+        selectDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        selectDateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+    }
+    private func setDateHolder() {
+        view.addSubview(dateHolder)
+        dateHolder.leftAnchor.constraint(equalTo: selectDateLabel.leftAnchor).isActive = true
+        dateHolder.topAnchor.constraint(equalTo: selectDateLabel.bottomAnchor, constant: 8).isActive = true
+        dateHolder.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        dateHolder.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-    func setupServiceTitleLabel() {
-        view.addSubview(serviceTitleLabel)
-        serviceTitleLabel.topAnchor.constraint(equalTo: descriptionButton.bottomAnchor, constant: 20).isActive = true
-        serviceTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
-        
+    private func setDateLabel() {
+        dateHolder.addSubview(dateLabel)
+        dateLabel.centerYAnchor.constraint(equalTo: dateHolder.centerYAnchor).isActive = true
+        dateLabel.leadingAnchor.constraint(equalTo: dateHolder.leadingAnchor, constant: 16).isActive = true
+        dateLabel.trailingAnchor.constraint(equalTo: dateHolder.trailingAnchor, constant: -16).isActive = true
     }
     
-    func setupServiceSubTitleLabel() {
-        view.addSubview(serviceSubTitleLabel)
-        serviceSubTitleLabel.topAnchor.constraint(equalTo: serviceTitleLabel.bottomAnchor, constant: 5).isActive = true
-        serviceSubTitleLabel.leftAnchor.constraint(equalTo: serviceIconImageView.rightAnchor, constant: 10).isActive = true
+    private func setDownArrowIcon() {
+        dateHolder.addSubview(downArrowIcon)
+        downArrowIcon.centerYAnchor.constraint(equalTo: dateHolder.centerYAnchor).isActive = true
+        downArrowIcon.rightAnchor.constraint(equalTo: dateHolder.rightAnchor, constant: -16).isActive = true
+        downArrowIcon.widthAnchor.constraint(equalToConstant: 11).isActive = true
+        downArrowIcon.heightAnchor.constraint(equalToConstant: 11 * 0.6).isActive = true
     }
     
-    func setupTableView() {
-        view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: serviceIconImageView.bottomAnchor, constant: 20).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.33).isActive = true
+    private func setupSelectTimeLabel() {
+        view.addSubview(selectTimeLabel)
+        selectTimeLabel.topAnchor.constraint(equalTo: dateHolder.bottomAnchor, constant: 20).isActive = true
+        selectTimeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
     }
-    
-    func setupOrLabel() {
-        view.addSubview(orLabel)
-        orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        orLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20).isActive = true
-    }
-    
-    func setupLeftHorizontalLine() {
-        view.addSubview(leftHorizontalLine)
-        leftHorizontalLine.centerYAnchor.constraint(equalTo: orLabel.centerYAnchor).isActive = true
-        leftHorizontalLine.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        leftHorizontalLine.rightAnchor.constraint(equalTo: orLabel.leftAnchor, constant: -16).isActive = true
-        leftHorizontalLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    }
-    
-    func setupRighttHorizontalLine() {
-        view.addSubview(rightHorizontalLine)
-        rightHorizontalLine.centerYAnchor.constraint(equalTo: orLabel.centerYAnchor).isActive = true
-        rightHorizontalLine.leftAnchor.constraint(equalTo: orLabel.rightAnchor, constant: 16).isActive = true
-        rightHorizontalLine.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
-        rightHorizontalLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    private func setupHorizontalCollectionView() {
+        view.addSubview(horizontalCollectionView)
+        horizontalCollectionView.topAnchor.constraint(equalTo: selectTimeLabel.bottomAnchor, constant: 16).isActive = true
+        horizontalCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        horizontalCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        horizontalCollectionView.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     func setupPostButton() {
         view.addSubview(postButton)
-        postButton.topAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 20).isActive = true
+        postButton.topAnchor.constraint(equalTo: horizontalCollectionView.bottomAnchor, constant: 20).isActive = true
         postButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         postButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
         postButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
-    @objc func rightBarButtonTapped() {
-        
+    
+    func changeFromDateButtonTitle(withString title: String) {
+        DispatchQueue.main.async {
+            self.dateLabel.text = title
+        }
     }
     
     @objc func backTapped() {
-        //self.navigationController?.popViewController(animated: true)
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
-        for aViewController in viewControllers {
-            if aViewController is AllServicesListViewController {
-                self.navigationController!.popToViewController(aViewController, animated: true)
+        if self.skipServiceOneViewController {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+            for aViewController in viewControllers {
+                if aViewController is AllServicesListViewController {
+                    self.navigationController!.popToViewController(aViewController, animated: true)
+                }
+            }
+        }else {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+            for aViewController in viewControllers {
+                if aViewController is ServiceDescriptionOneViewController {
+                    self.navigationController!.popToViewController(aViewController, animated: true)
+                }
             }
         }
     }
@@ -314,44 +319,86 @@ class ServiceDateAndTimeOneViewController: UIViewController {
     @objc func navigationButtonTapped(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            self.navigationController?.pushViewController(ServiceDescriptionOneViewController(), animated: false)
+            let serviceDescriptionVC = ServiceDescriptionTwoViewController()
+            serviceDescriptionVC.isImageSelected = self.isImageSelected
+            serviceDescriptionVC.imageArray = self.imageArray
+            serviceDescriptionVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(serviceDescriptionVC, animated: false)
         case 2:
-            self.navigationController?.pushViewController(ServiceLocationOneViewController(), animated: false)
+            let serviceLocationVC = ServiceLocationOneViewController()
+            serviceLocationVC.isImageSelected = self.isImageSelected
+            serviceLocationVC.imageArray = self.imageArray
+            serviceLocationVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(serviceLocationVC, animated: false)
         case 4:
-            self.navigationController?.pushViewController(ServicePaymentOneViewController(), animated: false)
+            let servicePaymentVC = ServicePaymentOneViewController()
+            servicePaymentVC.isImageSelected = self.isImageSelected
+            servicePaymentVC.imageArray = self.imageArray
+            servicePaymentVC.skipServiceOneViewController = self.skipServiceOneViewController
+            self.navigationController?.pushViewController(servicePaymentVC, animated: false)
         default:
             print("current view controller")
         }
     }
+    
+    @objc private func showDatePicker() {
+        calendarSelector.show()
+    }
+    
+    private func getCurrentDate() {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy"
+        self.selectedDate = formatter.string(from: date)
+        guard let selectedDate = self.selectedDate else { return }
+        self.changeFromDateButtonTitle(withString: selectedDate)
+    }
 }
 
-extension ServiceDateAndTimeOneViewController: UITableViewDelegate, UITableViewDataSource {
+extension ServiceDateAndTimeOneViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subServices.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.availableTimeSlots.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ServiceDetailsCell {
-            cell.titleText = subServices[indexPath.row]
-            cell.priceText = "101 AED"
-            return cell
-        } else {
-            let cell = tableView.cellForRow(at: indexPath)!
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: horizontalCellID, for: indexPath) as? TimeCell else {
+            let cell = collectionView.cellForItem(at: indexPath)!
             return cell
         }
+        if self.isTimeSelected == false && indexPath.row == 0 {
+            cell.isSelected = true
+        }
+        cell.mainText = self.availableTimeSlots[indexPath.row]
+        return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
+        cell.isSelected = true
+        self.isTimeSelected = true
+    }
+}
+
+extension ServiceDateAndTimeOneViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width: CGFloat = 80
+        let height: CGFloat = 30
+        return CGSize(width: width, height: height)
+        
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
 }

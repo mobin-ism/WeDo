@@ -24,6 +24,8 @@
 		083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B152109BBD4004F9A0F /* LoginViewController.swift */; };
 		083B2B1A2109CCC3004F9A0F /* ActiveOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B192109CCC3004F9A0F /* ActiveOrderTableViewCell.swift */; };
 		083B2B1C2109EF4F004F9A0F /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B2B1B2109EF4F004F9A0F /* ServiceDetailsViewController.swift */; };
+		0847AFC2213BFE890054DE93 /* CalenderSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847AFC1213BFE890054DE93 /* CalenderSelector.swift */; };
+		0847AFC4213C05FD0054DE93 /* TImeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847AFC3213C05FD0054DE93 /* TImeCell.swift */; };
 		084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */; };
 		084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */; };
 		084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */; };
@@ -83,6 +85,8 @@
 		083B2B152109BBD4004F9A0F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		083B2B192109CCC3004F9A0F /* ActiveOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderTableViewCell.swift; sourceTree = "<group>"; };
 		083B2B1B2109EF4F004F9A0F /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
+		0847AFC1213BFE890054DE93 /* CalenderSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderSelector.swift; sourceTree = "<group>"; };
+		0847AFC3213C05FD0054DE93 /* TImeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TImeCell.swift; sourceTree = "<group>"; };
 		084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListViewController.swift; sourceTree = "<group>"; };
 		084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListCollectionViewCell.swift; sourceTree = "<group>"; };
 		084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 				08320EEF20FDF2AF00D98704 /* Slider.swift */,
 				E98CCFE720FE7D1B00799029 /* Menu.swift */,
 				E9A8CE7B210E4BEE00F4FDF4 /* Selector.swift */,
+				0847AFC1213BFE890054DE93 /* CalenderSelector.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 				084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */,
 				084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */,
 				E912818B2103642F0010A242 /* ServiceRequestImageCell.swift */,
+				0847AFC3213C05FD0054DE93 /* TImeCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -463,6 +469,7 @@
 				E98CCFE420FE797100799029 /* MasterCollectionViewCell.swift in Sources */,
 				08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */,
 				E9A8CE7C210E4BEE00F4FDF4 /* Selector.swift in Sources */,
+				0847AFC2213BFE890054DE93 /* CalenderSelector.swift in Sources */,
 				E912818621033C030010A242 /* ServiceDateAndTimeOneviewController.swift in Sources */,
 				E9FDBAE2210F2C8300F4773A /* VerficationCodeViewController.swift in Sources */,
 				084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */,
@@ -493,6 +500,7 @@
 				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
 				083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */,
 				083B2B1C2109EF4F004F9A0F /* ServiceDetailsViewController.swift in Sources */,
+				0847AFC4213C05FD0054DE93 /* TImeCell.swift in Sources */,
 				084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -632,13 +640,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 75LX5BY4KB;
+				DEVELOPMENT_TEAM = NVRNTBSH8C;
 				INFOPLIST_FILE = WeDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem2.WeDo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem.WeDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeDo/WeDo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -654,13 +662,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 75LX5BY4KB;
+				DEVELOPMENT_TEAM = NVRNTBSH8C;
 				INFOPLIST_FILE = WeDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem2.WeDo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem.WeDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeDo/WeDo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

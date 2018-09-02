@@ -28,3 +28,5 @@ let AUTH_KEY      = "Basic YWRtaW46MTIzNA=="
 let PARENT_SERVICE_ID = "parent_service_id"
 let SUB_SERVICE_ID = "sub_service_id"
 let SUB_SERVICE_TITLE = "sub_service_title"
+let JOB_ID = "job_id"
+
