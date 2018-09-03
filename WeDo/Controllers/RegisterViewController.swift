@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Alamofire
 class RegisterViewController: UIViewController {
     
+    var areaID : Int = 0
     lazy var menu: Menu = {
         let slideMenu = Menu()
         slideMenu.registerVC = self
@@ -232,6 +234,12 @@ class RegisterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
+        
+        if !Helper.Exists(key: AREA_ID) {
+           self.setAreaFirst()
+        }else {
+            self.areaID = UserDefaults.standard.value(forKey: AREA_ID) as! Int
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -405,11 +413,58 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func login() {
-        self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func registerButtonTapped() {
-        self.navigationController?.pushViewController(ActiveOrderViewController(), animated: true)
+        if let name = self.nameTextField.text, let email = self.emailTextField.text, let phoneNumber = self.phoneNumberTextField.text {
+            if name == "" || email == "" || phoneNumber == "" {
+                Alert.showBasicAlert(on: self, with: "Fill all the fields", message: "Please fill all the fields to register")
+            }else {
+                if self.checkEmailValidation(email: email){
+                    self.registrationMember()
+                }else {
+                    Alert.showBasicAlert(on: self, with: "Invalid email address", message: "Please enter a valid email address")
+                }
+            }
+        }
+    }
+    
+    func setAreaFirst() {
+        let refreshAlert = UIAlertController(title: "Please select your area first", message: "You have to select an area first", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Select Area", style: .default, handler: { (action: UIAlertAction!) in
+            self.navigationController?.pushViewController(CustomerSettingsViewController(), animated: false)
+        }))
+        present(refreshAlert, animated: true, completion: nil)
+    }
+    
+    func checkEmailValidation(email: String) -> Bool{
+        // alternative: not case sensitive
+        if  email.lowercased().range(of:"@") != nil && email.lowercased().range(of:".com") != nil {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    private func registrationSuccessfullyDoneAlert(securityCode : String, phoneNumber: String) {
+        
+        let alert = UIAlertController(title: "Congratulations!!!", message: "Registration Successfully Done", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Close", style: .default, handler: { action in
+            let verificationVC = VerificationCodeViewController()
+            verificationVC.securityCode = securityCode
+            verificationVC.phoneNumber = phoneNumber
+            self.navigationController?.pushViewController(verificationVC, animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    private func registrationFailedAlert(){
+        
+        let alert = UIAlertController(title: "Ooops!!", message: "Registration failed", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -443,6 +498,52 @@ extension RegisterViewController : UITextFieldDelegate {
         textField.resignFirstResponder()
         view.resignFirstResponder()
         return true
+        
+    }
+}
+
+// API CALLS
+extension RegisterViewController {
+    func registrationMember() {
+        if self.areaID > 0 {
+            guard let url = URL(string: "\(BASE_URL)api/v2/member/register") else { return }
+            let params = ["PhoneNumber" : self.phoneNumberTextField.text ?? "",
+                          "CityId" : self.areaID,
+                          "Name" : self.nameTextField.text ?? "",
+                          "Password" : "",
+                          "Email" : self.emailTextField.text ?? ""] as [String : Any]
+            Alamofire.request(url,method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON(completionHandler: {
+                response in
+                guard response.result.isSuccess else {
+                    print(response)
+                    return
+                }
+                print(response)
+                if let json = response.data {
+                    
+                    let decoder = JSONDecoder()
+                    
+                    do {
+                        
+                        let registrationResponse = try decoder.decode(Member.self, from: json)
+                        
+                        if  registrationResponse.isSuccess {
+                            
+                            self.registrationSuccessfullyDoneAlert(securityCode: registrationResponse.data.member.securityCode, phoneNumber: self.phoneNumberTextField.text!)
+                        }
+                        else{
+                            self.registrationFailedAlert()
+                        }
+                        
+                    } catch let err{
+                        
+                        print(err)
+                    }
+                }
+            })
+        }else {
+            self.setAreaFirst()
+        }
         
     }
 }

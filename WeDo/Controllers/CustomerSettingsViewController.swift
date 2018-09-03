@@ -11,8 +11,10 @@ import UIKit
 class CustomerSettingsViewController: UIViewController {
     
     var languageNSObject = [LanguageNSObject]()
+    var areaNSObject = [AreaNSObject]()
     var selectedLanguageID : Int?
-    
+    var selectedAreaID : Int?
+    var selectedLanguage : String!
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,10 +93,36 @@ class CustomerSettingsViewController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1.0).cgColor
         button.layer.cornerRadius = 4
-        button.setTitle("Select Language", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
         button.addTarget(self, action: #selector(handleLanguageSelector), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var selectAreaLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.clipsToBounds = true
+        label.numberOfLines = 0
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.textColor = UIColor.black
+        label.textAlignment = .left
+        label.text = "Area"
+        return label
+    }()
+    
+    lazy var areaSelectorButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor.white
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1.0).cgColor
+        button.layer.cornerRadius = 4
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.setTitle("Select Area", for: .normal)
+        button.addTarget(self, action: #selector(handleAreaSelector), for: .touchUpInside)
         return button
     }()
     
@@ -115,6 +143,14 @@ class CustomerSettingsViewController: UIViewController {
     }()
     
     lazy var horizontalLineThree : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.backgroundColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.3)
+        return view
+    }()
+    
+    lazy var horizontalLineFour : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
@@ -153,7 +189,19 @@ class CustomerSettingsViewController: UIViewController {
         return customSwitch
     }()
     
-    lazy var languageSelector: Selector = {
+    lazy var submitButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:0.17, green:0.67, blue:0.31, alpha:1.0)
+        button.setTitle("Submit", for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
+        button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleSubmitButton), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var selector: Selector = {
         let selector = Selector()
         selector.customerSettingsVC = self
         return selector
@@ -164,6 +212,16 @@ class CustomerSettingsViewController: UIViewController {
         view.backgroundColor = UIColor.white
         setNavigationBar()
         layout()
+        
+        if UserDefaults.standard.value(forKey: LANGUAGE) as? String == "ar" {
+            self.languageSelectorButton.setTitle("Arabic", for: .normal)
+        }else {
+            self.languageSelectorButton.setTitle("English", for: .normal)
+        }
+        
+        if Helper.Exists(key: AREA){
+            self.areaSelectorButton.setTitle("\(UserDefaults.standard.value(forKey: AREA) as! String)", for: .normal)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -180,14 +238,26 @@ class CustomerSettingsViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    func changeSelectorTitle(withString title: String) {
+    func changeLanguageSelectorTitle(withString title: String) {
         self.languageSelectorButton.setTitle(title, for: .normal)
+        guard let selectedLanguageID = self.selectedLanguageID else { return }
+        if selectedLanguageID == 2 {
+            UserDefaults.standard.set("ar", forKey: LANGUAGE)
+        }else {
+            UserDefaults.standard.set("en", forKey: LANGUAGE)
+        }
+    }
+    func changeAreaSelectorTitle(withString title: String) {
+        self.areaSelectorButton.setTitle(title, for: .normal)
     }
     
     func layout() {
         setupBackgroundImageView()
         setupLanguageSelector()
         setupLanguageLable()
+        setupHorizontalLineFour()
+        setupAreaSelector()
+        setupAreaLabel()
         setupHorizontalLineOne()
         setupNotificationSwitch()
         setupNotificationLable()
@@ -197,7 +267,7 @@ class CustomerSettingsViewController: UIViewController {
         setupHorizontalLineThree()
         setupVibrationSwitch()
         setupVibrationLabel()
-        
+        setupSubmitButton()
         setupVersionNumberLabel()
     }
     
@@ -224,9 +294,30 @@ class CustomerSettingsViewController: UIViewController {
         languageLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
     }
     
+    func setupHorizontalLineFour() {
+        view.addSubview(horizontalLineFour)
+        horizontalLineFour.topAnchor.constraint(equalTo: languageSelectorButton.bottomAnchor, constant: 16).isActive = true
+        horizontalLineFour.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        horizontalLineFour.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        horizontalLineFour.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
+    func setupAreaSelector() {
+        view.addSubview(areaSelectorButton)
+        areaSelectorButton.topAnchor.constraint(equalTo: horizontalLineFour.bottomAnchor, constant: 16).isActive = true
+        areaSelectorButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        areaSelectorButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        areaSelectorButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.45).isActive = true
+    }
+    
+    func setupAreaLabel() {
+        view.addSubview(selectAreaLabel)
+        selectAreaLabel.centerYAnchor.constraint(equalTo: areaSelectorButton.centerYAnchor).isActive = true
+        selectAreaLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+    }
+    
     func setupHorizontalLineOne() {
         view.addSubview(horizontalLineOne)
-        horizontalLineOne.topAnchor.constraint(equalTo: languageSelectorButton.bottomAnchor, constant: 16).isActive = true
+        horizontalLineOne.topAnchor.constraint(equalTo: areaSelectorButton.bottomAnchor, constant: 16).isActive = true
         horizontalLineOne.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         horizontalLineOne.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         horizontalLineOne.heightAnchor.constraint(equalToConstant: 1).isActive = true
@@ -284,6 +375,14 @@ class CustomerSettingsViewController: UIViewController {
         vibrationLabel.centerYAnchor.constraint(equalTo: vibrationSwitch.centerYAnchor).isActive = true
     }
     
+    func setupSubmitButton() {
+        view.addSubview(submitButton)
+        submitButton.topAnchor.constraint(equalTo: vibrationSwitch.bottomAnchor, constant: 20).isActive = true
+        submitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        submitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        submitButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    }
+    
     func setupVersionNumberLabel() {
         view.addSubview(versionLabel)
         versionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -294,14 +393,10 @@ class CustomerSettingsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func rightBarButtonTapped() {
-        
-    }
-    
     @objc func toggleNotificationSwitch() {
         print(notificationSwitch.isOn)
         if notificationSwitch.isOn {
-            self.navigationController?.pushViewController(VerificationCodeViewController(), animated: true)
+            //self.navigationController?.pushViewController(VerificationCodeViewController(), animated: true)
         }
     }
     
@@ -317,6 +412,9 @@ class CustomerSettingsViewController: UIViewController {
         self.makeLanguageNSObject()
     }
     
+    @objc func handleAreaSelector() {
+        self.makeAreaNSObject()
+    }
     func makeLanguageNSObject() {
         if !self.languageNSObject.isEmpty {
             self.languageNSObject.removeAll()
@@ -325,6 +423,38 @@ class CustomerSettingsViewController: UIViewController {
         let arabicLanguagge = LanguageNSObject(languageId: 2, languageName: "Arabic")
         self.languageNSObject.append(englishLanguage)
         self.languageNSObject.append(arabicLanguagge)
-        self.languageSelector.show(withData: self.languageNSObject)
+        self.selector.show(withData: self.languageNSObject)
     }
+    
+    private func makeAreaNSObject() {
+        guard let url = URL(string: "\(BASE_URL)api/v2/city?language=\(UserDefaults.standard.value(forKey: LANGUAGE) as! String)") else { return }
+        HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
+            guard let response = response else { return }
+            
+            if !self.areaNSObject.isEmpty {
+                self.areaNSObject.removeAll()
+            }
+            print(response)
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let areaList = try decoder.decode(Area.self, from: json)
+                    for area in areaList.data.city {
+                        let container = AreaNSObject(areaId: area.id, areaName: area.name)
+                        self.areaNSObject.append(container)
+                    }
+                self.selector.show(withData: self.areaNSObject)
+                }catch let err {
+                    print(err)
+                }
+            }
+        }
+    }
+    
+    
+    
+    @objc func handleSubmitButton() {
+        Alert.showBasicAlert(on: self, with: "Updated", message: "Settings updated successfully")
+    }
+    
 }

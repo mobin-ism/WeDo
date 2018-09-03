@@ -46,7 +46,7 @@ class AllServicesListViewController: UIViewController {
         collection.dataSource = self
         collection.clipsToBounds = true
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.isPagingEnabled = true
+        //collection.isPagingEnabled = true
         return collection
     }()
     
@@ -86,8 +86,6 @@ class AllServicesListViewController: UIViewController {
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "All Services", style: .plain, target: self, action: #selector(allServicesButtonTapped))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
     }
     
     func layout() {
@@ -117,10 +115,6 @@ class AllServicesListViewController: UIViewController {
     
     @objc func backTapped() {
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func allServicesButtonTapped() {
-        
     }
 }
 

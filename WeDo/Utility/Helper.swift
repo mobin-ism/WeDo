@@ -36,4 +36,8 @@ class Helper {
     public static var barHeight : CGFloat {
         return UIApplication.shared.statusBarFrame.height
     }
+    
+    static func Exists(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
 }

@@ -16,7 +16,7 @@ struct Alert {
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
         vc.present(alert, animated: true, completion: nil)
     }
-    
+        
     public static func checkInternetConnection(on vc: UIViewController) {
         if !Reachability.isConnectedToNetwork() {
           showBasicAlert(on: vc, with: "No Internet Connection", message: "Please check your internet connection")

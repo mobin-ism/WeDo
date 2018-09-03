@@ -711,6 +711,9 @@ extension ServiceDescriptionTwoViewController : UITextViewDelegate {
             textView.textColor = UIColor.lightGray
         }
     }
+    func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
+        UserDefaults.standard.set(textView.text, forKey: DESCRIPTION)
+    }
 }
 
 

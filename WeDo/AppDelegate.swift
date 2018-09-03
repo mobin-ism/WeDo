@@ -22,9 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(GOOGLE_MAP_API_KEY)
         GMSPlacesClient.provideAPIKey(GOOGLE_MAP_API_KEY)
-        
-        // settings English Language as default
-        UserDefaults.standard.set("en", forKey: LANGUAGE)
         return true
     }
 

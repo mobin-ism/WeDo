@@ -128,6 +128,7 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         button.setTitle("SUBMIT", for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleSubmitButton), for: .touchUpInside)
         return button
     }()
     
@@ -286,7 +287,7 @@ class ServiceDateAndTimeOneViewController: UIViewController {
     
     func setupPostButton() {
         view.addSubview(postButton)
-        postButton.topAnchor.constraint(equalTo: horizontalCollectionView.bottomAnchor, constant: 20).isActive = true
+        postButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
         postButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         postButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
         postButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -353,6 +354,14 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         guard let selectedDate = self.selectedDate else { return }
         self.changeFromDateButtonTitle(withString: selectedDate)
     }
+    
+    @objc func handleSubmitButton() {
+        if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            
+        }else {
+            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        }
+    }
 }
 
 extension ServiceDateAndTimeOneViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -371,9 +380,9 @@ extension ServiceDateAndTimeOneViewController: UICollectionViewDelegate, UIColle
             let cell = collectionView.cellForItem(at: indexPath)!
             return cell
         }
-        if self.isTimeSelected == false && indexPath.row == 0 {
+        /*if self.isTimeSelected == false && indexPath.row == 0 {
             cell.isSelected = true
-        }
+        }*/
         cell.mainText = self.availableTimeSlots[indexPath.row]
         return cell
     }

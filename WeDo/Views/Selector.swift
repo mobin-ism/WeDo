@@ -119,6 +119,9 @@ extension Selector : UITableViewDelegate, UITableViewDataSource {
             if let data = selectorData as? [LanguageNSObject] {
                 cell.titleText = "\(data[indexPath.row].languageName)"
             }
+            if let data = selectorData as? [AreaNSObject] {
+                cell.titleText = "\(data[indexPath.row].areaName)"
+            }
             return cell
         }
         else {
@@ -131,14 +134,14 @@ extension Selector : UITableViewDelegate, UITableViewDataSource {
         hide()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
             if let data = self.selectorData as? [LanguageNSObject] {
-                self.customerSettingsVC.changeSelectorTitle(withString: "\(data[indexPath.row].languageName)")
+                self.customerSettingsVC.changeLanguageSelectorTitle(withString: "\(data[indexPath.row].languageName)")
                 self.customerSettingsVC.selectedLanguageID = data[indexPath.row].languageId
-                if data[indexPath.row].languageId == 1 {
-                    UserDefaults.standard.set("en", forKey: LANGUAGE)
-                }
-                else if data[indexPath.row].languageId == 2 {
-                    UserDefaults.standard.set("ar", forKey: LANGUAGE)
-                }
+            }
+            if let data = self.selectorData as? [AreaNSObject] {
+                self.customerSettingsVC.changeAreaSelectorTitle(withString: "\(data[indexPath.row].areaName)")
+                self.customerSettingsVC.selectedAreaID = data[indexPath.row].areaId
+                UserDefaults.standard.set(data[indexPath.row].areaId, forKey: AREA_ID)
+                UserDefaults.standard.set(data[indexPath.row].areaName, forKey: AREA)
             }
         })
     }

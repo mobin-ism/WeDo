@@ -21,6 +21,7 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         self.layout()
+        self.checkMandatoryUserDefaults()
     }
     
     func layout() {
@@ -49,5 +50,14 @@ class LandingViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func checkMandatoryUserDefaults() {
+        if !Helper.Exists(key: LANGUAGE) {
+            UserDefaults.standard.set("en", forKey: LANGUAGE)
+        }
+        if !Helper.Exists(key: IS_LOGGED_IN) {
+            UserDefaults.standard.set( false, forKey: IS_LOGGED_IN)
+        }
     }
 }

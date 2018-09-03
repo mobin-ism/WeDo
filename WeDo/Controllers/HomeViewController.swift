@@ -167,6 +167,16 @@ class HomeViewController: UIViewController {
     @objc func customerSettings() {
         self.navigationController?.pushViewController(CustomerSettingsViewController(), animated: false)
     }
+    
+    func makeDefaultInputOnUserDefaults() {
+        UserDefaults.standard.set("", forKey: DESCRIPTION)
+        UserDefaults.standard.set(0.0, forKey: MARKED_LATITUDE)
+        UserDefaults.standard.set(0.0, forKey: MARKED_LONGITUDE)
+        UserDefaults.standard.set("", forKey: EXTRA_DIRECTION)
+        UserDefaults.standard.set("", forKey: APARTMENT_NUMBER)
+        UserDefaults.standard.set("", forKey: SELECTED_DATE)
+        UserDefaults.standard.set("", forKey: SELECTED_TIME)
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {

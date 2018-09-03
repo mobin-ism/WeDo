@@ -11,8 +11,8 @@ import GoogleMaps
 import GooglePlaces
 
 class ServiceLocationOneViewController: UIViewController {
-    var markedLatitude : Double?
-    var markedLongitude : Double?
+    var markedLatitude : Double = 0.0
+    var markedLongitude : Double = 0.0
     var skipServiceOneViewController : Bool = false
     var imageArray : [UIImage] = []
     var isImageSelected : Bool = false
@@ -164,6 +164,7 @@ class ServiceLocationOneViewController: UIViewController {
         textfield.layer.cornerRadius = 5
         textfield.layer.borderWidth = 1
         textfield.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
+        textfield.addTarget(self, action: #selector(extraDirectionTextFieldChanged), for: .editingChanged)
         return textfield
     }()
     
@@ -186,6 +187,7 @@ class ServiceLocationOneViewController: UIViewController {
         textfield.layer.cornerRadius = 5
         textfield.layer.borderWidth = 1
         textfield.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
+        textfield.addTarget(self, action: #selector(apartmentNoTextFieldChanged), for: .editingChanged)
         return textfield
     }()
     
@@ -241,7 +243,8 @@ class ServiceLocationOneViewController: UIViewController {
         
         guard let currentLatitude  = locationManager.location?.coordinate.latitude else { return }
         guard let currentLongitude = locationManager.location?.coordinate.longitude else { return }
-        
+        self.markedLatitude  = currentLatitude
+        self.markedLongitude = currentLongitude
         let currentLocation = CLLocationCoordinate2DMake(currentLatitude, currentLongitude)
         mapView.animate(toLocation: currentLocation)
         mapView.animate(toZoom: 16)
@@ -437,6 +440,10 @@ class ServiceLocationOneViewController: UIViewController {
     }
     
     @objc func navigationButtonTapped(_ sender: UIButton) {
+        print(self.markedLongitude)
+        print(self.markedLatitude)
+        UserDefaults.standard.set(self.markedLatitude, forKey: MARKED_LATITUDE)
+        UserDefaults.standard.set(self.markedLongitude, forKey: MARKED_LONGITUDE)
         switch sender.tag {
         case 1:
             let serviceDescriptionVC = ServiceDescriptionTwoViewController()
@@ -462,6 +469,10 @@ class ServiceLocationOneViewController: UIViewController {
     }
     
     @objc func handleNextButton() {
+        print(self.markedLongitude)
+        print(self.markedLatitude)
+        UserDefaults.standard.set(self.markedLatitude, forKey: MARKED_LATITUDE)
+        UserDefaults.standard.set(self.markedLongitude, forKey: MARKED_LONGITUDE)
         let dateTimeVC = ServiceDateAndTimeOneViewController()
         dateTimeVC.isImageSelected = self.isImageSelected
         dateTimeVC.imageArray = self.imageArray
@@ -475,6 +486,14 @@ class ServiceLocationOneViewController: UIViewController {
     
     @objc func dismissKeyboard(){
         view.endEditing(true)
+    }
+    
+    @objc func apartmentNoTextFieldChanged() {
+        UserDefaults.standard.set(self.apartmentNoTextField.text!, forKey: APARTMENT_NUMBER)
+    }
+    
+    @objc func extraDirectionTextFieldChanged() {
+        UserDefaults.standard.set(self.extraDirectionTextField.text!, forKey: EXTRA_DIRECTION)
     }
 }
 
@@ -495,7 +514,6 @@ extension ServiceLocationOneViewController: CLLocationManagerDelegate {
 extension ServiceLocationOneViewController : GMSMapViewDelegate {
     
     // MARK: GMSMapViewDelegate
-    
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         let bottomPoint: CGPoint = CGPoint(x: mapPinImageView.center.x, y: mapPinImageView.center.y + mapPinImageView.frame.height / 2)
         let coordinate = mapView.projection.coordinate(for: bottomPoint)
@@ -518,7 +536,6 @@ extension ServiceLocationOneViewController : GMSMapViewDelegate {
             self.markedLatitude = coordinate.latitude
             self.markedLongitude = coordinate.longitude
         }
-        
     }
 }
 
@@ -538,7 +555,6 @@ extension ServiceLocationOneViewController : UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
@@ -547,6 +563,5 @@ extension ServiceLocationOneViewController : UITextFieldDelegate {
         textField.resignFirstResponder()
         view.resignFirstResponder()
         return true
-    
     }
 }

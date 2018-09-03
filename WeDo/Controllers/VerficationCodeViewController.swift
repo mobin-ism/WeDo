@@ -8,6 +8,8 @@
 
 import UIKit
 class VerificationCodeViewController: UIViewController {
+    var securityCode : String?
+    var phoneNumber : String?
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -160,7 +162,13 @@ class VerificationCodeViewController: UIViewController {
     }
     
     @objc func handleSubmitButton() {
-        self.navigationController?.pushViewController(WelcomeViewController(), animated: true)
+        guard let providedSecurityCode = self.verificationCodeTextField.text else { return }
+        guard let actualSecurityCode = self.securityCode else { return }
+        if  providedSecurityCode == actualSecurityCode {
+            self.navigationController?.pushViewController(WelcomeViewController(), animated: true)
+        }else {
+            Alert.showBasicAlert(on: self, with: "Invalid Security Code", message: "Provide the valid security code")
+        }
     }
     
     @objc func dismissKeyboard(){

@@ -187,8 +187,6 @@ class ServiceDescriptionOneViewController: UIViewController {
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "\(UserDefaults.standard.value(forKey: SUB_SERVICE_TITLE) as! String)", style: .plain, target: self, action: #selector(rightBarButtonTapped))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
@@ -306,10 +304,6 @@ class ServiceDescriptionOneViewController: UIViewController {
         postButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
         postButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
-    @objc func rightBarButtonTapped() {
-        
-    }
-    
     @objc func backTapped() {
         //self.navigationController?.popViewController(animated: true)
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers

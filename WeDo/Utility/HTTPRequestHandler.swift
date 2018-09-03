@@ -27,4 +27,21 @@ class HTTPRequestHandler: UIViewController {
             }
         })
     }
+    
+    public static func makePostHttpRequest(url: URL, parameter: [String : Any], completionHandler: @escaping (DataResponse<Any>?, Error?) -> ()) {
+        SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.show(withStatus: "Please Wait...")
+        
+        Alamofire.request(url,method: .post, parameters: nil, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON(completionHandler: {
+            response in
+            switch response.result {
+            case .success( _):
+                SVProgressHUD.dismiss()
+                completionHandler(response, nil)
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completionHandler(nil, error)
+            }
+        })
+    }
 }
