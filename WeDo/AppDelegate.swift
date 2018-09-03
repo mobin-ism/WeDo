@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(GOOGLE_MAP_API_KEY)
         GMSPlacesClient.provideAPIKey(GOOGLE_MAP_API_KEY)
+        
+        // show login page showing status
+        UserDefaults.standard.set(false, forKey: SHOW_WELCOME_PAGE)
         return true
     }
 

@@ -37,4 +37,7 @@ let EXTRA_DIRECTION = "extra_direction"
 let APARTMENT_NUMBER = "apartment_number"
 let SELECTED_DATE = "selected_date"
 let SELECTED_TIME = "selected_time"
+let SHOW_WELCOME_PAGE = "show_welcom_page"
+let MEMBER_ID = "member_id"
+let LOCATION = "location"
 

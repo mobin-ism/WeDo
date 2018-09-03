@@ -449,13 +449,14 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    private func registrationSuccessfullyDoneAlert(securityCode : String, phoneNumber: String) {
+    private func registrationSuccessfullyDoneAlert(securityCode : String, phoneNumber: String, memberID : Int) {
         
         let alert = UIAlertController(title: "Congratulations!!!", message: "Registration Successfully Done", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Close", style: .default, handler: { action in
             let verificationVC = VerificationCodeViewController()
             verificationVC.securityCode = securityCode
             verificationVC.phoneNumber = phoneNumber
+            verificationVC.memberID = memberID
             self.navigationController?.pushViewController(verificationVC, animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
@@ -529,7 +530,7 @@ extension RegisterViewController {
                         
                         if  registrationResponse.isSuccess {
                             
-                            self.registrationSuccessfullyDoneAlert(securityCode: registrationResponse.data.member.securityCode, phoneNumber: self.phoneNumberTextField.text!)
+                            self.registrationSuccessfullyDoneAlert(securityCode: registrationResponse.data.member.securityCode, phoneNumber: self.phoneNumberTextField.text!, memberID: registrationResponse.data.member.id)
                         }
                         else{
                             self.registrationFailedAlert()

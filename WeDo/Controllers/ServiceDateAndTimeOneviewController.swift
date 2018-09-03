@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SVProgressHUD
 class ServiceDateAndTimeOneViewController: UIViewController {
     
     var skipServiceOneViewController : Bool = false
@@ -16,6 +18,7 @@ class ServiceDateAndTimeOneViewController: UIViewController {
     var selectedDate : String?
     var selectedTime : String?
     var availableTimeSlots = ["12-3 AM", "3-6 AM", "6-9 AM", "9-12 PM", "12-3 PM", "3-6 PM", "6-9 PM", "9-12 PM"]
+    
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -175,7 +178,11 @@ class ServiceDateAndTimeOneViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
-        self.getCurrentDate()
+        if UserDefaults.standard.value(forKey: SELECTED_DATE) as! String == "" {
+            self.getCurrentDate()
+        }else {
+            self.dateLabel.text = "\(UserDefaults.standard.value(forKey: SELECTED_DATE) as! String)"
+        }
     }
     
     private func setNavigationBar() {
@@ -349,17 +356,24 @@ class ServiceDateAndTimeOneViewController: UIViewController {
     private func getCurrentDate() {
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
+        formatter.dateFormat = "dd/MM/yyyy"
         self.selectedDate = formatter.string(from: date)
         guard let selectedDate = self.selectedDate else { return }
         self.changeFromDateButtonTitle(withString: selectedDate)
+        UserDefaults.standard.set(selectedDate, forKey: SELECTED_DATE)
     }
     
     @objc func handleSubmitButton() {
-        if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
-            
+        UserDefaults.standard.set(true, forKey: SHOW_WELCOME_PAGE)
+        if UserDefaults.standard.value(forKey: SELECTED_TIME) as! String == "" {
+            Alert.showBasicAlert(on: self, with: "Select a timeslot", message: "Please select an available timeslot")
         }else {
-            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+                self.requestAService()
+                
+            }else {
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            }
         }
     }
 }
@@ -391,6 +405,7 @@ extension ServiceDateAndTimeOneViewController: UICollectionViewDelegate, UIColle
         guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
         cell.isSelected = true
         self.isTimeSelected = true
+        UserDefaults.standard.set(self.availableTimeSlots[indexPath.row], forKey: SELECTED_TIME)
     }
 }
 
@@ -409,5 +424,47 @@ extension ServiceDateAndTimeOneViewController: UICollectionViewDelegateFlowLayou
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+}
+
+//API CALLS
+extension ServiceDateAndTimeOneViewController {
+    func requestAService() {
+        SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.show(withStatus: "Please Wait...")
+        
+        guard let url = URL(string: "\(BASE_URL)api/v2/member/service/request/submit") else { return }
+        let params = ["MemberId" : UserDefaults.standard.value(forKey: MEMBER_ID) as! Int,
+                      "AgentId" : 1,
+                      "Title" : UserDefaults.standard.value(forKey: SUB_SERVICE_TITLE) as! String,
+                      "Description" : UserDefaults.standard.value(forKey: DESCRIPTION) as! String,
+                      "Location" : UserDefaults.standard.value(forKey: LOCATION) as! String,
+                      "Latitude" : UserDefaults.standard.value(forKey: MARKED_LATITUDE) as! Double,
+                      "Longitude" : UserDefaults.standard.value(forKey: MARKED_LONGITUDE) as! Double,
+                      "TimeRange" : UserDefaults.standard.value(forKey: SELECTED_TIME) as! String,
+                      "StartDate" : UserDefaults.standard.value(forKey: SELECTED_DATE) as! String,
+                      "ServiceId" : UserDefaults.standard.value(forKey: SUB_SERVICE_ID) as! Int,
+                      "RequireHours" : 0] as [String : Any]
+        Alamofire.request(url,method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON(completionHandler: {
+            response in
+            guard response.result.isSuccess else {
+                print(response)
+                return
+            }
+            print(response)
+            if let json = response.data {
+                
+                let decoder = JSONDecoder()
+                
+                do {
+                    
+                    
+                } catch let err{
+                    
+                    print(err)
+                }
+            }
+        })
+        SVProgressHUD.dismiss()
     }
 }

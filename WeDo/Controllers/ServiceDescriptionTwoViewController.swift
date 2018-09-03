@@ -205,7 +205,7 @@ class ServiceDescriptionTwoViewController: UIViewController {
         textview.layer.cornerRadius = 5
         textview.font = UIFont(name: OPENSANS_REGULAR, size: 12)
         textview.text = "Write your job details"
-        textview.textColor = UIColor.lightGray
+        textview.textColor = UIColor.black
         textview.delegate = self
         return textview
     }()
@@ -280,6 +280,8 @@ class ServiceDescriptionTwoViewController: UIViewController {
         if !self.skipServiceOneViewController {
             self.getSubServiceDetails(subServiceId: UserDefaults.standard.value(forKey: SUB_SERVICE_ID) as! Int, selectedJobId: UserDefaults.standard.value(forKey: JOB_ID) as! Int)
         }
+        
+        self.descriptionTextField.text = UserDefaults.standard.value(forKey: DESCRIPTION) as! String
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -698,7 +700,7 @@ extension ServiceDescriptionTwoViewController : UITextFieldDelegate {
 }
 
 extension ServiceDescriptionTwoViewController : UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
+    /*func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
             textView.textColor = UIColor.black
@@ -710,7 +712,7 @@ extension ServiceDescriptionTwoViewController : UITextViewDelegate {
             textView.text = "Write your job details"
             textView.textColor = UIColor.lightGray
         }
-    }
+    }*/
     func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
         UserDefaults.standard.set(textView.text, forKey: DESCRIPTION)
     }

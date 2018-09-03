@@ -125,7 +125,7 @@ class CalendarSelector: NSObject {
     @objc func handleDate(sender: UIDatePicker){
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy"
+        dateFormatter.dateFormat = "dd/MM/yyyy"
         let selectedDate = dateFormatter.string(from: sender.date)
         
         self.handleDate(selectedDate: selectedDate)
@@ -133,13 +133,14 @@ class CalendarSelector: NSObject {
     @objc func handleToday(){
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
+        formatter.dateFormat = "dd/MM/yyyy"
         let today = formatter.string(from: date)
         
         self.handleDate(selectedDate: today)
     }
     
     private func handleDate(selectedDate : String) {
+        UserDefaults.standard.set(selectedDate, forKey: SELECTED_DATE)
         dateTimeVC.changeFromDateButtonTitle(withString: selectedDate)
     }
     @objc func handleCancel(){

@@ -237,6 +237,9 @@ class ServiceLocationOneViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
+        
+        self.extraDirectionTextField.text = "\(UserDefaults.standard.value(forKey: EXTRA_DIRECTION) as! String)"
+        self.apartmentNoTextField.text = "\(UserDefaults.standard.value(forKey: APARTMENT_NUMBER) as! String)"
     }
     
     func setMapViewToCurrentLocation() {
@@ -440,8 +443,6 @@ class ServiceLocationOneViewController: UIViewController {
     }
     
     @objc func navigationButtonTapped(_ sender: UIButton) {
-        print(self.markedLongitude)
-        print(self.markedLatitude)
         UserDefaults.standard.set(self.markedLatitude, forKey: MARKED_LATITUDE)
         UserDefaults.standard.set(self.markedLongitude, forKey: MARKED_LONGITUDE)
         switch sender.tag {
@@ -469,8 +470,6 @@ class ServiceLocationOneViewController: UIViewController {
     }
     
     @objc func handleNextButton() {
-        print(self.markedLongitude)
-        print(self.markedLatitude)
         UserDefaults.standard.set(self.markedLatitude, forKey: MARKED_LATITUDE)
         UserDefaults.standard.set(self.markedLongitude, forKey: MARKED_LONGITUDE)
         let dateTimeVC = ServiceDateAndTimeOneViewController()
@@ -527,6 +526,7 @@ extension ServiceLocationOneViewController : GMSMapViewDelegate {
             for line in lines {
                 if line != "" {
                     formattedAddress = "\(formattedAddress) \(line),"
+                    UserDefaults.standard.set(formattedAddress, forKey: LOCATION)
                 }
             }
             formattedAddress.removeLast()

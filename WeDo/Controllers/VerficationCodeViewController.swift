@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import Alamofire
+import SVProgressHUD
+
 class VerificationCodeViewController: UIViewController {
     var securityCode : String?
     var phoneNumber : String?
+    var memberID : Int?
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -165,7 +169,13 @@ class VerificationCodeViewController: UIViewController {
         guard let providedSecurityCode = self.verificationCodeTextField.text else { return }
         guard let actualSecurityCode = self.securityCode else { return }
         if  providedSecurityCode == actualSecurityCode {
-            self.navigationController?.pushViewController(WelcomeViewController(), animated: true)
+            guard let memberId = self.memberID else {return}
+            UserDefaults.standard.set(memberId, forKey: MEMBER_ID)
+            if UserDefaults.standard.value(forKey: SHOW_WELCOME_PAGE) as! Bool {
+                self.requestAService()
+            }else {
+                print("show another view")
+            }
         }else {
             Alert.showBasicAlert(on: self, with: "Invalid Security Code", message: "Provide the valid security code")
         }
@@ -199,5 +209,47 @@ extension VerificationCodeViewController : UITextFieldDelegate {
         view.resignFirstResponder()
         return true
         
+    }
+}
+
+extension VerificationCodeViewController {
+    func requestAService() {
+        SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.show(withStatus: "Please Wait...")
+        
+        guard let url = URL(string: "\(BASE_URL)api/v2/member/service/request/submit") else { return }
+        let params = ["MemberId" : UserDefaults.standard.value(forKey: MEMBER_ID) as! Int,
+                      "AgentId" : 1,
+                      "Title" : UserDefaults.standard.value(forKey: SUB_SERVICE_TITLE) as! String,
+                      "Description" : UserDefaults.standard.value(forKey: DESCRIPTION) as! String,
+                      "Location" : UserDefaults.standard.value(forKey: LOCATION) as! String,
+                      "Latitude" : UserDefaults.standard.value(forKey: MARKED_LATITUDE) as! Double,
+                      "Longitude" : UserDefaults.standard.value(forKey: MARKED_LONGITUDE) as! Double,
+                      "TimeRange" : UserDefaults.standard.value(forKey: SELECTED_TIME) as! String,
+                      "StartDate" : UserDefaults.standard.value(forKey: SELECTED_DATE) as! String,
+                      "ServiceId" : UserDefaults.standard.value(forKey: SUB_SERVICE_ID) as! Int,
+                      "RequireHours" : 0] as [String : Any]
+        Alamofire.request(url,method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON(completionHandler: {
+            response in
+            guard response.result.isSuccess else {
+                print(response)
+                return
+            }
+            print(response)
+            if let json = response.data {
+                
+                let decoder = JSONDecoder()
+                
+                do {
+                    
+                    
+                } catch let err{
+                    
+                    print(err)
+                }
+            }
+        })
+        SVProgressHUD.dismiss()
+        self.navigationController?.pushViewController(WelcomeViewController(), animated: true)
     }
 }

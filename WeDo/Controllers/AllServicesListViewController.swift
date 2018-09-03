@@ -63,6 +63,8 @@ class AllServicesListViewController: UIViewController {
         horizontalCollectionView.register(HorizontalCollectionViewCell.self, forCellWithReuseIdentifier: horizontalCellID)
         setNavigationBar()
         layout()
+        
+        self.makeDefaultInputOnUserDefaults()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -115,6 +117,16 @@ class AllServicesListViewController: UIViewController {
     
     @objc func backTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func makeDefaultInputOnUserDefaults() {
+        UserDefaults.standard.set("", forKey: DESCRIPTION)
+        UserDefaults.standard.set(0.0, forKey: MARKED_LATITUDE)
+        UserDefaults.standard.set(0.0, forKey: MARKED_LONGITUDE)
+        UserDefaults.standard.set("", forKey: EXTRA_DIRECTION)
+        UserDefaults.standard.set("", forKey: APARTMENT_NUMBER)
+        UserDefaults.standard.set("", forKey: SELECTED_DATE)
+        UserDefaults.standard.set("", forKey: SELECTED_TIME)
     }
 }
 
