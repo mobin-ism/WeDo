@@ -50,12 +50,6 @@ class AllServicesListViewController: UIViewController {
         return collection
     }()
     
-    lazy var menu: Menu = {
-        let slideMenu = Menu()
-        slideMenu.allServicesListController = self
-        return slideMenu
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
@@ -109,10 +103,6 @@ class AllServicesListViewController: UIViewController {
         verticalCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
         verticalCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         verticalCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-    }
-    
-    @objc func menuIconTapped() {
-        self.menu.show()
     }
     
     @objc func backTapped() {

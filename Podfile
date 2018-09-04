@@ -15,4 +15,5 @@ target 'WeDo' do
     pod 'LIHImageSlider'
     pod 'RAMPaperSwitch'
     pod 'SDWebImage'
+    pod 'Localize-Swift'
 end

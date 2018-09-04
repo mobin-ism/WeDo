@@ -10,6 +10,7 @@ PODS:
     - GoogleMaps/Base (= 2.6.0)
   - HCSStarRatingView (1.5)
   - LIHImageSlider (1.0.8)
+  - Localize-Swift (2.0.0)
   - RAMPaperSwitch (2.1.0)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - GooglePlaces
   - HCSStarRatingView (~> 1.5)
   - LIHImageSlider
+  - Localize-Swift
   - RAMPaperSwitch
   - SDWebImage
   - SVProgressHUD
@@ -35,6 +37,7 @@ SPEC REPOS:
     - GooglePlaces
     - HCSStarRatingView
     - LIHImageSlider
+    - Localize-Swift
     - RAMPaperSwitch
     - SDWebImage
     - SVProgressHUD
@@ -46,10 +49,11 @@ SPEC CHECKSUMS:
   GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   LIHImageSlider: ddf90c3a07e6f571b0e57629177a49eaf5bf15a3
+  Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
   RAMPaperSwitch: ef08af0400a040c9850e09253280deb77510becb
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: a716c0062e9670fc532f12f0afe81853abe85db0
+PODFILE CHECKSUM: e3f286d2044e893f38a92df78c5acafc7a988178
 
 COCOAPODS: 1.5.3

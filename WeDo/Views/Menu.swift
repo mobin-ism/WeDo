@@ -11,8 +11,9 @@ import UIKit
 class Menu: NSObject {
     
     var homeController = HomeViewController()
-    var allServicesListController = AllServicesListViewController()
     var registerVC = RegisterViewController()
+    
+    var calledFrom : String!
     
     lazy var backgroundView: UIView = {
         let view = UIView()
@@ -39,7 +40,6 @@ class Menu: NSObject {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Welcome"
         return label
     }()
     let nametLabel: UILabel = {
@@ -88,18 +88,39 @@ class Menu: NSObject {
     }()
     
     let cellId = "MenuCell"
-    let menuItems = ["Home", "My Order", "Notification", "Order History", "Help & FAQ", "Contact Us", "Edit Profile", "Settings", "Logout"]
+    let menuItemsForLoggedOut = ["Home", "Help & FAQ", "Contact Us", "Settings", "Login"]
+    let menuItemsForLoggedIn  = ["Home", "My Order", "Notification", "Order History", "Help & FAQ", "Contact Us", "Edit Profile", "Settings", "Logout"]
     
     override init() {
         super.init()
         tableView.register(MenuCell.self, forCellReuseIdentifier: cellId)
     }
     
-    func show() {
+    func show(_ vc: UIViewController) {
+        self.calledFrom = self.getClassName(vc)
         if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            self.welcomeLabel.text = "Welcome"
             self.nametLabel.text = "\(UserDefaults.standard.value(forKey: MEMBER_NAME) as! String)"
         }
         setupSubViews()
+        self.tableView.reloadData()
+    }
+    
+    func getClassName(_ vc : UIViewController) -> String {
+        var firstPartOfString : String!
+        firstPartOfString = String(describing: vc)
+        var secondPartOfString = String(firstPartOfString.dropFirst(6))
+        if let colonRange = secondPartOfString.range(of: ":") {
+            secondPartOfString.removeSubrange(colonRange.lowerBound..<secondPartOfString.endIndex)
+        }
+        return secondPartOfString
+    }
+    func myCommonMethod(_ aViewController: UIViewController?) {
+        if type(of: aViewController) == NSClassFromString("MyFirstController") {
+            
+        } else if type(of: aViewController) == NSClassFromString("MySecondController") {
+            
+        }
     }
     
     func setupSubViews() {
@@ -190,15 +211,24 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuItems.count
+        
+        if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            return menuItemsForLoggedIn.count
+        }else {
+            return menuItemsForLoggedOut.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? MenuCell {
-            if  indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 {
-                cell.titleLabel.font = UIFont(name: OPENSANS_BOLD, size: 15)
+            if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+                if  indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 {
+                    cell.titleLabel.font = UIFont(name: OPENSANS_BOLD, size: 15)
+                }
+                cell.titleText = menuItemsForLoggedIn[indexPath.row]
+            }else {
+                cell.titleText = menuItemsForLoggedOut[indexPath.row]
             }
-            cell.titleText = menuItems[indexPath.row]
             return cell
         } else {
             let cell = tableView.cellForRow(at: indexPath)!
@@ -208,7 +238,13 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         hide()
-        homeController.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        switch self.calledFrom {
+        case "HomeViewController":
+            self.homeController.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+            print("Call from HomeViewController")
+        default:
+            print("Call from mars")
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

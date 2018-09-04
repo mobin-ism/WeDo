@@ -163,7 +163,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func menuIconTapped() {
-        self.menu.show()
+        self.menu.show(self)
     }
     
     @objc func customerSettings() {
