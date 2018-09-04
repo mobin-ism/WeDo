@@ -195,6 +195,7 @@ class ServiceDateAndTimeOneViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
+    let welcomeVC = WelcomeViewController()
     func layout() {
         setupBackgroundImageView()
         setupDescriptionButton()
@@ -372,7 +373,10 @@ class ServiceDateAndTimeOneViewController: UIViewController {
                 self.requestAService()
                 
             }else {
-                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+                let loginVC = LoginViewController()
+                loginVC.imageArray = self.imageArray
+                loginVC.isImageSelected = self.isImageSelected
+                self.navigationController?.pushViewController(loginVC, animated: true)
             }
         }
     }
@@ -430,6 +434,7 @@ extension ServiceDateAndTimeOneViewController: UICollectionViewDelegateFlowLayou
 //API CALLS
 extension ServiceDateAndTimeOneViewController {
     func requestAService() {
+        var serviceRequestId : Int = 0
         SVProgressHUD.setDefaultMaskType(.black)
         SVProgressHUD.show(withStatus: "Please Wait...")
         
@@ -457,8 +462,14 @@ extension ServiceDateAndTimeOneViewController {
                 let decoder = JSONDecoder()
                 
                 do {
-                    
-                    
+                    let serviceRequestDetails = try decoder.decode(RequestAServiceModel.self, from: json)
+                    if serviceRequestDetails.isSuccess {
+                        self.welcomeVC.jobIdLabel.text = "\(serviceRequestDetails.data.serviceRequest.id)"
+                        self.welcomeVC.amountToBePaidLabel.text = "\(serviceRequestDetails.data.serviceRequest.amount)"
+                        serviceRequestId = serviceRequestDetails.data.serviceRequest.id
+                    }else {
+                        print("Sorry babe")
+                    }
                 } catch let err{
                     
                     print(err)
@@ -466,5 +477,7 @@ extension ServiceDateAndTimeOneViewController {
             }
         })
         SVProgressHUD.dismiss()
+        self.navigationController?.pushViewController(welcomeVC, animated: true)
+        //self.sendImageToServer(serviceRequestId: serviceRequestId)
     }
 }

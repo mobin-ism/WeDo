@@ -30,6 +30,11 @@
 		084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */; };
 		084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */; };
 		084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A03F120FF7813000E532E /* ServiceDetailsCell.swift */; };
+		084C9F30213E5F610062C247 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084C9F2C213E5F5C0062C247 /* OpenSans-SemiBold.ttf */; };
+		084C9F31213E5F610062C247 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084C9F2D213E5F5C0062C247 /* OpenSans-LightItalic.ttf */; };
+		084C9F32213E5F610062C247 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084C9F2E213E5F5D0062C247 /* OpenSans-Regular.ttf */; };
+		084C9F33213E5F610062C247 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084C9F2F213E5F610062C247 /* OpenSans-Bold.ttf */; };
+		084C9F35213E62FC0062C247 /* RequestAServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C9F34213E62FC0062C247 /* RequestAServiceModel.swift */; };
 		08666543213D5B84003980BC /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666542213D5B84003980BC /* MemberModel.swift */; };
 		08743F49211848190077C5EE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F48211848190077C5EE /* Reachability.swift */; };
 		08743F4B2118491C0077C5EE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F4A2118491C0077C5EE /* Alert.swift */; };
@@ -47,10 +52,6 @@
 		E912818821033C1A0010A242 /* ServicePaymentOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912818721033C1A0010A242 /* ServicePaymentOneViewController.swift */; };
 		E912818C2103642F0010A242 /* ServiceRequestImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912818B2103642F0010A242 /* ServiceRequestImageCell.swift */; };
 		E912818E2103C3D00010A242 /* PaddedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912818D2103C3CF0010A242 /* PaddedText.swift */; };
-		E967D1BF213DB8770075896A /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E967D1BB213DB8760075896A /* OpenSans-Regular.ttf */; };
-		E967D1C0213DB8770075896A /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E967D1BC213DB8760075896A /* OpenSans-Bold.ttf */; };
-		E967D1C1213DB8770075896A /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E967D1BD213DB8760075896A /* OpenSans-LightItalic.ttf */; };
-		E967D1C2213DB8770075896A /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E967D1BE213DB8760075896A /* OpenSans-SemiBold.ttf */; };
 		E98CCFE420FE797100799029 /* MasterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE320FE797100799029 /* MasterCollectionViewCell.swift */; };
 		E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE520FE79BC00799029 /* ServiceCell.swift */; };
 		E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CCFE720FE7D1B00799029 /* Menu.swift */; };
@@ -92,6 +93,11 @@
 		084A03E520FF5104000E532E /* AllServicesListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllServicesListCollectionViewCell.swift; sourceTree = "<group>"; };
 		084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
 		084A03F120FF7813000E532E /* ServiceDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsCell.swift; sourceTree = "<group>"; };
+		084C9F2C213E5F5C0062C247 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		084C9F2D213E5F5C0062C247 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		084C9F2E213E5F5D0062C247 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		084C9F2F213E5F610062C247 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		084C9F34213E62FC0062C247 /* RequestAServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAServiceModel.swift; sourceTree = "<group>"; };
 		08666542213D5B84003980BC /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
 		08743F45211846C50077C5EE /* WeDo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeDo-Bridging-Header.h"; sourceTree = "<group>"; };
 		08743F48211848190077C5EE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -112,10 +118,6 @@
 		E912818721033C1A0010A242 /* ServicePaymentOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePaymentOneViewController.swift; sourceTree = "<group>"; };
 		E912818B2103642F0010A242 /* ServiceRequestImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRequestImageCell.swift; sourceTree = "<group>"; };
 		E912818D2103C3CF0010A242 /* PaddedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedText.swift; sourceTree = "<group>"; };
-		E967D1BB213DB8760075896A /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../../800handyman/800Handyman/Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		E967D1BC213DB8760075896A /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../../../../../800handyman/800Handyman/Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		E967D1BD213DB8760075896A /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "../../../../../800handyman/800Handyman/Resources/Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
-		E967D1BE213DB8760075896A /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiBold.ttf"; path = "../../../../../800handyman/800Handyman/Resources/Fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		E98CCFE320FE797100799029 /* MasterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterCollectionViewCell.swift; sourceTree = "<group>"; };
 		E98CCFE520FE79BC00799029 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		E98CCFE720FE7D1B00799029 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				08743F4E211862780077C5EE /* AreaModel.swift */,
 				08743F50211871600077C5EE /* ServiceModel.swift */,
 				08666542213D5B84003980BC /* MemberModel.swift */,
+				084C9F34213E62FC0062C247 /* RequestAServiceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -255,6 +258,17 @@
 				08743F4C211850B50077C5EE /* HTTPRequestHandler.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		084C9F2B213E5EBE0062C247 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				084C9F2F213E5F610062C247 /* OpenSans-Bold.ttf */,
+				084C9F2D213E5F5C0062C247 /* OpenSans-LightItalic.ttf */,
+				084C9F2E213E5F5D0062C247 /* OpenSans-Regular.ttf */,
+				084C9F2C213E5F5C0062C247 /* OpenSans-SemiBold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		25776C88FDB7AD1E262E4081 /* Pods */ = {
@@ -274,17 +288,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E967D1BA213DB8610075896A /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				E967D1BC213DB8760075896A /* OpenSans-Bold.ttf */,
-				E967D1BD213DB8760075896A /* OpenSans-LightItalic.ttf */,
-				E967D1BB213DB8760075896A /* OpenSans-Regular.ttf */,
-				E967D1BE213DB8760075896A /* OpenSans-SemiBold.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		E98CCFE920FE7D5C00799029 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,7 +305,7 @@
 		E98CCFEC20FE89ED00799029 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E967D1BA213DB8610075896A /* Fonts */,
+				084C9F2B213E5EBE0062C247 /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -369,12 +372,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				084C9F32213E5F610062C247 /* OpenSans-Regular.ttf in Resources */,
 				08320EE020FDE01F00D98704 /* LaunchScreen.storyboard in Resources */,
-				E967D1BF213DB8770075896A /* OpenSans-Regular.ttf in Resources */,
-				E967D1C0213DB8770075896A /* OpenSans-Bold.ttf in Resources */,
+				084C9F33213E5F610062C247 /* OpenSans-Bold.ttf in Resources */,
+				084C9F30213E5F610062C247 /* OpenSans-SemiBold.ttf in Resources */,
+				084C9F31213E5F610062C247 /* OpenSans-LightItalic.ttf in Resources */,
 				08320EDD20FDE01F00D98704 /* Assets.xcassets in Resources */,
-				E967D1C2213DB8770075896A /* OpenSans-SemiBold.ttf in Resources */,
-				E967D1C1213DB8770075896A /* OpenSans-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +504,7 @@
 				E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */,
 				E9F10165210A6C34007CEE7F /* ActiveOrderViewController.swift in Sources */,
 				082E5FF42100B7340081D26D /* ServiceDescriptionTwoViewController.swift in Sources */,
+				084C9F35213E62FC0062C247 /* RequestAServiceModel.swift in Sources */,
 				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
 				083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */,
 				083B2B1C2109EF4F004F9A0F /* ServiceDetailsViewController.swift in Sources */,

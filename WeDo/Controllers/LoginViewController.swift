@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Alamofire
+import SVProgressHUD
+
 class LoginViewController: UIViewController {
-    
+    var isImageSelected : Bool = false
+    var imageArray : [UIImage] = []
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
         scroll.keyboardDismissMode = .interactive
@@ -73,6 +77,7 @@ class LoginViewController: UIViewController {
         button.setTitle("LOGIN", for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
         return button
     }()
     
@@ -312,7 +317,20 @@ class LoginViewController: UIViewController {
     }
     
     @objc func register() {
-        self.navigationController?.pushViewController(RegisterViewController(), animated: true)
+        let registerVC = RegisterViewController()
+        registerVC.isImageSelected = self.isImageSelected
+        registerVC.imageArray = self.imageArray
+        self.navigationController?.pushViewController(registerVC, animated: true)
+    }
+    
+    @objc func handleLoginButton() {
+        if let phoneNumber = self.phoneNumberTextField.text {
+            if phoneNumber != "" {
+                self.login(phoneNumber: phoneNumber)
+            }else {
+                Alert.showBasicAlert(on: self, with: "Fill all the fields", message: "Please fill all the fields to login")
+            }
+        }
     }
 }
 
@@ -340,5 +358,52 @@ extension LoginViewController : UITextFieldDelegate {
         view.resignFirstResponder()
         return true
         
+    }
+}
+
+//API CALLS
+extension LoginViewController {
+    func login(phoneNumber : String) {
+        guard let url = URL(string: "\(BASE_URL)api/v2/member/register") else { return }
+        let params = ["PhoneNumber" : "\(phoneNumber)",
+                      "CityId" : UserDefaults.standard.value(forKey: AREA_ID) as! Int,
+                      "Name" : "",
+                      "Password" : "12345",
+                      "Email" : ""] as [String : Any]
+        Alamofire.request(url,method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON(completionHandler: {
+            response in
+            guard response.result.isSuccess else {
+                print(response)
+                return
+            }
+            print(response)
+            if let json = response.data {
+                
+                let decoder = JSONDecoder()
+                
+                do {
+                    
+                    let registrationResponse = try decoder.decode(Member.self, from: json)
+                    
+                    if  registrationResponse.isSuccess {
+                        let verificationVC = VerificationCodeViewController()
+                        verificationVC.securityCode = registrationResponse.data.member.securityCode
+                        verificationVC.phoneNumber = phoneNumber
+                        verificationVC.memberID = registrationResponse.data.member.id
+                        verificationVC.memberName = registrationResponse.data.member.name
+                        verificationVC.imageArray = self.imageArray
+                        verificationVC.isImageSelected = self.isImageSelected
+                        self.navigationController?.pushViewController(verificationVC, animated: true)
+                    }
+                    else{
+                        Alert.showBasicAlert(on: self, with: "Invalid Phone Number", message: "Please login with a valid phone number")
+                    }
+                    
+                } catch let err{
+                    
+                    print(err)
+                }
+            }
+        })
     }
 }

@@ -80,7 +80,6 @@ class WelcomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
-        label.text = "123456789"
         label.textColor = UIColor.black
         return label
     }()
@@ -90,7 +89,6 @@ class WelcomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.font = UIFont(name: OPENSANS_REGULAR, size: 10)
-        label.text = "Lorem Ipsum Dolor Immit"
         label.textColor = UIColor.black
         return label
     }()
@@ -153,7 +151,6 @@ class WelcomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.font = UIFont(name: OPENSANS_BOLD, size: 14)
-        label.text = "Full House Cleaning"
         label.textColor = GREENISH_COLOR
         return label
     }()
@@ -228,6 +225,8 @@ class WelcomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
+        self.jobLabel.text = "\(UserDefaults.standard.value(forKey: SUB_SERVICE_TITLE) as! String)"
+        UserDefaults.standard.set(false, forKey: SHOW_WELCOME_PAGE)
     }
     
     override func viewDidLayoutSubviews() {
@@ -413,7 +412,12 @@ class WelcomeViewController: UIViewController {
     }
     
     @objc func backTapped() {
-        self.navigationController?.popViewController(animated: true)
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+        for aViewController in viewControllers {
+            if aViewController is HomeViewController {
+                self.navigationController!.popToViewController(aViewController, animated: true)
+            }
+        }
     }
 }
 

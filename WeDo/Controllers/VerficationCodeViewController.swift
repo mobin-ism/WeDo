@@ -11,10 +11,13 @@ import Alamofire
 import SVProgressHUD
 
 class VerificationCodeViewController: UIViewController {
+    var isImageSelected : Bool = false
+    var imageArray : [UIImage] = []
+    var strBase64Array : [String] = []
     var securityCode : String?
     var phoneNumber : String?
     var memberID : Int?
-    
+    var memberName : String?
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
         scroll.keyboardDismissMode = .interactive
@@ -92,6 +95,7 @@ class VerificationCodeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
+        //self.convertImageToBase64String()
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,6 +117,8 @@ class VerificationCodeViewController: UIViewController {
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
+    
+    let welcomeVC = WelcomeViewController()
     
     func layout() {
         setupBackgroundImageView()
@@ -170,7 +176,12 @@ class VerificationCodeViewController: UIViewController {
         guard let actualSecurityCode = self.securityCode else { return }
         if  providedSecurityCode == actualSecurityCode {
             guard let memberId = self.memberID else {return}
+            guard let memberName = self.memberName else {return}
+            
+            UserDefaults.standard.set(true, forKey: IS_LOGGED_IN)
             UserDefaults.standard.set(memberId, forKey: MEMBER_ID)
+            UserDefaults.standard.set(memberName, forKey: MEMBER_NAME)
+            
             if UserDefaults.standard.value(forKey: SHOW_WELCOME_PAGE) as! Bool {
                 self.requestAService()
             }else {
@@ -214,6 +225,7 @@ extension VerificationCodeViewController : UITextFieldDelegate {
 
 extension VerificationCodeViewController {
     func requestAService() {
+        var serviceRequestId : Int = 0
         SVProgressHUD.setDefaultMaskType(.black)
         SVProgressHUD.show(withStatus: "Please Wait...")
         
@@ -241,8 +253,14 @@ extension VerificationCodeViewController {
                 let decoder = JSONDecoder()
                 
                 do {
-                    
-                    
+                    let serviceRequestDetails = try decoder.decode(RequestAServiceModel.self, from: json)
+                    if serviceRequestDetails.isSuccess {
+                        self.welcomeVC.jobIdLabel.text = "\(serviceRequestDetails.data.serviceRequest.id)"
+                        self.welcomeVC.amountToBePaidLabel.text = "\(serviceRequestDetails.data.serviceRequest.amount)"
+                        serviceRequestId = serviceRequestDetails.data.serviceRequest.id
+                    }else {
+                        print("Sorry babe")
+                    }
                 } catch let err{
                     
                     print(err)
@@ -250,6 +268,60 @@ extension VerificationCodeViewController {
             }
         })
         SVProgressHUD.dismiss()
-        self.navigationController?.pushViewController(WelcomeViewController(), animated: true)
+        self.navigationController?.pushViewController(welcomeVC, animated: true)
+        //self.sendImageToServer(serviceRequestId: serviceRequestId)
+    }
+    
+    func sendImageToServer(serviceRequestId : Int) {
+        
+        let url = "\(BASE_URL)api/v2/member/service/request/image/upload" /* your API url */
+        let params = ["ServiceRequestId" : serviceRequestId,
+                          "ImageList" : self.strBase64Array] as [String: Any]
+        Alamofire.request(url,method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON(completionHandler: {
+            response in
+            guard response.result.isSuccess else {
+                print(response)
+                return
+            }
+            print(response)
+        })
+    }
+    
+    func convertImageToBase64String() {
+        if self.isImageSelected {
+            for eachImage in self.imageArray {
+                let image : UIImage = self.resizeImage(image: eachImage, targetSize: CGSize(width: 100, height: 100))
+                let imageData:NSData = UIImagePNGRepresentation(image)! as NSData
+                let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+                self.strBase64Array.append(strBase64)
+            }
+        }
+    }
+    
+    private func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: newSize.width, height: newSize.height))
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
 }

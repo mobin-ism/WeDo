@@ -9,7 +9,8 @@
 import UIKit
 import Alamofire
 class RegisterViewController: UIViewController {
-    
+    var isImageSelected : Bool = false
+    var imageArray : [UIImage] = []
     var areaID : Int = 0
     lazy var menu: Menu = {
         let slideMenu = Menu()
@@ -449,7 +450,7 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    private func registrationSuccessfullyDoneAlert(securityCode : String, phoneNumber: String, memberID : Int) {
+    private func registrationSuccessfullyDoneAlert(securityCode : String, phoneNumber: String, memberID : Int, memberName : String) {
         
         let alert = UIAlertController(title: "Congratulations!!!", message: "Registration Successfully Done", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Close", style: .default, handler: { action in
@@ -457,6 +458,9 @@ class RegisterViewController: UIViewController {
             verificationVC.securityCode = securityCode
             verificationVC.phoneNumber = phoneNumber
             verificationVC.memberID = memberID
+            verificationVC.memberName = memberName
+            verificationVC.imageArray = self.imageArray
+            verificationVC.isImageSelected = self.isImageSelected
             self.navigationController?.pushViewController(verificationVC, animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
@@ -511,7 +515,7 @@ extension RegisterViewController {
             let params = ["PhoneNumber" : self.phoneNumberTextField.text ?? "",
                           "CityId" : self.areaID,
                           "Name" : self.nameTextField.text ?? "",
-                          "Password" : "",
+                          "Password" : "1234",
                           "Email" : self.emailTextField.text ?? ""] as [String : Any]
             Alamofire.request(url,method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON(completionHandler: {
                 response in
@@ -530,7 +534,7 @@ extension RegisterViewController {
                         
                         if  registrationResponse.isSuccess {
                             
-                            self.registrationSuccessfullyDoneAlert(securityCode: registrationResponse.data.member.securityCode, phoneNumber: self.phoneNumberTextField.text!, memberID: registrationResponse.data.member.id)
+                            self.registrationSuccessfullyDoneAlert(securityCode: registrationResponse.data.member.securityCode, phoneNumber: self.phoneNumberTextField.text!, memberID: registrationResponse.data.member.id, memberName: registrationResponse.data.member.name)
                         }
                         else{
                             self.registrationFailedAlert()
@@ -545,7 +549,6 @@ extension RegisterViewController {
         }else {
             self.setAreaFirst()
         }
-        
     }
 }
 

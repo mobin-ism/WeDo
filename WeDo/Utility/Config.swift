@@ -39,5 +39,6 @@ let SELECTED_DATE = "selected_date"
 let SELECTED_TIME = "selected_time"
 let SHOW_WELCOME_PAGE = "show_welcom_page"
 let MEMBER_ID = "member_id"
+let MEMBER_NAME = "member_name"
 let LOCATION = "location"
 

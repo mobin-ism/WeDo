@@ -10,7 +10,7 @@ import UIKit
 import BouncyLayout
 import LIHImageSlider
 import Alamofire
-
+import SVProgressHUD
 class HomeViewController: UIViewController {
     
     var listOfServices = [NSObject]()
@@ -69,6 +69,8 @@ class HomeViewController: UIViewController {
         slider.dataSource = sliderImages
         self.layout()
         
+        // API CALL
+        self.selectAnAreaByDefaultForTheFirstTime()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -241,6 +243,30 @@ extension HomeViewController {
                     }
                     
                     self.collectionView.reloadData()
+                }catch let err {
+                    print(err)
+                }
+            }
+        }
+    }
+    
+    func selectAnAreaByDefaultForTheFirstTime() {
+        var isFirst = true
+        guard let url = URL(string: "\(BASE_URL)api/v2/city?language=\(UserDefaults.standard.value(forKey: LANGUAGE) as! String)") else { return }
+        HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
+            guard let response = response else { return }
+            
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let areaList = try decoder.decode(Area.self, from: json)
+                    for area in areaList.data.city {
+                        if isFirst {
+                            UserDefaults.standard.set(area.id, forKey: AREA_ID)
+                            UserDefaults.standard.set(area.name, forKey: AREA)
+                        }
+                        isFirst = false
+                    }
                 }catch let err {
                     print(err)
                 }

@@ -51,7 +51,6 @@ class Menu: NSObject {
         label.numberOfLines = 0
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Creativeitem"
         return label
     }()
     
@@ -97,6 +96,9 @@ class Menu: NSObject {
     }
     
     func show() {
+        if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            self.nametLabel.text = "\(UserDefaults.standard.value(forKey: MEMBER_NAME) as! String)"
+        }
         setupSubViews()
     }
     

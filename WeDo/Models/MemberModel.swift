@@ -16,6 +16,7 @@ struct MemberData : Decodable {
 }
 struct MemberDetails : Decodable {
     let id : Int
+    let name : String
     let securityCode : String
     let token : String
 }
