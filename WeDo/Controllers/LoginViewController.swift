@@ -160,6 +160,12 @@ class LoginViewController: UIViewController {
         return label
     }()
     
+    lazy var menu: Menu = {
+        let slideMenu = Menu()
+        slideMenu.loginVC = self
+        return slideMenu
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -199,9 +205,7 @@ class LoginViewController: UIViewController {
         let logo = UIImage(named: "logo.png")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        //navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
     }
     
     func layout() {
@@ -308,8 +312,8 @@ class LoginViewController: UIViewController {
         loginRegisterLabel.topAnchor.constraint(equalTo: serviceProviderLabel.bottomAnchor, constant: 16).isActive = true
     }
     
-    @objc func backTapped() {
-        self.navigationController?.popViewController(animated: true)
+    @objc func menuIconTapped() {
+        self.menu.show(self)
     }
         
     @objc func dismissKeyboard(){
@@ -329,6 +333,44 @@ class LoginViewController: UIViewController {
                 self.login(phoneNumber: phoneNumber)
             }else {
                 Alert.showBasicAlert(on: self, with: "Fill all the fields", message: "Please fill all the fields to login")
+            }
+        }
+    }
+    
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        if  UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: false)
+            case 1:
+                self.navigationController?.pushViewController(ActiveOrderViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(NotificationViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 5:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 6:
+                self.navigationController?.pushViewController(EditProfileViewController(), animated: true)
+            case 7:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        }else {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: false)
+            case 1:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 3:
+                print("Current view controller")
+            default:
+                print("Wrong Index")
             }
         }
     }
@@ -382,9 +424,7 @@ extension LoginViewController {
                 let decoder = JSONDecoder()
                 
                 do {
-                    
                     let registrationResponse = try decoder.decode(Member.self, from: json)
-                    
                     if  registrationResponse.isSuccess {
                         let verificationVC = VerificationCodeViewController()
                         verificationVC.securityCode = registrationResponse.data.member.securityCode
@@ -400,7 +440,6 @@ extension LoginViewController {
                     }
                     
                 } catch let err{
-                    
                     print(err)
                 }
             }

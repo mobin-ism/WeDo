@@ -412,12 +412,7 @@ class WelcomeViewController: UIViewController {
     }
     
     @objc func backTapped() {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
-        for aViewController in viewControllers {
-            if aViewController is HomeViewController {
-                self.navigationController!.popToViewController(aViewController, animated: true)
-            }
-        }
+        self.navigationController?.pushViewController(HomeViewController(), animated: false)
     }
 }
 

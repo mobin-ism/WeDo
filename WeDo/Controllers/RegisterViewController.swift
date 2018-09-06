@@ -258,9 +258,7 @@ class RegisterViewController: UIViewController {
         let logo = UIImage(named: "logo.png")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        //navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
     }
     
     func layout() {
@@ -401,10 +399,6 @@ class RegisterViewController: UIViewController {
         loginRegisterLabel.topAnchor.constraint(equalTo: serviceProviderLabel.bottomAnchor, constant: 16).isActive = true
     }
     
-    @objc func backTapped() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     @objc func menuIconTapped() {
         self.menu.show(self)
     }
@@ -471,6 +465,44 @@ class RegisterViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        if  UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: false)
+            case 1:
+                self.navigationController?.pushViewController(ActiveOrderViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(NotificationViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 5:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 6:
+                self.navigationController?.pushViewController(EditProfileViewController(), animated: true)
+            case 7:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        }else {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: false)
+            case 1:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 3:
+                print("Current view controller")
+            default:
+                print("Wrong Index")
+            }
+        }
+    }
 }
 
 extension RegisterViewController : UIScrollViewDelegate {
@@ -532,7 +564,7 @@ extension RegisterViewController {
                         
                         let registrationResponse = try decoder.decode(Member.self, from: json)
                         
-                        if  registrationResponse.isSuccess {
+                        if  registrationResponse.isSuccess == true {
                             
                             self.registrationSuccessfullyDoneAlert(securityCode: registrationResponse.data.member.securityCode, phoneNumber: self.phoneNumberTextField.text!, memberID: registrationResponse.data.member.id, memberName: registrationResponse.data.member.name)
                         }

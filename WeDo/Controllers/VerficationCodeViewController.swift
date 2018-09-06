@@ -185,7 +185,7 @@ class VerificationCodeViewController: UIViewController {
             if UserDefaults.standard.value(forKey: SHOW_WELCOME_PAGE) as! Bool {
                 self.requestAService()
             }else {
-                print("show another view")
+                self.navigationController?.pushViewController(HomeViewController(), animated: false)
             }
         }else {
             Alert.showBasicAlert(on: self, with: "Invalid Security Code", message: "Provide the valid security code")

@@ -35,7 +35,15 @@
 		084C9F32213E5F610062C247 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084C9F2E213E5F5D0062C247 /* OpenSans-Regular.ttf */; };
 		084C9F33213E5F610062C247 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 084C9F2F213E5F610062C247 /* OpenSans-Bold.ttf */; };
 		084C9F35213E62FC0062C247 /* RequestAServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C9F34213E62FC0062C247 /* RequestAServiceModel.swift */; };
+		0861E8242141279400AC285E /* CompanyListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E8232141279400AC285E /* CompanyListModel.swift */; };
+		0861E82621413AC200AC285E /* FAQTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E82521413AC200AC285E /* FAQTableViewCell.swift */; };
 		08666543213D5B84003980BC /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666542213D5B84003980BC /* MemberModel.swift */; };
+		086E2FFD213FB7EE004FA13F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086E2FFF213FB7EE004FA13F /* Localizable.strings */; };
+		086E3002213FCB79004FA13F /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E3001213FCB79004FA13F /* NotificationViewController.swift */; };
+		086E3004213FCD4C004FA13F /* HelpAndFAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E3003213FCD4C004FA13F /* HelpAndFAQViewController.swift */; };
+		086E3006213FCDC6004FA13F /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E3005213FCDC6004FA13F /* ContactUsViewController.swift */; };
+		086E3008213FCDDC004FA13F /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E3007213FCDDC004FA13F /* EditProfileViewController.swift */; };
+		086E300A213FE9A6004FA13F /* ActiveOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E3009213FE9A6004FA13F /* ActiveOrderModel.swift */; };
 		08743F49211848190077C5EE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F48211848190077C5EE /* Reachability.swift */; };
 		08743F4B2118491C0077C5EE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F4A2118491C0077C5EE /* Alert.swift */; };
 		08743F4D211850B50077C5EE /* HTTPRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08743F4C211850B50077C5EE /* HTTPRequestHandler.swift */; };
@@ -98,7 +106,17 @@
 		084C9F2E213E5F5D0062C247 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		084C9F2F213E5F610062C247 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		084C9F34213E62FC0062C247 /* RequestAServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAServiceModel.swift; sourceTree = "<group>"; };
+		0861E8232141279400AC285E /* CompanyListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyListModel.swift; sourceTree = "<group>"; };
+		0861E82521413AC200AC285E /* FAQTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQTableViewCell.swift; sourceTree = "<group>"; };
 		08666542213D5B84003980BC /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
+		086E2FF4213FB678004FA13F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		086E2FFE213FB7EE004FA13F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		086E3000213FB7F4004FA13F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		086E3001213FCB79004FA13F /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		086E3003213FCD4C004FA13F /* HelpAndFAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndFAQViewController.swift; sourceTree = "<group>"; };
+		086E3005213FCDC6004FA13F /* ContactUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
+		086E3007213FCDDC004FA13F /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		086E3009213FE9A6004FA13F /* ActiveOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderModel.swift; sourceTree = "<group>"; };
 		08743F45211846C50077C5EE /* WeDo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeDo-Bridging-Header.h"; sourceTree = "<group>"; };
 		08743F48211848190077C5EE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		08743F4A2118491C0077C5EE /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -177,6 +195,7 @@
 				08320EE120FDE01F00D98704 /* Info.plist */,
 				08320ED920FDE01400D98704 /* WeDo.xcdatamodeld */,
 				08743F45211846C50077C5EE /* WeDo-Bridging-Header.h */,
+				086E2FFF213FB7EE004FA13F /* Localizable.strings */,
 			);
 			path = WeDo;
 			sourceTree = "<group>";
@@ -203,6 +222,10 @@
 				E9A8CE3F210E35E200F4FDF4 /* CustomerSettingsViewController.swift */,
 				E9FDBADF210F126C00F4773A /* WelcomeViewController.swift */,
 				E9FDBAE1210F2C8300F4773A /* VerficationCodeViewController.swift */,
+				086E3001213FCB79004FA13F /* NotificationViewController.swift */,
+				086E3003213FCD4C004FA13F /* HelpAndFAQViewController.swift */,
+				086E3005213FCDC6004FA13F /* ContactUsViewController.swift */,
+				086E3007213FCDDC004FA13F /* EditProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -243,6 +266,8 @@
 				08743F50211871600077C5EE /* ServiceModel.swift */,
 				08666542213D5B84003980BC /* MemberModel.swift */,
 				084C9F34213E62FC0062C247 /* RequestAServiceModel.swift */,
+				086E3009213FE9A6004FA13F /* ActiveOrderModel.swift */,
+				0861E8232141279400AC285E /* CompanyListModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +323,7 @@
 				0885583F210DA2FA00533A08 /* CompanyTableViewCell.swift */,
 				08855843210DBC3E00533A08 /* JobRequestListTableViewCell.swift */,
 				E9A8CE7D210E4C4200F4FDF4 /* SelectorCell.swift */,
+				0861E82521413AC200AC285E /* FAQTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -356,6 +382,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 08320EC620FDE01400D98704;
 			productRefGroup = 08320ED020FDE01400D98704 /* Products */;
@@ -375,6 +402,7 @@
 				084C9F32213E5F610062C247 /* OpenSans-Regular.ttf in Resources */,
 				08320EE020FDE01F00D98704 /* LaunchScreen.storyboard in Resources */,
 				084C9F33213E5F610062C247 /* OpenSans-Bold.ttf in Resources */,
+				086E2FFD213FB7EE004FA13F /* Localizable.strings in Resources */,
 				084C9F30213E5F610062C247 /* OpenSans-SemiBold.ttf in Resources */,
 				084C9F31213E5F610062C247 /* OpenSans-LightItalic.ttf in Resources */,
 				08320EDD20FDE01F00D98704 /* Assets.xcassets in Resources */,
@@ -465,6 +493,7 @@
 				08320EDB20FDE01400D98704 /* WeDo.xcdatamodeld in Sources */,
 				E9A8CE40210E35E200F4FDF4 /* CustomerSettingsViewController.swift in Sources */,
 				08855842210DAFA200533A08 /* JobRequestListViewController.swift in Sources */,
+				0861E82621413AC200AC285E /* FAQTableViewCell.swift in Sources */,
 				08743F49211848190077C5EE /* Reachability.swift in Sources */,
 				08320EE920FDE49000D98704 /* LandingViewController.swift in Sources */,
 				08855846210DD08000533A08 /* JobRequestDetails.swift in Sources */,
@@ -483,6 +512,7 @@
 				E9FDBAE2210F2C8300F4773A /* VerficationCodeViewController.swift in Sources */,
 				084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */,
 				08855844210DBC3E00533A08 /* JobRequestListTableViewCell.swift in Sources */,
+				086E3002213FCB79004FA13F /* NotificationViewController.swift in Sources */,
 				E9F10169210A6C9D007CEE7F /* CompanyViewController.swift in Sources */,
 				0885583E210DA2E800533A08 /* OrderHistoryTableViewCell.swift in Sources */,
 				083B2B1A2109CCC3004F9A0F /* ActiveOrderTableViewCell.swift in Sources */,
@@ -493,6 +523,7 @@
 				E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */,
 				08743F4D211850B50077C5EE /* HTTPRequestHandler.swift in Sources */,
 				E9A8CE80210E4CD200F4FDF4 /* SelectorModel.swift in Sources */,
+				086E3008213FCDDC004FA13F /* EditProfileViewController.swift in Sources */,
 				084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */,
 				E9A8CE7E210E4C4200F4FDF4 /* SelectorCell.swift in Sources */,
 				08320EF620FDF37800D98704 /* SliderImages.swift in Sources */,
@@ -501,6 +532,7 @@
 				084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */,
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
 				E912818821033C1A0010A242 /* ServicePaymentOneViewController.swift in Sources */,
+				086E300A213FE9A6004FA13F /* ActiveOrderModel.swift in Sources */,
 				08320EF020FDF2AF00D98704 /* Slider.swift in Sources */,
 				E9FDBAE0210F126C00F4773A /* WelcomeViewController.swift in Sources */,
 				E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */,
@@ -510,8 +542,11 @@
 				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
 				083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */,
 				083B2B1C2109EF4F004F9A0F /* ServiceDetailsViewController.swift in Sources */,
+				086E3004213FCD4C004FA13F /* HelpAndFAQViewController.swift in Sources */,
 				0847AFC4213C05FD0054DE93 /* TImeCell.swift in Sources */,
 				084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */,
+				0861E8242141279400AC285E /* CompanyListModel.swift in Sources */,
+				086E3006213FCDC6004FA13F /* ContactUsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,8 +557,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				08320EDF20FDE01F00D98704 /* Base */,
+				086E2FF4213FB678004FA13F /* ar */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		086E2FFF213FB7EE004FA13F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				086E2FFE213FB7EE004FA13F /* en */,
+				086E3000213FB7F4004FA13F /* ar */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -533,6 +578,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -593,6 +639,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

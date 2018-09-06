@@ -70,7 +70,9 @@ class HomeViewController: UIViewController {
         self.layout()
         
         // API CALL
-        self.selectAnAreaByDefaultForTheFirstTime()
+        if !Helper.Exists(key: AREA_ID) {
+            self.selectAnAreaByDefaultForTheFirstTime()
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -98,11 +100,40 @@ class HomeViewController: UIViewController {
     }
     
     public func selectedViewControllerFromMenu(indexNumber : Int) {
-        switch indexNumber {
-        case 0:
-            print("Current View Controller")
-        default:
-            print("Wrong Index")
+        if  UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            switch indexNumber {
+            case 0:
+                print("Current View Controller")
+            case 1:
+                self.navigationController?.pushViewController(ActiveOrderViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(NotificationViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 5:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 6:
+                self.navigationController?.pushViewController(EditProfileViewController(), animated: true)
+            case 7:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        }else {
+            switch indexNumber {
+            case 0:
+                print("Current View Controller")
+            case 1:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            default:
+                print("Wrong Index")
+            }
         }
     }
     
@@ -151,8 +182,8 @@ class HomeViewController: UIViewController {
         view.addSubview(collectionView)
         /*collectionView.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 16).isActive = true*/
         collectionView.topAnchor.constraint(equalTo: self.sliderVc1.view.bottomAnchor, constant: 16).isActive = true
-        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     

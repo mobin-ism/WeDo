@@ -74,6 +74,7 @@ class AllServicesListViewController: UIViewController {
         guard let selectedIndexPath = self.selectedIndexPath else { return }
         let indexPath = IndexPath(item: selectedIndexPath, section: 0)
         print(indexPath)
+        //self.horizontalCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
     }
     
     private func setNavigationBar() {
@@ -92,8 +93,8 @@ class AllServicesListViewController: UIViewController {
     func setupHorizontalCollectionView() {
         view.addSubview(horizontalCollectionView)
         horizontalCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
-        horizontalCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        horizontalCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        horizontalCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        horizontalCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         horizontalCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3).isActive = true
     }
     
@@ -101,8 +102,8 @@ class AllServicesListViewController: UIViewController {
         view.addSubview(verticalCollectionView)
         verticalCollectionView.topAnchor.constraint(equalTo: horizontalCollectionView.bottomAnchor, constant: 20).isActive = true
         verticalCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
-        verticalCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        verticalCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        verticalCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        verticalCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     @objc func backTapped() {

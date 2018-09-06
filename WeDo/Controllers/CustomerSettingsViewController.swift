@@ -7,14 +7,15 @@
 //
 
 import UIKit
-
+import Localize_Swift
 class CustomerSettingsViewController: UIViewController {
     
     var languageNSObject = [LanguageNSObject]()
     var areaNSObject = [AreaNSObject]()
-    var selectedLanguageID : Int?
-    var selectedAreaID : Int?
+    var selectedAreaID : Int = 1
+    var selectedArea : String!
     var selectedLanguage : String!
+    var selectedLanguageID : Int = 1
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -227,6 +228,15 @@ class CustomerSettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
+        
+        if UserDefaults.standard.value(forKey: LANGUAGE) as! String == "en" {
+            self.selectedLanguageID = 1
+        }else if UserDefaults.standard.value(forKey: LANGUAGE) as! String == "ar" {
+            self.selectedLanguageID = 2
+        }
+        
+        self.selectedArea = UserDefaults.standard.value(forKey: AREA) as! String
+        self.selectedAreaID = UserDefaults.standard.value(forKey: AREA_ID) as! Int
     }
     
     private func setNavigationBar() {
@@ -238,17 +248,15 @@ class CustomerSettingsViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    func changeLanguageSelectorTitle(withString title: String) {
+    func changeLanguageSelectorTitle(withString title: String, selectedLanguageID : Int) {
         self.languageSelectorButton.setTitle(title, for: .normal)
-        guard let selectedLanguageID = self.selectedLanguageID else { return }
-        if selectedLanguageID == 2 {
-            UserDefaults.standard.set("ar", forKey: LANGUAGE)
-        }else {
-            UserDefaults.standard.set("en", forKey: LANGUAGE)
-        }
+        self.selectedLanguageID = selectedLanguageID
     }
-    func changeAreaSelectorTitle(withString title: String) {
+    
+    func changeAreaSelectorTitle(withString title: String, selectedAreaID : Int) {
         self.areaSelectorButton.setTitle(title, for: .normal)
+        self.selectedArea = title
+        self.selectedAreaID = selectedAreaID
     }
     
     func layout() {
@@ -390,7 +398,8 @@ class CustomerSettingsViewController: UIViewController {
     }
     
     @objc func backTapped() {
-        self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
+        self.navigationController?.pushViewController(HomeViewController(), animated: true)
     }
     
     @objc func toggleNotificationSwitch() {
@@ -454,6 +463,21 @@ class CustomerSettingsViewController: UIViewController {
     
     
     @objc func handleSubmitButton() {
+        // language select
+        if selectedLanguageID == 2 {
+            UserDefaults.standard.set("ar", forKey: LANGUAGE)
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            Localize.setCurrentLanguage("ar")
+            
+        }else {
+            UserDefaults.standard.set("en", forKey: LANGUAGE)
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            Localize.setCurrentLanguage("en")
+        }
+        
+        // area select
+        UserDefaults.standard.set(self.selectedAreaID, forKey: AREA_ID)
+        UserDefaults.standard.set(selectedArea, forKey: AREA)
         Alert.showBasicAlert(on: self, with: "Updated", message: "Settings updated successfully")
     }
     

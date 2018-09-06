@@ -134,14 +134,10 @@ extension Selector : UITableViewDelegate, UITableViewDataSource {
         hide()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
             if let data = self.selectorData as? [LanguageNSObject] {
-                self.customerSettingsVC.changeLanguageSelectorTitle(withString: "\(data[indexPath.row].languageName)")
-                self.customerSettingsVC.selectedLanguageID = data[indexPath.row].languageId
+                self.customerSettingsVC.changeLanguageSelectorTitle(withString: "\(data[indexPath.row].languageName)", selectedLanguageID: data[indexPath.row].languageId)
             }
             if let data = self.selectorData as? [AreaNSObject] {
-                self.customerSettingsVC.changeAreaSelectorTitle(withString: "\(data[indexPath.row].areaName)")
-                self.customerSettingsVC.selectedAreaID = data[indexPath.row].areaId
-                UserDefaults.standard.set(data[indexPath.row].areaId, forKey: AREA_ID)
-                UserDefaults.standard.set(data[indexPath.row].areaName, forKey: AREA)
+                self.customerSettingsVC.changeAreaSelectorTitle(withString: "\(data[indexPath.row].areaName)", selectedAreaID: data[indexPath.row].areaId)
             }
         })
     }

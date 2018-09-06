@@ -10,6 +10,7 @@ import Foundation
 struct Member : Decodable {
     let data : MemberData
     let isSuccess : Bool
+    let code : Int
 }
 struct MemberData : Decodable {
     let member : MemberDetails

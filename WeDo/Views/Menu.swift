@@ -7,11 +7,19 @@
 //
 
 import UIKit
-
+import Localize_Swift
 class Menu: NSObject {
     
     var homeController = HomeViewController()
     var registerVC = RegisterViewController()
+    var loginVC = LoginViewController()
+    var activeOrderVC = ActiveOrderViewController()
+    var orderhistoryVC = OrderHistoryViewController()
+    var companyVC = CompanyViewController()
+    var notificationVC = NotificationViewController()
+    var faqVC = HelpAndFAQViewController()
+    var contactUsVC = ContactUsViewController()
+    var editProfileVC = EditProfileViewController()
     
     var calledFrom : String!
     
@@ -88,8 +96,8 @@ class Menu: NSObject {
     }()
     
     let cellId = "MenuCell"
-    let menuItemsForLoggedOut = ["Home", "Help & FAQ", "Contact Us", "Settings", "Login"]
-    let menuItemsForLoggedIn  = ["Home", "My Order", "Notification", "Order History", "Help & FAQ", "Contact Us", "Edit Profile", "Settings", "Logout"]
+    let menuItemsForLoggedOut = ["Home".localized(), "Help & FAQ".localized(), "Contact Us".localized(), "Login".localized()]
+    let menuItemsForLoggedIn  = ["Home".localized(), "My Order".localized(), "Notification".localized(), "Order History".localized(), "Help & FAQ".localized(), "Contact Us".localized(), "Edit Profile".localized(), "Logout".localized()]
     
     override init() {
         super.init()
@@ -99,7 +107,7 @@ class Menu: NSObject {
     func show(_ vc: UIViewController) {
         self.calledFrom = self.getClassName(vc)
         if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
-            self.welcomeLabel.text = "Welcome"
+            self.welcomeLabel.text = "Welcome".localized()
             self.nametLabel.text = "\(UserDefaults.standard.value(forKey: MEMBER_NAME) as! String)"
         }
         setupSubViews()
@@ -241,7 +249,24 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
         switch self.calledFrom {
         case "HomeViewController":
             self.homeController.selectedViewControllerFromMenu(indexNumber: indexPath.row)
-            print("Call from HomeViewController")
+        case "RegisterViewController":
+            self.registerVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "LoginViewController":
+            self.loginVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "ActiveOrderViewController":
+            self.activeOrderVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "OrderHistoryViewController":
+            self.orderhistoryVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "CompanyViewController":
+            self.companyVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "NotificationViewController":
+            self.notificationVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "HelpAndFAQViewController":
+            self.faqVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "ContactUsViewController":
+            self.contactUsVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "EditProfileViewController":
+            self.editProfileVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         default:
             print("Call from mars")
         }

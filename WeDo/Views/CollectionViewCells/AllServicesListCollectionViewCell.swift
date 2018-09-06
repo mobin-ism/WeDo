@@ -67,7 +67,7 @@ class AllServicesListCollectionViewCell: UICollectionViewCell {
     private func setImageView() {
         addSubview(imageView)
         imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
@@ -75,7 +75,7 @@ class AllServicesListCollectionViewCell: UICollectionViewCell {
     private func setTitleLabel() {
         addSubview(titleLabel)
         titleLabel.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 10).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10).isActive = true
     }
     
 }

@@ -9,8 +9,8 @@
 import UIKit
 class CompanyViewController: UIViewController {
     
+    var listOfCompanies = [CompanyListNSObject]()
     let serviceDetailsVC = ServiceDetailsViewController()
-    
     lazy var activeOrderButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +63,12 @@ class CompanyViewController: UIViewController {
     
     let cellId = "companyTableViewCell"
     
+    lazy var menu: Menu = {
+        let slideMenu = Menu()
+        slideMenu.companyVC = self
+        return slideMenu
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -76,6 +82,7 @@ class CompanyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
+        self.getCompanies()
     }
     
     private func setNavigationBar() {
@@ -83,9 +90,7 @@ class CompanyViewController: UIViewController {
         let logo = UIImage(named: "logo.png")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "My Order", style: .plain, target: self, action: #selector(rightBarButtonTapped))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
@@ -137,16 +142,49 @@ class CompanyViewController: UIViewController {
             print("Current ViewController")
         }
     }
-    @objc func backTapped() {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
-        for aViewController in viewControllers {
-            if aViewController is RegisterViewController {
-                self.navigationController!.popToViewController(aViewController, animated: true)
-            }
-        }
+    @objc func menuIconTapped() {
+        self.menu.show(self)
     }
     @objc func rightBarButtonTapped() {
         
+    }
+    
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        if  UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: false)
+            case 1:
+                self.navigationController?.pushViewController(ActiveOrderViewController(), animated: false)
+            case 2:
+                self.navigationController?.pushViewController(NotificationViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 5:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 6:
+                self.navigationController?.pushViewController(EditProfileViewController(), animated: true)
+            case 7:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        }else {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: false)
+            case 1:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            default:
+                print("Wrong Index")
+            }
+        }
     }
 }
 
@@ -157,16 +195,16 @@ extension CompanyViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? CompanyTableViewCell {
-            cell.serviceImageView.image = #imageLiteral(resourceName: "dummy")
-            cell.titleText = "Service Title"
-            cell.subTitleText = "(Carpentry)"
+            cell.serviceImageView.image = #imageLiteral(resourceName: "placeholder")
+            cell.titleText = "Test"
+            cell.subTitleText = "(Test Name)"
             cell.dateTimeText = "15th May, 2017 | 11:30 AM"
-            cell.lastJobDateText = "25th May, 2017"
+            cell.lastJobDateText = "25th May, 2018"
             return cell
         } else {
             let cell = tableView.cellForRow(at: indexPath)!
@@ -182,5 +220,36 @@ extension CompanyViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
-    
+}
+// API CALLS
+extension CompanyViewController {
+    func getCompanies() {
+        guard let url = URL(string: "\(BASE_URL)api/v2/member/job/by/company") else { return }
+        HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
+            guard let response = response else { return }
+            
+            if !self.listOfCompanies.isEmpty {
+                self.listOfCompanies.removeAll()
+            }
+            print(response)
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+//                    let activeOrderList = try decoder.decode(ActiveOrderModel.self, from: json)
+//
+//                    for eachOrder in activeOrderList.data.jobRequestList {
+//                        let container = ActiveOrderNSObject(id: eachOrder.id, serviceId: eachOrder.serviceId, parentServiceTitle: eachOrder.parentServiceTitle, serviceTitle: eachOrder.serviceTitle, description: eachOrder.description ?? "", serviceIcon: eachOrder.serviceIcon ?? "https://rabota.a42.ru/front/img/no_image.jpg", status: eachOrder.status ?? "", startDateTime: eachOrder.startDateTime ?? "", bidAmount: eachOrder.bidAmount ?? 0 )
+//                        self.listOfOrders.append(container)
+//                    }
+//
+//                    self.tableView.reloadData()
+//                    if self.listOfOrders.count == 0 {
+//                        Alert.showBasicAlert(on: self, with: "No Order History Found", message: "There is no order history")
+//                    }
+                }catch let err {
+                    print(err)
+                }
+            }
+        }
+    }
 }

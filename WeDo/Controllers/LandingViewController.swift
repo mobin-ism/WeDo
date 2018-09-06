@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 class LandingViewController: UIViewController {
     
     lazy var landingScreenImageView : UIImageView = {
@@ -55,7 +56,18 @@ class LandingViewController: UIViewController {
     func checkMandatoryUserDefaults() {
         if !Helper.Exists(key: LANGUAGE) {
             UserDefaults.standard.set("en", forKey: LANGUAGE)
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            Localize.setCurrentLanguage("en")
+        }else {
+            if UserDefaults.standard.value(forKey: LANGUAGE) as! String == "en" {
+                UIView.appearance().semanticContentAttribute = .forceLeftToRight
+                Localize.setCurrentLanguage("en")
+            }else if UserDefaults.standard.value(forKey: LANGUAGE) as! String == "ar" {
+                UIView.appearance().semanticContentAttribute = .forceRightToLeft
+                Localize.setCurrentLanguage("ar")
+            }
         }
+        
         if !Helper.Exists(key: IS_LOGGED_IN) {
             UserDefaults.standard.set( false, forKey: IS_LOGGED_IN)
         }
