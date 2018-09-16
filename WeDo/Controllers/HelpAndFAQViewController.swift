@@ -65,6 +65,7 @@ class HelpAndFAQViewController: UIViewController {
     }()
     
     let cellId = "FAQCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -206,7 +207,16 @@ extension HelpAndFAQViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        switch indexPath.row {
+        case 0:
+            self.navigationController?.pushViewController(FaqViewController(), animated: true)
+        case 1:
+            self.navigationController?.pushViewController(TermsConditionsViewController(), animated: true)
+        case 2:
+            self.navigationController?.pushViewController(PrivacyPolicyViewController(), animated: true)
+        default:
+            print("call from Mars")
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

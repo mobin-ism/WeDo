@@ -20,6 +20,10 @@ class Menu: NSObject {
     var faqVC = HelpAndFAQViewController()
     var contactUsVC = ContactUsViewController()
     var editProfileVC = EditProfileViewController()
+    var spRegisterVC = SPRegisterViewController()
+    var spHomeVC = SPHomeViewController()
+    
+    var frequentlyAskedVC = FaqViewController()
     
     var calledFrom : String!
     

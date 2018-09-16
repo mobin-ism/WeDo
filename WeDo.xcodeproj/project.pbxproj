@@ -54,6 +54,27 @@
 		08855842210DAFA200533A08 /* JobRequestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855841210DAFA200533A08 /* JobRequestListViewController.swift */; };
 		08855844210DBC3E00533A08 /* JobRequestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855843210DBC3E00533A08 /* JobRequestListTableViewCell.swift */; };
 		08855846210DD08000533A08 /* JobRequestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855845210DD08000533A08 /* JobRequestDetails.swift */; };
+		7775A155214D36000038C432 /* FaqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A154214D36000038C432 /* FaqViewController.swift */; };
+		7775A157214D37A40038C432 /* TermsConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A156214D37A40038C432 /* TermsConditionsViewController.swift */; };
+		7775A159214D37C80038C432 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A158214D37C80038C432 /* PrivacyPolicyViewController.swift */; };
+		7775A15C214D3ABA0038C432 /* SPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A15B214D3ABA0038C432 /* SPLoginViewController.swift */; };
+		7775A15E214D44990038C432 /* SPRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A15D214D44990038C432 /* SPRegisterViewController.swift */; };
+		7775A164214D53F40038C432 /* SPRegisterCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A163214D53F40038C432 /* SPRegisterCompanyViewController.swift */; };
+		7775A166214D54220038C432 /* SPRegisterAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A165214D54220038C432 /* SPRegisterAddressViewController.swift */; };
+		7775A168214D56C90038C432 /* SPRegisterDateTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A167214D56C80038C432 /* SPRegisterDateTimeViewController.swift */; };
+		7775A16A214D56F10038C432 /* SPRegisterServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A169214D56F10038C432 /* SPRegisterServicesViewController.swift */; };
+		7775A16C214DA1820038C432 /* WeekdaySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A16B214DA1820038C432 /* WeekdaySelectCell.swift */; };
+		778F1331214E91F50042A212 /* SPLoginVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1330214E91F50042A212 /* SPLoginVerifyViewController.swift */; };
+		778F1333214EACA30042A212 /* SPHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1332214EACA30042A212 /* SPHomeViewController.swift */; };
+		778F1335214EACDF0042A212 /* SPCurrentJobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1334214EACDF0042A212 /* SPCurrentJobsViewController.swift */; };
+		778F1337214EAD0B0042A212 /* SPNewJobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1336214EAD0B0042A212 /* SPNewJobsViewController.swift */; };
+		778F1339214EAD350042A212 /* SPRequestedJobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1338214EAD350042A212 /* SPRequestedJobsViewController.swift */; };
+		778F133B214EB14C0042A212 /* SPJobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F133A214EB14C0042A212 /* SPJobCell.swift */; };
+		778F133D214EBC670042A212 /* SPCurrentJobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F133C214EBC670042A212 /* SPCurrentJobDetailsViewController.swift */; };
+		778F133F214EE9800042A212 /* SingleImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F133E214EE9800042A212 /* SingleImageCell.swift */; };
+		778F1341214EF42A0042A212 /* SPNewJobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1340214EF42A0042A212 /* SPNewJobDetailsViewController.swift */; };
+		778F1343214EF6810042A212 /* SPCustomerDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1342214EF6810042A212 /* SPCustomerDetailCell.swift */; };
+		778F1345214EFF350042A212 /* SPRequestedJobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1344214EFF350042A212 /* SPRequestedJobDetailsViewController.swift */; };
 		854CEC902907D94E1A3E5786 /* Pods_WeDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */; };
 		E912818221033BBF0010A242 /* ServiceLocationOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912818121033BBF0010A242 /* ServiceLocationOneViewController.swift */; };
 		E912818621033C030010A242 /* ServiceDateAndTimeOneviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912818521033C030010A242 /* ServiceDateAndTimeOneviewController.swift */; };
@@ -130,6 +151,27 @@
 		08855845210DD08000533A08 /* JobRequestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobRequestDetails.swift; sourceTree = "<group>"; };
 		1CD9AB98BE6B45E7F39176FA /* Pods-WeDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.release.xcconfig"; sourceTree = "<group>"; };
 		49DB9D0DB3ABD83CB09CBC25 /* Pods-WeDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.debug.xcconfig"; sourceTree = "<group>"; };
+		7775A154214D36000038C432 /* FaqViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqViewController.swift; sourceTree = "<group>"; };
+		7775A156214D37A40038C432 /* TermsConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionsViewController.swift; sourceTree = "<group>"; };
+		7775A158214D37C80038C432 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		7775A15B214D3ABA0038C432 /* SPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPLoginViewController.swift; sourceTree = "<group>"; };
+		7775A15D214D44990038C432 /* SPRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterViewController.swift; sourceTree = "<group>"; };
+		7775A163214D53F40038C432 /* SPRegisterCompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterCompanyViewController.swift; sourceTree = "<group>"; };
+		7775A165214D54220038C432 /* SPRegisterAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterAddressViewController.swift; sourceTree = "<group>"; };
+		7775A167214D56C80038C432 /* SPRegisterDateTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterDateTimeViewController.swift; sourceTree = "<group>"; };
+		7775A169214D56F10038C432 /* SPRegisterServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterServicesViewController.swift; sourceTree = "<group>"; };
+		7775A16B214DA1820038C432 /* WeekdaySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaySelectCell.swift; sourceTree = "<group>"; };
+		778F1330214E91F50042A212 /* SPLoginVerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPLoginVerifyViewController.swift; sourceTree = "<group>"; };
+		778F1332214EACA30042A212 /* SPHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPHomeViewController.swift; sourceTree = "<group>"; };
+		778F1334214EACDF0042A212 /* SPCurrentJobsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCurrentJobsViewController.swift; sourceTree = "<group>"; };
+		778F1336214EAD0B0042A212 /* SPNewJobsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNewJobsViewController.swift; sourceTree = "<group>"; };
+		778F1338214EAD350042A212 /* SPRequestedJobsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRequestedJobsViewController.swift; sourceTree = "<group>"; };
+		778F133A214EB14C0042A212 /* SPJobCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPJobCell.swift; sourceTree = "<group>"; };
+		778F133C214EBC670042A212 /* SPCurrentJobDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCurrentJobDetailsViewController.swift; sourceTree = "<group>"; };
+		778F133E214EE9800042A212 /* SingleImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageCell.swift; sourceTree = "<group>"; };
+		778F1340214EF42A0042A212 /* SPNewJobDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNewJobDetailsViewController.swift; sourceTree = "<group>"; };
+		778F1342214EF6810042A212 /* SPCustomerDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCustomerDetailCell.swift; sourceTree = "<group>"; };
+		778F1344214EFF350042A212 /* SPRequestedJobDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRequestedJobDetailsViewController.swift; sourceTree = "<group>"; };
 		7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E912818121033BBF0010A242 /* ServiceLocationOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocationOneViewController.swift; sourceTree = "<group>"; };
 		E912818521033C030010A242 /* ServiceDateAndTimeOneviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDateAndTimeOneviewController.swift; sourceTree = "<group>"; };
@@ -203,6 +245,7 @@
 		08320EE720FDE47700D98704 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7775A15A214D3A970038C432 /* Service Provider */,
 				08320EE820FDE49000D98704 /* LandingViewController.swift */,
 				08320EEC20FDEBC000D98704 /* HomeViewController.swift */,
 				084A03E320FF3CEB000E532E /* AllServicesListViewController.swift */,
@@ -226,6 +269,9 @@
 				086E3003213FCD4C004FA13F /* HelpAndFAQViewController.swift */,
 				086E3005213FCDC6004FA13F /* ContactUsViewController.swift */,
 				086E3007213FCDDC004FA13F /* EditProfileViewController.swift */,
+				7775A154214D36000038C432 /* FaqViewController.swift */,
+				7775A156214D37A40038C432 /* TermsConditionsViewController.swift */,
+				7775A158214D37C80038C432 /* PrivacyPolicyViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -253,6 +299,10 @@
 				084A03E720FF5A3F000E532E /* HorizontalCollectionViewCell.swift */,
 				E912818B2103642F0010A242 /* ServiceRequestImageCell.swift */,
 				0847AFC3213C05FD0054DE93 /* TImeCell.swift */,
+				7775A16B214DA1820038C432 /* WeekdaySelectCell.swift */,
+				778F133A214EB14C0042A212 /* SPJobCell.swift */,
+				778F133E214EE9800042A212 /* SingleImageCell.swift */,
+				778F1342214EF6810042A212 /* SPCustomerDetailCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -303,6 +353,27 @@
 				1CD9AB98BE6B45E7F39176FA /* Pods-WeDo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		7775A15A214D3A970038C432 /* Service Provider */ = {
+			isa = PBXGroup;
+			children = (
+				7775A15B214D3ABA0038C432 /* SPLoginViewController.swift */,
+				7775A15D214D44990038C432 /* SPRegisterViewController.swift */,
+				7775A163214D53F40038C432 /* SPRegisterCompanyViewController.swift */,
+				7775A165214D54220038C432 /* SPRegisterAddressViewController.swift */,
+				7775A167214D56C80038C432 /* SPRegisterDateTimeViewController.swift */,
+				7775A169214D56F10038C432 /* SPRegisterServicesViewController.swift */,
+				778F1330214E91F50042A212 /* SPLoginVerifyViewController.swift */,
+				778F1332214EACA30042A212 /* SPHomeViewController.swift */,
+				778F1334214EACDF0042A212 /* SPCurrentJobsViewController.swift */,
+				778F1336214EAD0B0042A212 /* SPNewJobsViewController.swift */,
+				778F1338214EAD350042A212 /* SPRequestedJobsViewController.swift */,
+				778F133C214EBC670042A212 /* SPCurrentJobDetailsViewController.swift */,
+				778F1340214EF42A0042A212 /* SPNewJobDetailsViewController.swift */,
+				778F1344214EFF350042A212 /* SPRequestedJobDetailsViewController.swift */,
+			);
+			path = "Service Provider";
 			sourceTree = "<group>";
 		};
 		99CBE29B4F33FF18FD8C6563 /* Frameworks */ = {
@@ -424,6 +495,7 @@
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/LIHImageSlider/LIHImageSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/Pager/Pager.framework",
 				"${BUILT_PRODUCTS_DIR}/RAMPaperSwitch/RAMPaperSwitch.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -435,6 +507,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LIHImageSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMPaperSwitch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -489,31 +562,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7775A159214D37C80038C432 /* PrivacyPolicyViewController.swift in Sources */,
 				082E5FF22100B6C00081D26D /* ServiceDescriptionOneViewController.swift in Sources */,
+				778F1333214EACA30042A212 /* SPHomeViewController.swift in Sources */,
 				08320EDB20FDE01400D98704 /* WeDo.xcdatamodeld in Sources */,
 				E9A8CE40210E35E200F4FDF4 /* CustomerSettingsViewController.swift in Sources */,
+				7775A155214D36000038C432 /* FaqViewController.swift in Sources */,
 				08855842210DAFA200533A08 /* JobRequestListViewController.swift in Sources */,
 				0861E82621413AC200AC285E /* FAQTableViewCell.swift in Sources */,
+				7775A166214D54220038C432 /* SPRegisterAddressViewController.swift in Sources */,
+				7775A15C214D3ABA0038C432 /* SPLoginViewController.swift in Sources */,
 				08743F49211848190077C5EE /* Reachability.swift in Sources */,
+				778F1345214EFF350042A212 /* SPRequestedJobDetailsViewController.swift in Sources */,
 				08320EE920FDE49000D98704 /* LandingViewController.swift in Sources */,
+				778F1331214E91F50042A212 /* SPLoginVerifyViewController.swift in Sources */,
 				08855846210DD08000533A08 /* JobRequestDetails.swift in Sources */,
 				08320EFB20FDF57400D98704 /* Config.swift in Sources */,
 				08743F4F211862780077C5EE /* AreaModel.swift in Sources */,
+				7775A16A214D56F10038C432 /* SPRegisterServicesViewController.swift in Sources */,
 				08855840210DA2FA00533A08 /* CompanyTableViewCell.swift in Sources */,
 				08743F51211871600077C5EE /* ServiceModel.swift in Sources */,
 				08666543213D5B84003980BC /* MemberModel.swift in Sources */,
 				08320ED320FDE01400D98704 /* AppDelegate.swift in Sources */,
+				778F133F214EE9800042A212 /* SingleImageCell.swift in Sources */,
 				E912818C2103642F0010A242 /* ServiceRequestImageCell.swift in Sources */,
 				E98CCFE420FE797100799029 /* MasterCollectionViewCell.swift in Sources */,
 				08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */,
 				E9A8CE7C210E4BEE00F4FDF4 /* Selector.swift in Sources */,
 				0847AFC2213BFE890054DE93 /* CalenderSelector.swift in Sources */,
+				778F1337214EAD0B0042A212 /* SPNewJobsViewController.swift in Sources */,
 				E912818621033C030010A242 /* ServiceDateAndTimeOneviewController.swift in Sources */,
 				E9FDBAE2210F2C8300F4773A /* VerficationCodeViewController.swift in Sources */,
 				084A03E820FF5A3F000E532E /* HorizontalCollectionViewCell.swift in Sources */,
 				08855844210DBC3E00533A08 /* JobRequestListTableViewCell.swift in Sources */,
+				7775A16C214DA1820038C432 /* WeekdaySelectCell.swift in Sources */,
+				778F133B214EB14C0042A212 /* SPJobCell.swift in Sources */,
 				086E3002213FCB79004FA13F /* NotificationViewController.swift in Sources */,
 				E9F10169210A6C9D007CEE7F /* CompanyViewController.swift in Sources */,
+				778F1339214EAD350042A212 /* SPRequestedJobsViewController.swift in Sources */,
+				778F1343214EF6810042A212 /* SPCustomerDetailCell.swift in Sources */,
+				7775A157214D37A40038C432 /* TermsConditionsViewController.swift in Sources */,
 				0885583E210DA2E800533A08 /* OrderHistoryTableViewCell.swift in Sources */,
 				083B2B1A2109CCC3004F9A0F /* ActiveOrderTableViewCell.swift in Sources */,
 				E912818E2103C3D00010A242 /* PaddedText.swift in Sources */,
@@ -529,23 +617,29 @@
 				08320EF620FDF37800D98704 /* SliderImages.swift in Sources */,
 				08743F4B2118491C0077C5EE /* Alert.swift in Sources */,
 				083B2AF32109A372004F9A0F /* RegisterViewController.swift in Sources */,
+				7775A15E214D44990038C432 /* SPRegisterViewController.swift in Sources */,
 				084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */,
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
 				E912818821033C1A0010A242 /* ServicePaymentOneViewController.swift in Sources */,
 				086E300A213FE9A6004FA13F /* ActiveOrderModel.swift in Sources */,
 				08320EF020FDF2AF00D98704 /* Slider.swift in Sources */,
+				778F133D214EBC670042A212 /* SPCurrentJobDetailsViewController.swift in Sources */,
+				778F1341214EF42A0042A212 /* SPNewJobDetailsViewController.swift in Sources */,
 				E9FDBAE0210F126C00F4773A /* WelcomeViewController.swift in Sources */,
 				E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */,
+				7775A168214D56C90038C432 /* SPRegisterDateTimeViewController.swift in Sources */,
 				E9F10165210A6C34007CEE7F /* ActiveOrderViewController.swift in Sources */,
 				082E5FF42100B7340081D26D /* ServiceDescriptionTwoViewController.swift in Sources */,
 				084C9F35213E62FC0062C247 /* RequestAServiceModel.swift in Sources */,
 				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
 				083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */,
+				778F1335214EACDF0042A212 /* SPCurrentJobsViewController.swift in Sources */,
 				083B2B1C2109EF4F004F9A0F /* ServiceDetailsViewController.swift in Sources */,
 				086E3004213FCD4C004FA13F /* HelpAndFAQViewController.swift in Sources */,
 				0847AFC4213C05FD0054DE93 /* TImeCell.swift in Sources */,
 				084A03E620FF5104000E532E /* AllServicesListCollectionViewCell.swift in Sources */,
 				0861E8242141279400AC285E /* CompanyListModel.swift in Sources */,
+				7775A164214D53F40038C432 /* SPRegisterCompanyViewController.swift in Sources */,
 				086E3006213FCDC6004FA13F /* ContactUsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

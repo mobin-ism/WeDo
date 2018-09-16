@@ -32,8 +32,8 @@ class LandingViewController: UIViewController {
     func setLandingScreen() {
         view.addSubview(landingScreenImageView)
         landingScreenImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        landingScreenImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        landingScreenImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        landingScreenImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        landingScreenImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         landingScreenImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     

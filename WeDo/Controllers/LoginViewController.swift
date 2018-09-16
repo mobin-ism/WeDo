@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.text = "Login As Customer"
+        label.text = "Login As Customer".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 18)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.text = "Phone Number"
+        label.text = "Phone Number".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +98,7 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.attributedText = NSAttributedString(string: "Register", attributes:[.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+        label.attributedText = NSAttributedString(string: "Register now".localized(), attributes:[.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -137,9 +137,9 @@ class LoginViewController: UIViewController {
     
     let serviceProviderLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.textColor = UIColor.black
-        label.text = "Service Provide"
+        label.text = "Service Provider".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -147,16 +147,39 @@ class LoginViewController: UIViewController {
         return label
     }()
     
-    let loginRegisterLabel: UILabel = {
+    let spDividerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGray
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var spLoginLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.textColor = UIColor.black
-        label.text = "Login | Register"
+        label.text = "Login".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.textColor = UIColor.lightGray
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(spLoginTapped)))
+        return label
+    }()
+    
+    lazy var spRegisterLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .right
+        label.text = "Register".localized()
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        label.textColor = UIColor.lightGray
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(spRegisterTapped)))
         return label
     }()
     
@@ -221,7 +244,9 @@ class LoginViewController: UIViewController {
         setupLeftHorizontalLine()
         setupRighttHorizontalLine()
         setupServiceProvideLabel()
-        setupLoginRegisterLabel()
+        setupSpDividerView()
+        setupSpLoginLabel()
+        setupSpRegisterLabel()
     }
     
     func setupBackgroundImageView() {
@@ -306,10 +331,33 @@ class LoginViewController: UIViewController {
         serviceProviderLabel.topAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 40).isActive = true
     }
     
-    func setupLoginRegisterLabel() {
-        scrollView.addSubview(loginRegisterLabel)
-        loginRegisterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        loginRegisterLabel.topAnchor.constraint(equalTo: serviceProviderLabel.bottomAnchor, constant: 16).isActive = true
+    func setupSpDividerView() {
+        scrollView.addSubview(spDividerView)
+        spDividerView.centerXAnchor.constraint(equalTo: serviceProviderLabel.centerXAnchor).isActive = true
+        spDividerView.topAnchor.constraint(equalTo: serviceProviderLabel.bottomAnchor, constant: 16).isActive = true
+        spDividerView.widthAnchor.constraint(equalToConstant: 1).isActive = true
+        spDividerView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        
+    }
+    
+    func setupSpLoginLabel() {
+        scrollView.addSubview(spLoginLabel)
+        spLoginLabel.centerYAnchor.constraint(equalTo: spDividerView.centerYAnchor).isActive = true
+        spLoginLabel.leadingAnchor.constraint(equalTo: serviceProviderLabel.leadingAnchor, constant: 0).isActive = true
+    }
+    
+    func setupSpRegisterLabel() {
+        scrollView.addSubview(spRegisterLabel)
+        spRegisterLabel.centerYAnchor.constraint(equalTo: spDividerView.centerYAnchor).isActive = true
+        spRegisterLabel.trailingAnchor.constraint(equalTo: serviceProviderLabel.trailingAnchor, constant: 0).isActive = true
+    }
+    
+    @objc private func spLoginTapped() {
+        navigationController?.pushViewController(SPLoginViewController(), animated: true)
+    }
+    
+    @objc private func spRegisterTapped() {
+        navigationController?.pushViewController(SPRegisterViewController(), animated: true)
     }
     
     @objc func menuIconTapped() {

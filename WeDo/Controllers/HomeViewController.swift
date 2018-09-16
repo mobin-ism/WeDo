@@ -121,7 +121,7 @@ class HomeViewController: UIViewController {
             default:
                 print("Wrong Index")
             }
-        }else {
+        } else {
             switch indexNumber {
             case 0:
                 print("Current View Controller")
@@ -274,7 +274,7 @@ extension HomeViewController {
                     }
                     
                     self.collectionView.reloadData()
-                }catch let err {
+                } catch let err {
                     print(err)
                 }
             }

@@ -16,7 +16,7 @@ class AllServicesListViewController: UIViewController {
     var listOfServices = [NSObject]()
     var selectedIndexPath : Int?
     var skipOneViewController : Bool = false
-    let bouncyLayout = BouncyLayout()
+    let bouncyLayout = BouncyLayout(style: BouncyLayout.BounceStyle.regular)
     let verticalCellID = "AllServicesCell"
     let horizontalCellID = "serviceTypesCell"
     let serviceDescriptionOne = ServiceDescriptionOneViewController()
@@ -259,7 +259,7 @@ extension AllServicesListViewController {
                     }
                     self.verticalCollectionView.reloadData()
                     self.horizontalCollectionView.reloadData()
-                }catch let err {
+                } catch let err {
                     print(err)
                 }
             }
@@ -283,7 +283,7 @@ extension AllServicesListViewController {
                         serviceDescriptionTwoVC.skipServiceOneViewController = true
                         self.navigationController?.pushViewController(serviceDescriptionTwoVC, animated: true)
                     }
-                }catch let err {
+                } catch let err {
                     print(err)
                 }
             }
