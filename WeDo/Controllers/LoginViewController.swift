@@ -484,10 +484,10 @@ extension LoginViewController {
                         self.navigationController?.pushViewController(verificationVC, animated: true)
                     }
                     else{
-                        Alert.showBasicAlert(on: self, with: "Invalid Phone Number", message: "Please login with a valid phone number")
+                        Alert.showBasicAlert(on: self, with: "Invalid Phone Number".localized(), message: "Please login with a valid phone number".localized())
                     }
                     
-                } catch let err{
+                } catch let err {
                     print(err)
                 }
             }

@@ -10,6 +10,9 @@ import UIKit
 
 class SPRequestedJobDetailsViewController: UIViewController {
     
+    var selectedIndex: Int = 0
+    var object: SPDashboardModel?
+    
     let backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -160,7 +163,7 @@ class SPRequestedJobDetailsViewController: UIViewController {
     }()
     
     let customerDetailNames = ["Name".localized(), "Phone no.".localized(), "Address".localized()]
-    let customerDetailsValue = ["John Doe", "0162427252", "United Arab Amirates"]
+    var customerDetailsValue = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,6 +171,7 @@ class SPRequestedJobDetailsViewController: UIViewController {
         collectionView.register(SingleImageCell.self, forCellWithReuseIdentifier: SingleImageCell.cellId)
         collectionView2.register(SPCustomerDetailCell.self, forCellWithReuseIdentifier: SPCustomerDetailCell.cellId)
         layout()
+        setupData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -199,6 +203,16 @@ class SPRequestedJobDetailsViewController: UIViewController {
         setupDateValue()
         setupCustomerDetailsLabel()
         setupCollectionView2()
+    }
+    
+    func setupData() {
+        guard let object = object else { return }
+        titleLabel.text = object.data.jobRequestList[selectedIndex].serviceTitle
+        descriptionLabel.text = object.data.jobRequestList[selectedIndex].description
+        addressValue.text = object.data.jobRequestList[selectedIndex].area ?? ""
+        dateValue.text = object.data.jobRequestList[selectedIndex].startDateTime
+        customerDetailsValue = [object.data.jobRequestList[selectedIndex].customerName, object.data.jobRequestList[selectedIndex].customerPhone, object.data.jobRequestList[selectedIndex].customerArea]
+        collectionView2.reloadData()
     }
     
     func setupBackgroundImageView() {
@@ -235,7 +249,6 @@ class SPRequestedJobDetailsViewController: UIViewController {
     
     func setupTitleLabel() {
         scrollView.addSubview(titleLabel)
-        titleLabel.text = "Full House Cleaning"
         titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16).isActive = true
         titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
@@ -243,7 +256,6 @@ class SPRequestedJobDetailsViewController: UIViewController {
     
     func setupDescriptionLabel() {
         scrollView.addSubview(descriptionLabel)
-        descriptionLabel.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 0).isActive = true
@@ -266,7 +278,6 @@ class SPRequestedJobDetailsViewController: UIViewController {
     
     func setupAddressValue() {
         scrollView.addSubview(addressValue)
-        addressValue.text = "2 Infinite Loop, Cupertino, CA 2323, USA"
         addressValue.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         addressValue.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 4).isActive = true
         addressValue.widthAnchor.constraint(equalTo: addressLabel.widthAnchor).isActive = true
@@ -281,7 +292,6 @@ class SPRequestedJobDetailsViewController: UIViewController {
     
     func setupDateValue() {
         scrollView.addSubview(dateValue)
-        dateValue.text = "15th March, 2018 | 1:00 PM"
         dateValue.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor).isActive = true
         dateValue.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 4).isActive = true
         dateValue.trailingAnchor.constraint(equalTo: dateLabel.trailingAnchor).isActive = true
@@ -326,7 +336,12 @@ extension SPRequestedJobDetailsViewController: UICollectionViewDelegate, UIColle
         if collectionView == collectionView2 {
             return customerDetailNames.count
         } else {
-            return 2
+            guard let object = object else { return 0 }
+            if object.data.jobRequestList[selectedIndex].jobThumbnails?.count == 0 {
+                return 1
+            } else {
+                return (object.data.jobRequestList[selectedIndex].jobThumbnails?.count)!
+            }
         }
     }
     
@@ -343,7 +358,11 @@ extension SPRequestedJobDetailsViewController: UICollectionViewDelegate, UIColle
                 let cell = UICollectionViewCell()
                 return cell
             }
-            cell.image = #imageLiteral(resourceName: "house-4")
+            if object?.data.jobRequestList[selectedIndex].jobThumbnails?.count == 0 {
+                cell.image = #imageLiteral(resourceName: "placeholder")
+            } else {
+                cell.imageView.sd_setImage(with: URL(string: (object?.data.jobRequestList[selectedIndex].jobThumbnails![indexPath.item].addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!))
+            }
             return cell
         }
     }

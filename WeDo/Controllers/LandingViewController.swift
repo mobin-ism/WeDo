@@ -43,9 +43,15 @@ class LandingViewController: UIViewController {
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-            self.navigationController?.pushViewController(HomeViewController(), animated: true)
-        })
+        if UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                self.navigationController?.pushViewController(SPHomeViewController(), animated: true)
+            })
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            })
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -70,6 +76,9 @@ class LandingViewController: UIViewController {
         
         if !Helper.Exists(key: IS_LOGGED_IN) {
             UserDefaults.standard.set( false, forKey: IS_LOGGED_IN)
+        }
+        if !Helper.Exists(key: IS_SERVICE_PROVIDER) {
+            UserDefaults.standard.set( false, forKey: IS_SERVICE_PROVIDER)
         }
     }
 }

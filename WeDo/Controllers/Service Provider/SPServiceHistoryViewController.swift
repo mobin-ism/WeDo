@@ -1,14 +1,14 @@
 //
-//  SPNewJobsViewController.swift
+//  SPServiceHistoryViewController.swift
 //  WeDo
 //
-//  Created by Tanvir Hasan Piash on 16/9/18.
+//  Created by Tanvir Hasan Piash on 21/9/18.
 //  Copyright © 2018 Creativeitem. All rights reserved.
 //
 
 import UIKit
 
-class SPNewJobsViewController: UIViewController {
+class SPServiceHistoryViewController: UIViewController {
     
     let backgroundImageView : UIImageView = {
         var imageView = UIImageView()
@@ -34,20 +34,28 @@ class SPNewJobsViewController: UIViewController {
         return view
     }()
     
-    var serviceProviderDashboardData: SPDashboardModel?
+    var object: SPServiceHistoryModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         collectionView.register(SPJobCell.self, forCellWithReuseIdentifier: SPJobCell.cellId)
+        setNavigationBar()
         layout()
-//        getServiceProviderDashboard()
+        getServiceHistory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
-        getServiceProviderDashboard()
+    }
+    
+    private func setNavigationBar() {
+        navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
+        let logo = UIImage(named: "logo.png")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
     }
     
     private func layout() {
@@ -71,17 +79,21 @@ class SPNewJobsViewController: UIViewController {
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
+    @objc private func backTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
 
-extension SPNewJobsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SPServiceHistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let serviceProviderDashboardData = serviceProviderDashboardData else { return 0 }
-        return serviceProviderDashboardData.data.newJobList.count
+        guard let object = object else { return 0 }
+        return object.data.jobHistory.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,19 +101,21 @@ extension SPNewJobsViewController: UICollectionViewDelegate, UICollectionViewDat
             let cell = UICollectionViewCell()
             return cell
         }
-        if let data = serviceProviderDashboardData {
-            cell.setupData(url: data.data.newJobList[indexPath.item].serviceIcon.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!, title: data.data.newJobList[indexPath.item].serviceTitle, address: data.data.newJobList[indexPath.item].area ?? "", date: data.data.newJobList[indexPath.item].startDateTime)
+        if let object = object {
+            let imageUrl = object.data.jobHistory[indexPath.item].serviceIcon.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+            let title = object.data.jobHistory[indexPath.item].serviceTitle
+            let address = object.data.jobHistory[indexPath.item].area ?? ""
+            let date = object.data.jobHistory[indexPath.item].startDateTime
+            cell.setupData(url: imageUrl, title: title, address: address, date: date)
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            let destination = SPNewJobDetailsViewController()
-            destination.selectedIndex = indexPath.item
-            destination.object = self.serviceProviderDashboardData
-            self.present(destination, animated: true, completion: nil)
-        }
+        let destination = SPServiceHistoryDetailsViewController()
+        destination.selectedIndex = indexPath.item
+        destination.object = object
+        navigationController?.pushViewController(destination, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -119,21 +133,21 @@ extension SPNewJobsViewController: UICollectionViewDelegate, UICollectionViewDat
     
 }
 
-extension SPNewJobsViewController {
+extension SPServiceHistoryViewController {
     
-    func getServiceProviderDashboard() {
+    func getServiceHistory() {
         let id = UserDefaults.standard.value(forKey: SERVICE_PROVIDER_ID) as! Int
-        guard let url = URL(string: "\(BASE_URL)api/v2/agent/dashboard/\(id)") else { return }
+        guard let url = URL(string: "\(BASE_URL)api/v2/agent/job/history/\(id)") else { return }
         HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, error) in
             guard let response = response else { return }
             if let json = response.data {
                 let decoder = JSONDecoder()
                 do {
-                    let dashboardData = try decoder.decode(SPDashboardModel.self, from: json)
-                    self.serviceProviderDashboardData = dashboardData
+                    let data = try decoder.decode(SPServiceHistoryModel.self, from: json)
+                    self.object = data
                     self.collectionView.reloadData()
                 } catch let err {
-                    print(err)
+                    print(err.localizedDescription)
                 }
             }
         }

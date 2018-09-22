@@ -22,6 +22,9 @@ class Menu: NSObject {
     var editProfileVC = EditProfileViewController()
     var spRegisterVC = SPRegisterViewController()
     var spHomeVC = SPHomeViewController()
+    var spLoginVerifyVC = SPLoginVerifyViewController()
+    var spProfileVC = SPProfileViewController()
+    var spContactVC = SPContactViewController()
     
     var frequentlyAskedVC = FaqViewController()
     
@@ -102,6 +105,7 @@ class Menu: NSObject {
     let cellId = "MenuCell"
     let menuItemsForLoggedOut = ["Home".localized(), "Help & FAQ".localized(), "Contact Us".localized(), "Login".localized()]
     let menuItemsForLoggedIn  = ["Home".localized(), "My Order".localized(), "Notification".localized(), "Order History".localized(), "Help & FAQ".localized(), "Contact Us".localized(), "Edit Profile".localized(), "Logout".localized()]
+    let menuItemsForLoggedInSP = ["Home".localized(), "Current Jobs".localized(), "Profile".localized(), "Service History".localized(), "Contact Us".localized(), "Logout".localized()]
     
     override init() {
         super.init()
@@ -112,7 +116,11 @@ class Menu: NSObject {
         self.calledFrom = self.getClassName(vc)
         if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
             self.welcomeLabel.text = "Welcome".localized()
-            self.nametLabel.text = "\(UserDefaults.standard.value(forKey: MEMBER_NAME) as! String)"
+            if UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
+                self.nametLabel.text = "\(UserDefaults.standard.value(forKey: COMPANY_NAME) as! String)"
+            } else {
+                self.nametLabel.text = "\(UserDefaults.standard.value(forKey: MEMBER_NAME) as! String)"
+            }
         }
         setupSubViews()
         self.tableView.reloadData()
@@ -225,8 +233,12 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
-            return menuItemsForLoggedIn.count
-        }else {
+            if UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
+                return menuItemsForLoggedInSP.count
+            } else {
+                return menuItemsForLoggedIn.count
+            }
+        } else {
             return menuItemsForLoggedOut.count
         }
     }
@@ -234,10 +246,14 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? MenuCell {
             if UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
-                if  indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 {
-                    cell.titleLabel.font = UIFont(name: OPENSANS_BOLD, size: 15)
+                if UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
+                    cell.titleText = menuItemsForLoggedInSP[indexPath.row]
+                } else {
+                    if  indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 {
+                        cell.titleLabel.font = UIFont(name: OPENSANS_BOLD, size: 15)
+                    }
+                    cell.titleText = menuItemsForLoggedIn[indexPath.row]
                 }
-                cell.titleText = menuItemsForLoggedIn[indexPath.row]
             }else {
                 cell.titleText = menuItemsForLoggedOut[indexPath.row]
             }
@@ -271,6 +287,16 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
             self.contactUsVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         case "EditProfileViewController":
             self.editProfileVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPLoginVerifyViewController":
+            self.spLoginVerifyVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPHomeViewController":
+            self.spHomeVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPProfileViewController":
+            self.spProfileVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPContactViewController":
+            self.spContactVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPRegisterViewController":
+            self.spRegisterVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         default:
             print("Call from mars")
         }

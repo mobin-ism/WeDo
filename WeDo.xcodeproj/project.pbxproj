@@ -75,6 +75,21 @@
 		778F1341214EF42A0042A212 /* SPNewJobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1340214EF42A0042A212 /* SPNewJobDetailsViewController.swift */; };
 		778F1343214EF6810042A212 /* SPCustomerDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1342214EF6810042A212 /* SPCustomerDetailCell.swift */; };
 		778F1345214EFF350042A212 /* SPRequestedJobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1344214EFF350042A212 /* SPRequestedJobDetailsViewController.swift */; };
+		77F0D2602154090900E74DA3 /* SPProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D25F2154090900E74DA3 /* SPProfileViewController.swift */; };
+		77F0D26221540E3F00E74DA3 /* SPProfileItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D26121540E3F00E74DA3 /* SPProfileItemCell.swift */; };
+		77F0D2642154114A00E74DA3 /* SPAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D2632154114A00E74DA3 /* SPAccountViewController.swift */; };
+		77F0D266215528CF00E74DA3 /* SPBasicInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D265215528CF00E74DA3 /* SPBasicInformationViewController.swift */; };
+		77F0D2682155344F00E74DA3 /* SPServiceHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D2672155344F00E74DA3 /* SPServiceHistoryViewController.swift */; };
+		77F0D26A215541B800E74DA3 /* SPServiceHistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D269215541B800E74DA3 /* SPServiceHistoryDetailsViewController.swift */; };
+		77F0D26C2155454800E74DA3 /* SPContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D26B2155454800E74DA3 /* SPContactViewController.swift */; };
+		77F0D26E215556DC00E74DA3 /* SPContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D26D215556DC00E74DA3 /* SPContactModel.swift */; };
+		77F0D270215561C900E74DA3 /* ServiceProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D26F215561C900E74DA3 /* ServiceProviderModel.swift */; };
+		77F0D2722155906800E74DA3 /* SPDashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D2712155906800E74DA3 /* SPDashboardModel.swift */; };
+		77F0D27421567F8D00E74DA3 /* SPProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D27321567F8D00E74DA3 /* SPProfileModel.swift */; };
+		77F0D276215697AE00E74DA3 /* SPServiceHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D275215697AE00E74DA3 /* SPServiceHistoryModel.swift */; };
+		77F0D2782156A65400E74DA3 /* SPServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D2772156A65400E74DA3 /* SPServicesModel.swift */; };
+		77F0D27A2156B11900E74DA3 /* SPServiceHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D2792156B11900E74DA3 /* SPServiceHeaderCell.swift */; };
+		77F0D27C2156C88D00E74DA3 /* SimpleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D27B2156C88D00E74DA3 /* SimpleTableCell.swift */; };
 		854CEC902907D94E1A3E5786 /* Pods_WeDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */; };
 		E912818221033BBF0010A242 /* ServiceLocationOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912818121033BBF0010A242 /* ServiceLocationOneViewController.swift */; };
 		E912818621033C030010A242 /* ServiceDateAndTimeOneviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912818521033C030010A242 /* ServiceDateAndTimeOneviewController.swift */; };
@@ -172,6 +187,21 @@
 		778F1340214EF42A0042A212 /* SPNewJobDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNewJobDetailsViewController.swift; sourceTree = "<group>"; };
 		778F1342214EF6810042A212 /* SPCustomerDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCustomerDetailCell.swift; sourceTree = "<group>"; };
 		778F1344214EFF350042A212 /* SPRequestedJobDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRequestedJobDetailsViewController.swift; sourceTree = "<group>"; };
+		77F0D25F2154090900E74DA3 /* SPProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPProfileViewController.swift; sourceTree = "<group>"; };
+		77F0D26121540E3F00E74DA3 /* SPProfileItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPProfileItemCell.swift; sourceTree = "<group>"; };
+		77F0D2632154114A00E74DA3 /* SPAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPAccountViewController.swift; sourceTree = "<group>"; };
+		77F0D265215528CF00E74DA3 /* SPBasicInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPBasicInformationViewController.swift; sourceTree = "<group>"; };
+		77F0D2672155344F00E74DA3 /* SPServiceHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPServiceHistoryViewController.swift; sourceTree = "<group>"; };
+		77F0D269215541B800E74DA3 /* SPServiceHistoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPServiceHistoryDetailsViewController.swift; sourceTree = "<group>"; };
+		77F0D26B2155454800E74DA3 /* SPContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPContactViewController.swift; sourceTree = "<group>"; };
+		77F0D26D215556DC00E74DA3 /* SPContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPContactModel.swift; sourceTree = "<group>"; };
+		77F0D26F215561C900E74DA3 /* ServiceProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderModel.swift; sourceTree = "<group>"; };
+		77F0D2712155906800E74DA3 /* SPDashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDashboardModel.swift; sourceTree = "<group>"; };
+		77F0D27321567F8D00E74DA3 /* SPProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPProfileModel.swift; sourceTree = "<group>"; };
+		77F0D275215697AE00E74DA3 /* SPServiceHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPServiceHistoryModel.swift; sourceTree = "<group>"; };
+		77F0D2772156A65400E74DA3 /* SPServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPServicesModel.swift; sourceTree = "<group>"; };
+		77F0D2792156B11900E74DA3 /* SPServiceHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPServiceHeaderCell.swift; sourceTree = "<group>"; };
+		77F0D27B2156C88D00E74DA3 /* SimpleTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableCell.swift; sourceTree = "<group>"; };
 		7B09321FB70B88967EE31BF0 /* Pods_WeDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E912818121033BBF0010A242 /* ServiceLocationOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocationOneViewController.swift; sourceTree = "<group>"; };
 		E912818521033C030010A242 /* ServiceDateAndTimeOneviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDateAndTimeOneviewController.swift; sourceTree = "<group>"; };
@@ -303,6 +333,7 @@
 				778F133A214EB14C0042A212 /* SPJobCell.swift */,
 				778F133E214EE9800042A212 /* SingleImageCell.swift */,
 				778F1342214EF6810042A212 /* SPCustomerDetailCell.swift */,
+				77F0D26121540E3F00E74DA3 /* SPProfileItemCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -318,6 +349,12 @@
 				084C9F34213E62FC0062C247 /* RequestAServiceModel.swift */,
 				086E3009213FE9A6004FA13F /* ActiveOrderModel.swift */,
 				0861E8232141279400AC285E /* CompanyListModel.swift */,
+				77F0D26D215556DC00E74DA3 /* SPContactModel.swift */,
+				77F0D26F215561C900E74DA3 /* ServiceProviderModel.swift */,
+				77F0D2712155906800E74DA3 /* SPDashboardModel.swift */,
+				77F0D27321567F8D00E74DA3 /* SPProfileModel.swift */,
+				77F0D275215697AE00E74DA3 /* SPServiceHistoryModel.swift */,
+				77F0D2772156A65400E74DA3 /* SPServicesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -372,6 +409,12 @@
 				778F133C214EBC670042A212 /* SPCurrentJobDetailsViewController.swift */,
 				778F1340214EF42A0042A212 /* SPNewJobDetailsViewController.swift */,
 				778F1344214EFF350042A212 /* SPRequestedJobDetailsViewController.swift */,
+				77F0D25F2154090900E74DA3 /* SPProfileViewController.swift */,
+				77F0D2632154114A00E74DA3 /* SPAccountViewController.swift */,
+				77F0D265215528CF00E74DA3 /* SPBasicInformationViewController.swift */,
+				77F0D2672155344F00E74DA3 /* SPServiceHistoryViewController.swift */,
+				77F0D269215541B800E74DA3 /* SPServiceHistoryDetailsViewController.swift */,
+				77F0D26B2155454800E74DA3 /* SPContactViewController.swift */,
 			);
 			path = "Service Provider";
 			sourceTree = "<group>";
@@ -395,6 +438,8 @@
 				08855843210DBC3E00533A08 /* JobRequestListTableViewCell.swift */,
 				E9A8CE7D210E4C4200F4FDF4 /* SelectorCell.swift */,
 				0861E82521413AC200AC285E /* FAQTableViewCell.swift */,
+				77F0D2792156B11900E74DA3 /* SPServiceHeaderCell.swift */,
+				77F0D27B2156C88D00E74DA3 /* SimpleTableCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -565,9 +610,11 @@
 				7775A159214D37C80038C432 /* PrivacyPolicyViewController.swift in Sources */,
 				082E5FF22100B6C00081D26D /* ServiceDescriptionOneViewController.swift in Sources */,
 				778F1333214EACA30042A212 /* SPHomeViewController.swift in Sources */,
+				77F0D26221540E3F00E74DA3 /* SPProfileItemCell.swift in Sources */,
 				08320EDB20FDE01400D98704 /* WeDo.xcdatamodeld in Sources */,
 				E9A8CE40210E35E200F4FDF4 /* CustomerSettingsViewController.swift in Sources */,
 				7775A155214D36000038C432 /* FaqViewController.swift in Sources */,
+				77F0D2722155906800E74DA3 /* SPDashboardModel.swift in Sources */,
 				08855842210DAFA200533A08 /* JobRequestListViewController.swift in Sources */,
 				0861E82621413AC200AC285E /* FAQTableViewCell.swift in Sources */,
 				7775A166214D54220038C432 /* SPRegisterAddressViewController.swift in Sources */,
@@ -577,19 +624,25 @@
 				08320EE920FDE49000D98704 /* LandingViewController.swift in Sources */,
 				778F1331214E91F50042A212 /* SPLoginVerifyViewController.swift in Sources */,
 				08855846210DD08000533A08 /* JobRequestDetails.swift in Sources */,
+				77F0D26A215541B800E74DA3 /* SPServiceHistoryDetailsViewController.swift in Sources */,
 				08320EFB20FDF57400D98704 /* Config.swift in Sources */,
 				08743F4F211862780077C5EE /* AreaModel.swift in Sources */,
 				7775A16A214D56F10038C432 /* SPRegisterServicesViewController.swift in Sources */,
 				08855840210DA2FA00533A08 /* CompanyTableViewCell.swift in Sources */,
+				77F0D2682155344F00E74DA3 /* SPServiceHistoryViewController.swift in Sources */,
 				08743F51211871600077C5EE /* ServiceModel.swift in Sources */,
 				08666543213D5B84003980BC /* MemberModel.swift in Sources */,
+				77F0D27A2156B11900E74DA3 /* SPServiceHeaderCell.swift in Sources */,
 				08320ED320FDE01400D98704 /* AppDelegate.swift in Sources */,
 				778F133F214EE9800042A212 /* SingleImageCell.swift in Sources */,
+				77F0D270215561C900E74DA3 /* ServiceProviderModel.swift in Sources */,
 				E912818C2103642F0010A242 /* ServiceRequestImageCell.swift in Sources */,
 				E98CCFE420FE797100799029 /* MasterCollectionViewCell.swift in Sources */,
 				08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */,
 				E9A8CE7C210E4BEE00F4FDF4 /* Selector.swift in Sources */,
+				77F0D2602154090900E74DA3 /* SPProfileViewController.swift in Sources */,
 				0847AFC2213BFE890054DE93 /* CalenderSelector.swift in Sources */,
+				77F0D266215528CF00E74DA3 /* SPBasicInformationViewController.swift in Sources */,
 				778F1337214EAD0B0042A212 /* SPNewJobsViewController.swift in Sources */,
 				E912818621033C030010A242 /* ServiceDateAndTimeOneviewController.swift in Sources */,
 				E9FDBAE2210F2C8300F4773A /* VerficationCodeViewController.swift in Sources */,
@@ -607,11 +660,15 @@
 				E912818E2103C3D00010A242 /* PaddedText.swift in Sources */,
 				E9F10167210A6C8A007CEE7F /* OrderHistoryViewController.swift in Sources */,
 				E912818221033BBF0010A242 /* ServiceLocationOneViewController.swift in Sources */,
+				77F0D276215697AE00E74DA3 /* SPServiceHistoryModel.swift in Sources */,
 				E98CCFE820FE7D1B00799029 /* Menu.swift in Sources */,
 				E98CCFE620FE79BC00799029 /* ServiceCell.swift in Sources */,
 				08743F4D211850B50077C5EE /* HTTPRequestHandler.swift in Sources */,
 				E9A8CE80210E4CD200F4FDF4 /* SelectorModel.swift in Sources */,
+				77F0D27421567F8D00E74DA3 /* SPProfileModel.swift in Sources */,
 				086E3008213FCDDC004FA13F /* EditProfileViewController.swift in Sources */,
+				77F0D26E215556DC00E74DA3 /* SPContactModel.swift in Sources */,
+				77F0D2782156A65400E74DA3 /* SPServicesModel.swift in Sources */,
 				084A03E420FF3CEB000E532E /* AllServicesListViewController.swift in Sources */,
 				E9A8CE7E210E4C4200F4FDF4 /* SelectorCell.swift in Sources */,
 				08320EF620FDF37800D98704 /* SliderImages.swift in Sources */,
@@ -619,6 +676,7 @@
 				083B2AF32109A372004F9A0F /* RegisterViewController.swift in Sources */,
 				7775A15E214D44990038C432 /* SPRegisterViewController.swift in Sources */,
 				084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */,
+				77F0D2642154114A00E74DA3 /* SPAccountViewController.swift in Sources */,
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
 				E912818821033C1A0010A242 /* ServicePaymentOneViewController.swift in Sources */,
 				086E300A213FE9A6004FA13F /* ActiveOrderModel.swift in Sources */,
@@ -626,10 +684,12 @@
 				778F133D214EBC670042A212 /* SPCurrentJobDetailsViewController.swift in Sources */,
 				778F1341214EF42A0042A212 /* SPNewJobDetailsViewController.swift in Sources */,
 				E9FDBAE0210F126C00F4773A /* WelcomeViewController.swift in Sources */,
+				77F0D26C2155454800E74DA3 /* SPContactViewController.swift in Sources */,
 				E98CCFEB20FE7D7200799029 /* MenuCell.swift in Sources */,
 				7775A168214D56C90038C432 /* SPRegisterDateTimeViewController.swift in Sources */,
 				E9F10165210A6C34007CEE7F /* ActiveOrderViewController.swift in Sources */,
 				082E5FF42100B7340081D26D /* ServiceDescriptionTwoViewController.swift in Sources */,
+				77F0D27C2156C88D00E74DA3 /* SimpleTableCell.swift in Sources */,
 				084C9F35213E62FC0062C247 /* RequestAServiceModel.swift in Sources */,
 				08320EF920FDF49500D98704 /* Helper.swift in Sources */,
 				083B2B162109BBD4004F9A0F /* LoginViewController.swift in Sources */,

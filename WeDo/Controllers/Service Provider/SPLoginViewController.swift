@@ -69,11 +69,12 @@ class SPLoginViewController: UIViewController {
     }()
     
     lazy var loginButton : UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.clipsToBounds = true
         button.backgroundColor = UIColor(red:0.17, green:0.67, blue:0.31, alpha:1.0)
         button.setTitle("LOGIN".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
@@ -229,7 +230,12 @@ class SPLoginViewController: UIViewController {
     }
     
     @objc private func handleLoginButton() {
-        navigationController?.pushViewController(SPLoginVerifyViewController(), animated: true)
+        if phoneNumberTextField.text == "" {
+            Alert.showBasicAlert(on: self, with: "Error".localized(), message: "Please enter a phone number".localized())
+            return
+        }
+        attemptSPLogin(phoneNumber: phoneNumberTextField.text!)
+        //navigationController?.pushViewController(SPLoginVerifyViewController(), animated: true)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -239,5 +245,53 @@ class SPLoginViewController: UIViewController {
 }
 
 extension SPLoginViewController: UIScrollViewDelegate {
+    
+}
+
+extension SPLoginViewController {
+    
+    func attemptSPLogin(phoneNumber: String) {
+        SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.show(withStatus: "Please Wait...")
+        
+        guard let url = URL(string: "\(BASE_URL)api/v2/agent/register") else { return }
+        let params = ["PhoneNumber" : "\(phoneNumber)",
+                        "CityId" : UserDefaults.standard.value(forKey: AREA_ID) as! Int,
+                        "CompanyName": "",
+                        "CompanyEmail": "",
+                        "CompanyAddress": "",
+                        "CompanyPhone": "",
+                        "Latitude": "",
+                        "Longitude": "",
+                        "Address": ""]
+            as [String : Any]
+        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                print(response)
+                SVProgressHUD.dismiss()
+                return
+            }
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let serviceProviderInfo = try decoder.decode(ServiceProviderModel.self, from: json)
+                    if serviceProviderInfo.isSuccess {
+                        let spLoginVerifyVC = SPLoginVerifyViewController()
+                        spLoginVerifyVC.verificationCode = serviceProviderInfo.data.agent.token
+                        spLoginVerifyVC.id = serviceProviderInfo.data.agent.id
+                        spLoginVerifyVC.phoneNumber = serviceProviderInfo.data.agent.phoneNumber
+                        SVProgressHUD.dismiss()
+                        self.navigationController?.pushViewController(spLoginVerifyVC, animated: true)
+                    } else {
+                        SVProgressHUD.dismiss()
+                        Alert.showBasicAlert(on: self, with: "Invalid Phone Number".localized(), message: "Please login with a valid phone number".localized())
+                    }
+                } catch let err {
+                    SVProgressHUD.dismiss()
+                    print(err.localizedDescription)
+                }
+            }
+        }
+    }
     
 }

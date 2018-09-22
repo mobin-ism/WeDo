@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import Alamofire
+import SVProgressHUD
 
 class SPNewJobDetailsViewController: UIViewController {
+    
+    var selectedIndex: Int = 0
+    var object: SPDashboardModel?
     
     let backgroundImageView : UIImageView = {
         var imageView = UIImageView()
@@ -200,7 +205,7 @@ class SPNewJobDetailsViewController: UIViewController {
     }()
     
     let customerDetailNames = ["Name".localized(), "Phone no.".localized(), "Address".localized()]
-    let customerDetailsValue = ["John Doe", "0162427252", "United Arab Amirates"]
+    var customerDetailsValue = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -208,6 +213,7 @@ class SPNewJobDetailsViewController: UIViewController {
         collectionView.register(SingleImageCell.self, forCellWithReuseIdentifier: SingleImageCell.cellId)
         collectionView2.register(SPCustomerDetailCell.self, forCellWithReuseIdentifier: SPCustomerDetailCell.cellId)
         layout()
+        setupData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -244,6 +250,16 @@ class SPNewJobDetailsViewController: UIViewController {
         setupBidButton()
     }
     
+    func setupData() {
+        guard let object = object else { return }
+        titleLabel.text = object.data.newJobList[selectedIndex].serviceTitle
+        descriptionLabel.text = object.data.newJobList[selectedIndex].description
+        addressValue.text = object.data.newJobList[selectedIndex].area ?? ""
+        dateValue.text = object.data.newJobList[selectedIndex].startDateTime
+        customerDetailsValue = [object.data.newJobList[selectedIndex].customerName, object.data.newJobList[selectedIndex].customerPhone, object.data.newJobList[selectedIndex].customerArea]
+        collectionView2.reloadData()
+    }
+    
     func setupBackgroundImageView() {
         view.addSubview(backgroundImageView)
         backgroundImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
@@ -278,7 +294,6 @@ class SPNewJobDetailsViewController: UIViewController {
     
     func setupTitleLabel() {
         scrollView.addSubview(titleLabel)
-        titleLabel.text = "Full House Cleaning"
         titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16).isActive = true
         titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
@@ -286,7 +301,6 @@ class SPNewJobDetailsViewController: UIViewController {
     
     func setupDescriptionLabel() {
         scrollView.addSubview(descriptionLabel)
-        descriptionLabel.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 0).isActive = true
@@ -309,7 +323,6 @@ class SPNewJobDetailsViewController: UIViewController {
     
     func setupAddressValue() {
         scrollView.addSubview(addressValue)
-        addressValue.text = "2 Infinite Loop, Cupertino, CA 2323, USA"
         addressValue.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         addressValue.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 4).isActive = true
         addressValue.widthAnchor.constraint(equalTo: addressLabel.widthAnchor).isActive = true
@@ -324,7 +337,6 @@ class SPNewJobDetailsViewController: UIViewController {
     
     func setupDateValue() {
         scrollView.addSubview(dateValue)
-        dateValue.text = "15th March, 2018 | 1:00 PM"
         dateValue.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor).isActive = true
         dateValue.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 4).isActive = true
         dateValue.trailingAnchor.constraint(equalTo: dateLabel.trailingAnchor).isActive = true
@@ -372,7 +384,44 @@ class SPNewJobDetailsViewController: UIViewController {
     }
     
     @objc private func bidButtonTapped() {
-        
+        guard let object = object else { return }
+        let id = UserDefaults.standard.value(forKey: SERVICE_PROVIDER_ID) as! Int
+        let serviceRequestId = object.data.newJobList[selectedIndex].id
+        if bidTextField.text == "" {
+            Alert.showBasicAlert(on: self, with: "Error".localized(), message: "Please enter a bid amount".localized())
+            return
+        }
+        guard let url = URL(string: "\(BASE_URL)api/v2/agent/service/request/bid/submit") else { return }
+        let params = ["AgentId" : "\(id)",
+            "ServiceRequestId" : "\(serviceRequestId)",
+            "Amount": "\(bidTextField.text!)",
+            "Hour": 0]
+            as [String : Any]
+        SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.show(withStatus: "Please Wait...")
+        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                print(response)
+                SVProgressHUD.dismiss()
+                return
+            }
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let responseData = try decoder.decode(SPBidResponseModel.self, from: json)
+                    if responseData.isSuccess {
+                        SVProgressHUD.dismiss()
+                        Alert.showBasicAlert(on: self, with: "Success".localized(), message: "Bid request successfully sent".localized())
+                        self.aedLabel.removeFromSuperview()
+                        self.bidTextField.removeFromSuperview()
+                        self.bidButton.removeFromSuperview()
+                    }
+                } catch let err {
+                    print(err)
+                    SVProgressHUD.dismiss()
+                }
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -395,7 +444,12 @@ extension SPNewJobDetailsViewController: UICollectionViewDelegate, UICollectionV
         if collectionView == collectionView2 {
             return customerDetailNames.count
         } else {
-            return 2
+            guard let object = object else { return 0 }
+            if object.data.newJobList[selectedIndex].jobThumbnails?.count == 0 {
+                return 1
+            } else {
+                return (object.data.newJobList[selectedIndex].jobThumbnails?.count)!
+            }
         }
     }
     
@@ -412,7 +466,11 @@ extension SPNewJobDetailsViewController: UICollectionViewDelegate, UICollectionV
                 let cell = UICollectionViewCell()
                 return cell
             }
-            cell.image = #imageLiteral(resourceName: "house-4")
+            if object?.data.newJobList[selectedIndex].jobThumbnails?.count == 0 {
+                cell.image = #imageLiteral(resourceName: "placeholder")
+            } else {
+                cell.imageView.sd_setImage(with: URL(string: (object?.data.newJobList[selectedIndex].jobThumbnails![indexPath.item].addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!))
+            }
             return cell
         }
     }
@@ -456,4 +514,20 @@ extension SPNewJobDetailsViewController: UICollectionViewDelegate, UICollectionV
         }
     }
     
+}
+
+struct SPBidResponseModel: Decodable {
+    let data: SPBidResponseData
+    let code: Int
+    let message: String
+    let isSuccess: Bool
+}
+
+struct SPBidResponseData: Decodable {
+    let bid: SPBid
+}
+
+struct SPBid: Decodable {
+    let id: Int
+    let amount: Int
 }

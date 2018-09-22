@@ -14,7 +14,7 @@ struct Alert {
     
     public static func showBasicAlert(on vc : UIViewController, with title : String, message : String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Okay".localized(), style: UIAlertActionStyle.default, handler: nil))
         vc.present(alert, animated: true, completion: nil)
     }
         
@@ -31,6 +31,7 @@ struct Alert {
             //run your function here
             vc.navigationController?.pushViewController(HomeViewController(), animated: false)
             UserDefaults.standard.set(false, forKey: IS_LOGGED_IN)
+            UserDefaults.standard.set(false, forKey: IS_SERVICE_PROVIDER)
         }))
         alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .default, handler: { action in
             //run your function here

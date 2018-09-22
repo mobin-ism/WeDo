@@ -34,11 +34,20 @@ class SPCurrentJobsViewController: UIViewController {
         return view
     }()
     
+    var serviceProviderDashboardData: SPDashboardModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         collectionView.register(SPJobCell.self, forCellWithReuseIdentifier: SPJobCell.cellId)
         layout()
+        //getServiceProviderDashboard()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Alert.checkInternetConnection(on: self)
+        getServiceProviderDashboard()
     }
     
     private func layout() {
@@ -71,7 +80,8 @@ extension SPCurrentJobsViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        guard let serviceProviderDashboardData = serviceProviderDashboardData else { return 0 }
+        return serviceProviderDashboardData.data.selectedJob.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -79,13 +89,18 @@ extension SPCurrentJobsViewController: UICollectionViewDelegate, UICollectionVie
             let cell = UICollectionViewCell()
             return cell
         }
-        cell.setupData(image: #imageLiteral(resourceName: "dummy3"), title: "Full House Cleaning", address: "2 Infinite Loop, Cupertino, CA 6457, USA", date: "15th May, 2018")
+        if let data = serviceProviderDashboardData {
+            cell.setupData(url: data.data.selectedJob[indexPath.item].serviceIcon.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!, title: data.data.selectedJob[indexPath.item].serviceTitle, address: data.data.selectedJob[indexPath.item].area ?? "", date: data.data.selectedJob[indexPath.item].startDateTime)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         DispatchQueue.main.async {
-            self.present(SPCurrentJobDetailsViewController(), animated: true, completion: nil)
+            let destination = SPCurrentJobDetailsViewController()
+            destination.selectedIndex = indexPath.item
+            destination.object = self.serviceProviderDashboardData
+            self.present(destination, animated: true, completion: nil)
         }
     }
     
@@ -100,6 +115,28 @@ extension SPCurrentJobsViewController: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+}
+
+extension SPCurrentJobsViewController {
+    
+    func getServiceProviderDashboard() {
+        let id = UserDefaults.standard.value(forKey: SERVICE_PROVIDER_ID) as! Int
+        guard let url = URL(string: "\(BASE_URL)api/v2/agent/dashboard/\(id)") else { return }
+        HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, error) in
+            guard let response = response else { return }
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let dashboardData = try decoder.decode(SPDashboardModel.self, from: json)
+                    self.serviceProviderDashboardData = dashboardData
+                    self.collectionView.reloadData()
+                } catch let err {
+                    print(err)
+                }
+            }
+        }
     }
     
 }

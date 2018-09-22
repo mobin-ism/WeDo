@@ -72,4 +72,42 @@ class SPRegisterViewController: PagerController, PagerDataSource {
         
     }
     
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        if  UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            switch indexNumber {
+            case 0:
+                print("Current View Controller")
+            case 1:
+                self.navigationController?.pushViewController(ActiveOrderViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(NotificationViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 5:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 6:
+                self.navigationController?.pushViewController(EditProfileViewController(), animated: true)
+            case 7:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        } else {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            default:
+                print("Wrong Index")
+            }
+        }
+    }
+    
 }

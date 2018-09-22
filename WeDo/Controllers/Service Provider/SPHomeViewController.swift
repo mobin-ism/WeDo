@@ -21,6 +21,8 @@ class SPHomeViewController: PagerController, PagerDataSource {
         return slideMenu
     }()
     
+    var serviceProviderInfo: ServiceProviderModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
@@ -74,6 +76,40 @@ class SPHomeViewController: PagerController, PagerDataSource {
     public func showVC() {
         //reloadData()
         navigationController?.pushViewController(SPCurrentJobDetailsViewController(), animated: true)
+    }
+    
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        if  UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
+            switch indexNumber {
+            case 0:
+                print("this is home")
+            case 1:
+                self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(SPProfileViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(SPServiceHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(SPContactViewController(), animated: true)
+            case 5:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        } else {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            default:
+                print("Wrong Index")
+            }
+        }
     }
     
 }

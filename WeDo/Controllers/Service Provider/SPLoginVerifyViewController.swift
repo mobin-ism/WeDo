@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SVProgressHUD
 
 class SPLoginVerifyViewController: UIViewController {
     
@@ -58,11 +60,31 @@ class SPLoginVerifyViewController: UIViewController {
         return button
     }()
     
+    lazy var menu: Menu = {
+        let slideMenu = Menu()
+        slideMenu.spLoginVerifyVC = self
+        return slideMenu
+    }()
+    
+    var verificationCode: String = ""
+    var id: Int = 0
+    var phoneNumber: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         setNavigationBar()
         layout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Alert.checkInternetConnection(on: self)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        codeTextField.text = verificationCode
     }
     
     private func setNavigationBar() {
@@ -113,15 +135,102 @@ class SPLoginVerifyViewController: UIViewController {
     }
     
     @objc private func submitButtonTapped() {
-        navigationController?.pushViewController(SPHomeViewController(), animated: true)
+        if codeTextField.text == "" {
+            Alert.showBasicAlert(on: self, with: "Error".localized(), message: "Please enter verification code".localized())
+            return
+        }
+        verifySecurityCode(code: codeTextField.text!)
+        
+//        navigationController?.pushViewController(SPHomeViewController(), animated: true)
     }
     
     @objc private func menuIconTapped() {
-        
+        self.menu.show(self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        if  UserDefaults.standard.value(forKey: IS_LOGGED_IN) as! Bool {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(ActiveOrderViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(NotificationViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 5:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 6:
+                self.navigationController?.pushViewController(EditProfileViewController(), animated: true)
+            case 7:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        } else {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            default:
+                print("Wrong Index")
+            }
+        }
+    }
+    
+}
+
+extension SPLoginVerifyViewController {
+    
+    func verifySecurityCode(code: String) {
+        SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.show(withStatus: "Please Wait...")
+        
+        guard let url = URL(string: "\(BASE_URL)api/v2/agent/register/token/submit") else { return }
+        let params = ["AgentId" : "\(id)",
+            "SecurityKey" : "\(code)"]
+            as [String : Any]
+        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type" : "application/x-www-form-urlencoded", "Authorization": AUTH_KEY]).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                print(response)
+                SVProgressHUD.dismiss()
+                return
+            }
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let serviceProviderInfo = try decoder.decode(ServiceProviderModel.self, from: json)
+                    if serviceProviderInfo.isSuccess {
+                        let spHome = SPHomeViewController()
+                        spHome.serviceProviderInfo = serviceProviderInfo
+                        UserDefaults.standard.set(true, forKey: IS_LOGGED_IN)
+                        UserDefaults.standard.set(true, forKey: IS_SERVICE_PROVIDER)
+                        UserDefaults.standard.set(serviceProviderInfo.data.agent.id, forKey: SERVICE_PROVIDER_ID)
+                        UserDefaults.standard.set(serviceProviderInfo.data.agent.companyName, forKey: COMPANY_NAME)
+                        SVProgressHUD.dismiss()
+                        self.navigationController?.pushViewController(spHome, animated: true)
+                    } else {
+                        SVProgressHUD.dismiss()
+                        Alert.showBasicAlert(on: self, with: "Invalid Security Code".localized(), message: "Please enter the correct code".localized())
+                    }
+                } catch let err {
+                    SVProgressHUD.dismiss()
+                    print(err.localizedDescription)
+                }
+            }
+        }
     }
     
 }

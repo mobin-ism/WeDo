@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SPJobCell: UICollectionViewCell {
     
@@ -36,7 +37,7 @@ class SPJobCell: UICollectionViewCell {
         label.textAlignment = .left
         label.textColor = UIColor.black
         label.font = UIFont(name: OPENSANS_REGULAR, size: 12)
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -93,6 +94,7 @@ class SPJobCell: UICollectionViewCell {
         addSubview(addressLabel)
         addressLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         addressLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2).isActive = true
+        addressLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
     }
     
     func setupDateLabel() {
@@ -109,8 +111,8 @@ class SPJobCell: UICollectionViewCell {
         divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
-    func setupData(image: UIImage, title: String, address: String, date: String) {
-        imageView.image = image
+    func setupData(url: String, title: String, address: String, date: String) {
+        imageView.sd_setImage(with: URL(string: url))
         titleLabel.text = title
         addressLabel.text = address
         dateLabel.text = date
