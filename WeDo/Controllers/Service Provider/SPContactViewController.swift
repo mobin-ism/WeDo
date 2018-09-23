@@ -169,7 +169,7 @@ class SPContactViewController: UIViewController {
     func setupTextView() {
         view.addSubview(textView)
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             textView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)
