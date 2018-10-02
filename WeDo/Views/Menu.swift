@@ -21,10 +21,17 @@ class Menu: NSObject {
     var contactUsVC = ContactUsViewController()
     var editProfileVC = EditProfileViewController()
     var spRegisterVC = SPRegisterViewController()
-    var spHomeVC = SPHomeViewController()
+    //var spHomeVC = SPHomeViewController()
+    var spCurrentJobsVC = SPCurrentJobsViewController()
+    var spNewJobsVC = SPNewJobsViewController()
+    var spRequestedJobsVC = SPRequestedJobsViewController()
     var spLoginVerifyVC = SPLoginVerifyViewController()
     var spProfileVC = SPProfileViewController()
     var spContactVC = SPContactViewController()
+    var spRegisterCompanyVC = SPRegisterCompanyViewController()
+    var spRegisterAddressVC = SPRegisterAddressViewController()
+    var spRegisterDateTimeVC = SPRegisterDateTimeViewController()
+    var spRegisterServicesVC = SPRegisterServicesViewController()
     
     var frequentlyAskedVC = FaqViewController()
     
@@ -289,14 +296,26 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
             self.editProfileVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         case "SPLoginVerifyViewController":
             self.spLoginVerifyVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
-        case "SPHomeViewController":
-            self.spHomeVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         case "SPProfileViewController":
             self.spProfileVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         case "SPContactViewController":
             self.spContactVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         case "SPRegisterViewController":
             self.spRegisterVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPCurrentJobsViewController":
+            self.spCurrentJobsVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPNewJobsViewController":
+            self.spNewJobsVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPRequestedJobsViewController":
+            self.spRequestedJobsVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPRegisterCompanyViewController":
+            self.spRegisterCompanyVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPRegisterAddressViewController":
+            self.spRegisterAddressVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPRegisterDateTimeViewController":
+            self.spRegisterDateTimeVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
+        case "SPRegisterServicesViewController":
+            self.spRegisterServicesVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         default:
             print("Call from mars")
         }

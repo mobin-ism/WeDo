@@ -12,6 +12,7 @@ import SVProgressHUD
 class ServiceDescriptionOneViewController: UIViewController {
     
     var subServiceTitle : String?
+    
     lazy var backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false

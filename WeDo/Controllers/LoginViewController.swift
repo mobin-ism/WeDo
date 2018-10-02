@@ -357,7 +357,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func spRegisterTapped() {
-        navigationController?.pushViewController(SPRegisterViewController(), animated: true)
+        navigationController?.pushViewController(SPRegisterCompanyViewController(), animated: true)
     }
     
     @objc func menuIconTapped() {

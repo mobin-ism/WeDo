@@ -12,6 +12,64 @@ import GooglePlaces
 
 class SPRegisterAddressViewController: UIViewController {
     
+    lazy var menu: Menu = {
+        let slideMenu = Menu()
+        slideMenu.spRegisterAddressVC = self
+        return slideMenu
+    }()
+    
+    lazy var companyButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Company".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 1
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var addressButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Address".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 2
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var dateTimeButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Date & Time".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 3
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var servicesButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Services".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 4
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
+    }()
+    
     let backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -94,7 +152,7 @@ class SPRegisterAddressViewController: UIViewController {
         button.layer.cornerRadius = 5
         button.layer.borderColor = GREENISH_COLOR.cgColor
         button.layer.borderWidth = 1
-        //button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -116,11 +174,30 @@ class SPRegisterAddressViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         locationManager.requestWhenInUseAuthorization()
+        setNavigationBar()
         layout()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addressButton.titleLabel?.font = UIFont(name: OPENSANS_BOLD, size: 12)
+    }
+    
+    private func setNavigationBar() {
+        navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
+        let logo = UIImage(named: "logo.png")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
     }
     
     private func layout() {
         setupBackgroundImageView()
+        setupCompanyButton()
+        setupAddressButton()
+        setupDateTimeButton()
+        setupServicesButton()
         setupMapView()
         setupLocationSearchView()
         setupSearchImage()
@@ -138,9 +215,41 @@ class SPRegisterAddressViewController: UIViewController {
         backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
     }
     
+    func setupCompanyButton() {
+        view.addSubview(companyButton)
+        companyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
+        companyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        companyButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        companyButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+    }
+    
+    func setupAddressButton() {
+        view.addSubview(addressButton)
+        addressButton.topAnchor.constraint(equalTo: companyButton.topAnchor).isActive = true
+        addressButton.leadingAnchor.constraint(equalTo: companyButton.trailingAnchor).isActive = true
+        addressButton.heightAnchor.constraint(equalTo: companyButton.heightAnchor).isActive = true
+        addressButton.widthAnchor.constraint(equalTo: companyButton.widthAnchor).isActive = true
+    }
+    
+    func setupDateTimeButton() {
+        view.addSubview(dateTimeButton)
+        dateTimeButton.topAnchor.constraint(equalTo: companyButton.topAnchor).isActive = true
+        dateTimeButton.leadingAnchor.constraint(equalTo: addressButton.trailingAnchor).isActive = true
+        dateTimeButton.heightAnchor.constraint(equalTo: companyButton.heightAnchor).isActive = true
+        dateTimeButton.widthAnchor.constraint(equalTo: companyButton.widthAnchor).isActive = true
+    }
+    
+    func setupServicesButton() {
+        view.addSubview(servicesButton)
+        servicesButton.topAnchor.constraint(equalTo: companyButton.topAnchor).isActive = true
+        servicesButton.leadingAnchor.constraint(equalTo: dateTimeButton.trailingAnchor).isActive = true
+        servicesButton.heightAnchor.constraint(equalTo: companyButton.heightAnchor).isActive = true
+        servicesButton.widthAnchor.constraint(equalTo: companyButton.widthAnchor).isActive = true
+    }
+    
     func setupMapView() {
         view.addSubview(mapView)
-        mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: companyButton.bottomAnchor).isActive = true
         mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6).isActive = true
@@ -148,7 +257,7 @@ class SPRegisterAddressViewController: UIViewController {
     
     func setupLocationSearchView() {
         view.addSubview(locationSearchView)
-        locationSearchView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16).isActive = true
+        locationSearchView.topAnchor.constraint(equalTo: companyButton.bottomAnchor, constant: 16).isActive = true
         locationSearchView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).isActive = true
         locationSearchView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8).isActive = true
         locationSearchView.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -192,6 +301,62 @@ class SPRegisterAddressViewController: UIViewController {
     
     @objc func searchViewTapped() {
         present(locationSearchViewController, animated: true, completion: nil)
+    }
+    
+    @objc private func menuIconTapped() {
+        self.menu.show(self)
+    }
+    
+    @objc private func navigationButtonTapped(_ sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            navigationController?.pushViewController(SPRegisterCompanyViewController(), animated: false)
+        case 3:
+            navigationController?.pushViewController(SPRegisterDateTimeViewController(), animated: false)
+        case 4:
+            navigationController?.pushViewController(SPRegisterServicesViewController(), animated: false)
+        default:
+            print("current view controller")
+        }
+    }
+    
+    @objc func nextButtonTapped() {
+        let destination = SPRegisterDateTimeViewController()
+        navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        if  UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(SPProfileViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(SPServiceHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(SPContactViewController(), animated: true)
+            case 5:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        } else {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            default:
+                print("Wrong Index")
+            }
+        }
     }
 }
 

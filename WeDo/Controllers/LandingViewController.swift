@@ -45,7 +45,7 @@ class LandingViewController: UIViewController {
         
         if UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                self.navigationController?.pushViewController(SPHomeViewController(), animated: true)
+                self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
             })
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {

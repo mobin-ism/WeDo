@@ -213,7 +213,7 @@ extension SPLoginVerifyViewController {
                 do {
                     let serviceProviderInfo = try decoder.decode(ServiceProviderModel.self, from: json)
                     if serviceProviderInfo.isSuccess {
-                        let spHome = SPHomeViewController()
+                        let spHome = SPCurrentJobsViewController()
                         spHome.serviceProviderInfo = serviceProviderInfo
                         UserDefaults.standard.set(true, forKey: IS_LOGGED_IN)
                         UserDefaults.standard.set(true, forKey: IS_SERVICE_PROVIDER)

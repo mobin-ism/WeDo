@@ -95,7 +95,7 @@ class SPProfileViewController: UIViewController {
         if  UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
             switch indexNumber {
             case 0:
-                self.navigationController?.pushViewController(SPHomeViewController(), animated: true)
+                self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
             case 1:
                 self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
             case 2:
@@ -106,19 +106,6 @@ class SPProfileViewController: UIViewController {
                 self.navigationController?.pushViewController(SPContactViewController(), animated: true)
             case 5:
                 Alert.logOutConfirmationAlert(on: self)
-            default:
-                print("Wrong Index")
-            }
-        } else {
-            switch indexNumber {
-            case 0:
-                self.navigationController?.pushViewController(HomeViewController(), animated: true)
-            case 1:
-                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
-            case 2:
-                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
-            case 3:
-                self.navigationController?.pushViewController(LoginViewController(), animated: true)
             default:
                 print("Wrong Index")
             }

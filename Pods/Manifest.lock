@@ -1,21 +1,20 @@
 PODS:
-  - Alamofire (4.7.1)
-  - BouncyLayout (2.0.0)
-  - GoogleMaps (2.6.0):
-    - GoogleMaps/Maps (= 2.6.0)
-  - GoogleMaps/Base (2.6.0)
-  - GoogleMaps/Maps (2.6.0):
+  - Alamofire (4.7.3)
+  - BouncyLayout (2.1.0)
+  - GoogleMaps (2.7.0):
+    - GoogleMaps/Maps (= 2.7.0)
+  - GoogleMaps/Base (2.7.0)
+  - GoogleMaps/Maps (2.7.0):
     - GoogleMaps/Base
-  - GooglePlaces (2.6.0):
-    - GoogleMaps/Base (= 2.6.0)
+  - GooglePlaces (2.7.0):
+    - GoogleMaps/Base (= 2.7.0)
   - HCSStarRatingView (1.5)
   - LIHImageSlider (1.0.8)
   - Localize-Swift (2.0.0)
-  - Pager (1.4.0)
-  - RAMPaperSwitch (2.1.0)
-  - SDWebImage (4.3.3):
-    - SDWebImage/Core (= 4.3.3)
-  - SDWebImage/Core (4.3.3)
+  - RAMPaperSwitch (3.0.0)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -26,7 +25,6 @@ DEPENDENCIES:
   - HCSStarRatingView (~> 1.5)
   - LIHImageSlider
   - Localize-Swift
-  - Pager
   - RAMPaperSwitch
   - SDWebImage
   - SVProgressHUD
@@ -40,24 +38,22 @@ SPEC REPOS:
     - HCSStarRatingView
     - LIHImageSlider
     - Localize-Swift
-    - Pager
     - RAMPaperSwitch
     - SDWebImage
     - SVProgressHUD
 
 SPEC CHECKSUMS:
-  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
-  BouncyLayout: f64872d6b2a3e41bb8c89e24d0ff08e2dbeeb304
-  GoogleMaps: 42f91c68b7fa2f84d5c86597b18ceb99f5414c7f
-  GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  BouncyLayout: a7955879861375cc4e88bb64d42bcf622cd2694c
+  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
+  GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   LIHImageSlider: ddf90c3a07e6f571b0e57629177a49eaf5bf15a3
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
-  Pager: c62090c63f0eae2642454a572e659a08347c599d
-  RAMPaperSwitch: ef08af0400a040c9850e09253280deb77510becb
-  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  RAMPaperSwitch: 9b81604ec2e7d6dda3fd2cbac53eb012f7a5cc87
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 89f7c4f98725f32f521a9174c9529b1e6e863b3d
+PODFILE CHECKSUM: e3f286d2044e893f38a92df78c5acafc7a988178
 
 COCOAPODS: 1.5.3

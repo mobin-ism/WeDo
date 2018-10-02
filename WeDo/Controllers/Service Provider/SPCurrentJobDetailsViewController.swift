@@ -23,23 +23,6 @@ class SPCurrentJobDetailsViewController: UIViewController {
         return imageView
     }()
     
-    let topView: UIView = {
-        let view = UIView()
-        view.backgroundColor = GREENISH_COLOR
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    lazy var backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(#imageLiteral(resourceName: "back-icon"), for: .normal)
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
-        return button
-    }()
-    
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
         scroll.keyboardDismissMode = .interactive
@@ -192,8 +175,18 @@ class SPCurrentJobDetailsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         collectionView.register(SingleImageCell.self, forCellWithReuseIdentifier: SingleImageCell.cellId)
+        setNavigationBar()
         layout()
         setupData()
+    }
+    
+    private func setNavigationBar() {
+        navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
+        let logo = UIImage(named: "logo.png")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -221,8 +214,6 @@ class SPCurrentJobDetailsViewController: UIViewController {
     
     private func layout() {
         setupBackgroundImageView()
-        setupTopView()
-        setupBackButton()
         setupScrollView()
         setupTitleLabel()
         setupDescriptionLabel()
@@ -257,27 +248,11 @@ class SPCurrentJobDetailsViewController: UIViewController {
         backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
     }
     
-    func setupTopView() {
-        view.addSubview(topView)
-        topView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        topView.heightAnchor.constraint(equalToConstant: 68).isActive = true
-    }
-    
-    func setupBackButton() {
-        topView.addSubview(backButton)
-        backButton.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 8).isActive = true
-        backButton.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -16).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: 22).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 22).isActive = true
-    }
-    
     func setupScrollView() {
         view.addSubview(scrollView)
-        scrollView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 0).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
@@ -362,7 +337,7 @@ class SPCurrentJobDetailsViewController: UIViewController {
     }
     
     @objc private func backTapped() {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func jobDoneButtonTapped() {

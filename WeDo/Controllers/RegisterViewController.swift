@@ -44,7 +44,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.text = "Register Now"
+        label.text = "Register Now".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 18)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +56,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.text = "Name"
+        label.text = "Name".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +67,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.text = "Email"
+        label.text = "Email".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -79,7 +79,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.text = "Phone No."
+        label.text = "Phone No.".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
         label.clipsToBounds = true
         label.numberOfLines = 1
@@ -91,7 +91,7 @@ class RegisterViewController: UIViewController {
         var textfield = PaddedTextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.clipsToBounds = true
-        textfield.placeholder = "Name"
+        textfield.placeholder = "Name".localized()
         textfield.layer.cornerRadius = 5
         textfield.layer.borderWidth = 1
         textfield.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
@@ -102,7 +102,7 @@ class RegisterViewController: UIViewController {
         var textfield = PaddedTextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.clipsToBounds = true
-        textfield.placeholder = "Email"
+        textfield.placeholder = "Email".localized()
         textfield.layer.cornerRadius = 5
         textfield.layer.borderWidth = 1
         textfield.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
@@ -113,7 +113,7 @@ class RegisterViewController: UIViewController {
         var textfield = PaddedTextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.clipsToBounds = true
-        textfield.placeholder = "Your Phone No."
+        textfield.placeholder = "Your Phone No.".localized()
         textfield.layer.cornerRadius = 5
         textfield.layer.borderWidth = 1
         textfield.layer.borderColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.5).cgColor
@@ -125,7 +125,7 @@ class RegisterViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.clipsToBounds = true
         button.backgroundColor = UIColor(red:0.17, green:0.67, blue:0.31, alpha:1.0)
-        button.setTitle("REGISTER", for: .normal)
+        button.setTitle("REGISTER".localized(), for: .normal)
         button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
@@ -136,7 +136,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.text = "Have And Account?"
+        label.text = "Have And Account?".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -149,7 +149,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.attributedText = NSAttributedString(string: "Login", attributes:[.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+        label.attributedText = NSAttributedString(string: "Login".localized(), attributes:[.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -179,7 +179,7 @@ class RegisterViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.textAlignment = .center
-        label.text = "OR"
+        label.text = "OR".localized()
         label.numberOfLines = 0
         label.textColor = UIColor.black
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
@@ -190,7 +190,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.text = "Service Provide"
+        label.text = "Service Provider".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -198,17 +198,42 @@ class RegisterViewController: UIViewController {
         return label
     }()
     
-    let loginRegisterLabel: UILabel = {
+    lazy var spLoginLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
+        label.textAlignment = .right
         label.textColor = UIColor.black
-        label.text = "Login | Register"
+        label.text = "Login".localized()
         label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.textColor = UIColor.lightGray
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(spLoginTapped)))
         return label
+    }()
+    
+    lazy var spRegisterLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = UIColor.black
+        label.text = "Register".localized()
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 13)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        label.textColor = UIColor.lightGray
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(spRegisterTapped)))
+        return label
+    }()
+    
+    let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     override func viewDidLoad() {
@@ -278,7 +303,9 @@ class RegisterViewController: UIViewController {
         setupLeftHorizontalLine()
         setupRighttHorizontalLine()
         setupServiceProvideLabel()
-        setupLoginRegisterLabel()
+        setupSeparator()
+        setupSpLoginLabel()
+        setupSpRegisterLabel()
     }
     
     func setupBackgroundImageView() {
@@ -393,10 +420,24 @@ class RegisterViewController: UIViewController {
         serviceProviderLabel.topAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 40).isActive = true
     }
     
-    func setupLoginRegisterLabel() {
-        scrollView.addSubview(loginRegisterLabel)
-        loginRegisterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        loginRegisterLabel.topAnchor.constraint(equalTo: serviceProviderLabel.bottomAnchor, constant: 16).isActive = true
+    func setupSeparator() {
+        scrollView.addSubview(separator)
+        separator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        separator.topAnchor.constraint(equalTo: serviceProviderLabel.bottomAnchor, constant: 16).isActive = true
+        separator.widthAnchor.constraint(equalToConstant: 1).isActive = true
+        separator.heightAnchor.constraint(equalToConstant: 16).isActive = true
+    }
+    
+    func setupSpLoginLabel() {
+        scrollView.addSubview(spLoginLabel)
+        spLoginLabel.centerYAnchor.constraint(equalTo: separator.centerYAnchor).isActive = true
+        spLoginLabel.trailingAnchor.constraint(equalTo: separator.leadingAnchor, constant: -8).isActive = true
+    }
+    
+    func setupSpRegisterLabel() {
+        scrollView.addSubview(spRegisterLabel)
+        spRegisterLabel.centerYAnchor.constraint(equalTo: separator.centerYAnchor).isActive = true
+        spRegisterLabel.leadingAnchor.constraint(equalTo: separator.trailingAnchor, constant: 8).isActive = true
     }
     
     @objc func menuIconTapped() {
@@ -409,6 +450,14 @@ class RegisterViewController: UIViewController {
     
     @objc func login() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func spLoginTapped() {
+        navigationController?.pushViewController(SPLoginViewController(), animated: true)
+    }
+    
+    @objc private func spRegisterTapped() {
+        navigationController?.pushViewController(SPRegisterCompanyViewController(), animated: true)
     }
     
     @objc func registerButtonTapped() {

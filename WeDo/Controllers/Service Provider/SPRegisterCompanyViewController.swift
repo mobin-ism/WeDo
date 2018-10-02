@@ -7,14 +7,65 @@
 //
 
 import UIKit
-import Pager
 
 class SPRegisterCompanyViewController: UIViewController {
     
-    lazy var registerTabMaster: SPRegisterViewController = {
-        let vc = SPRegisterViewController()
-        vc.vc1 = self
-        return vc
+    lazy var menu: Menu = {
+        let slideMenu = Menu()
+        slideMenu.spRegisterCompanyVC = self
+        return slideMenu
+    }()
+    
+    lazy var companyButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Company".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 1
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var addressButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Address".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 2
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var dateTimeButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Date & Time".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 3
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var servicesButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Services".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 4
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
     }()
     
     lazy var scrollView: UIScrollView = {
@@ -311,7 +362,17 @@ class SPRegisterCompanyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        setNavigationBar()
         layout()
+    }
+    
+    private func setNavigationBar() {
+        navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
+        let logo = UIImage(named: "logo.png")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -327,10 +388,15 @@ class SPRegisterCompanyViewController: UIViewController {
             contentHeight = contentHeight + view.frame.size.height
         }
         scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 140)
+        companyButton.titleLabel?.font = UIFont(name: OPENSANS_BOLD, size: 12)
     }
     
     private func layout() {
         setupBackgroundImageView()
+        setupCompanyButton()
+        setupAddressButton()
+        setupDateTimeButton()
+        setupServicesButton()
         setupScrollView()
         setupCompanyNameLabel()
         setupCompanyNameTextField()
@@ -365,9 +431,41 @@ class SPRegisterCompanyViewController: UIViewController {
         backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
     }
     
+    func setupCompanyButton() {
+        view.addSubview(companyButton)
+        companyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
+        companyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        companyButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        companyButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+    }
+    
+    func setupAddressButton() {
+        view.addSubview(addressButton)
+        addressButton.topAnchor.constraint(equalTo: companyButton.topAnchor).isActive = true
+        addressButton.leadingAnchor.constraint(equalTo: companyButton.trailingAnchor).isActive = true
+        addressButton.heightAnchor.constraint(equalTo: companyButton.heightAnchor).isActive = true
+        addressButton.widthAnchor.constraint(equalTo: companyButton.widthAnchor).isActive = true
+    }
+    
+    func setupDateTimeButton() {
+        view.addSubview(dateTimeButton)
+        dateTimeButton.topAnchor.constraint(equalTo: companyButton.topAnchor).isActive = true
+        dateTimeButton.leadingAnchor.constraint(equalTo: addressButton.trailingAnchor).isActive = true
+        dateTimeButton.heightAnchor.constraint(equalTo: companyButton.heightAnchor).isActive = true
+        dateTimeButton.widthAnchor.constraint(equalTo: companyButton.widthAnchor).isActive = true
+    }
+    
+    func setupServicesButton() {
+        view.addSubview(servicesButton)
+        servicesButton.topAnchor.constraint(equalTo: companyButton.topAnchor).isActive = true
+        servicesButton.leadingAnchor.constraint(equalTo: dateTimeButton.trailingAnchor).isActive = true
+        servicesButton.heightAnchor.constraint(equalTo: companyButton.heightAnchor).isActive = true
+        servicesButton.widthAnchor.constraint(equalTo: companyButton.widthAnchor).isActive = true
+    }
+    
     func setupScrollView() {
         view.addSubview(scrollView)
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        scrollView.topAnchor.constraint(equalTo: companyButton.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -540,7 +638,59 @@ class SPRegisterCompanyViewController: UIViewController {
     }
     
     @objc func nextButtonTapped() {
-        registerTabMaster.changeTabs(index: 2)
+        let destination = SPRegisterAddressViewController()
+        navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    @objc private func navigationButtonTapped(_ sender: UIButton) {
+        switch sender.tag {
+        case 2:
+            navigationController?.pushViewController(SPRegisterAddressViewController(), animated: false)
+        case 3:
+            navigationController?.pushViewController(SPRegisterDateTimeViewController(), animated: false)
+        case 4:
+            navigationController?.pushViewController(SPRegisterServicesViewController(), animated: false)
+        default:
+            print("current view controller")
+        }
+    }
+    
+    @objc private func menuIconTapped() {
+        self.menu.show(self)
+    }
+    
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        if  UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(SPProfileViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(SPServiceHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(SPContactViewController(), animated: true)
+            case 5:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        } else {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(HelpAndFAQViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(ContactUsViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            default:
+                print("Wrong Index")
+            }
+        }
     }
     
 }

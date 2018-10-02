@@ -10,6 +10,12 @@ import UIKit
 
 class SPRequestedJobsViewController: UIViewController {
     
+    lazy var menu: Menu = {
+        let slideMenu = Menu()
+        slideMenu.spRequestedJobsVC = self
+        return slideMenu
+    }()
+    
     let backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,6 +24,45 @@ class SPRequestedJobsViewController: UIViewController {
         imageView.backgroundColor = .clear
         imageView.image = #imageLiteral(resourceName: "bigger-logo")
         return imageView
+    }()
+    
+    lazy var currentJobsButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Current Jobs".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 1
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var newJobsButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("New Jobs".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 2
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var requestedJobsButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(red:64/255, green:173/255, blue:93/255, alpha:0.9)
+        button.setTitle("Requested Jobs".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        button.tag = 3
+        button.addTarget(self, action: #selector(navigationButtonTapped( _:)), for: .touchUpInside)
+        return button
     }()
     
     lazy var collectionView: UICollectionView = {
@@ -40,7 +85,17 @@ class SPRequestedJobsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         collectionView.register(SPJobCell.self, forCellWithReuseIdentifier: SPJobCell.cellId)
+        setNavigationBar()
         layout()
+    }
+    
+    private func setNavigationBar() {
+        navigationController?.navigationBar.barTintColor = NAVBAR_BG_COLOR
+        let logo = UIImage(named: "logo.png")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon"), style: .plain, target: self, action: #selector(backTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(menuIconTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,8 +104,15 @@ class SPRequestedJobsViewController: UIViewController {
         getServiceProviderDashboard()
     }
     
+    override func viewDidLayoutSubviews() {
+        requestedJobsButton.titleLabel?.font = UIFont(name: OPENSANS_BOLD, size: 12)
+    }
+    
     private func layout() {
         setupBackgroundImageView()
+        setupCurrentJobsButton()
+        setupNewJobsButton()
+        setupRequestedJobsButton()
         setupCollectionView()
     }
     
@@ -62,12 +124,72 @@ class SPRequestedJobsViewController: UIViewController {
         backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
     }
     
+    func setupCurrentJobsButton() {
+        view.addSubview(currentJobsButton)
+        currentJobsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
+        currentJobsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        currentJobsButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        currentJobsButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
+    }
+    
+    func setupNewJobsButton() {
+        view.addSubview(newJobsButton)
+        newJobsButton.topAnchor.constraint(equalTo: currentJobsButton.topAnchor).isActive = true
+        newJobsButton.leadingAnchor.constraint(equalTo: currentJobsButton.trailingAnchor).isActive = true
+        newJobsButton.heightAnchor.constraint(equalTo: currentJobsButton.heightAnchor).isActive = true
+        newJobsButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.33).isActive = true
+    }
+    
+    func setupRequestedJobsButton() {
+        view.addSubview(requestedJobsButton)
+        requestedJobsButton.topAnchor.constraint(equalTo: currentJobsButton.topAnchor).isActive = true
+        requestedJobsButton.leadingAnchor.constraint(equalTo: newJobsButton.trailingAnchor).isActive = true
+        requestedJobsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        requestedJobsButton.heightAnchor.constraint(equalTo: currentJobsButton.heightAnchor).isActive = true
+    }
+    
     func setupCollectionView() {
         view.addSubview(collectionView)
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: currentJobsButton.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    @objc private func menuIconTapped() {
+        self.menu.show(self)
+    }
+    
+    @objc private func navigationButtonTapped(_ sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            navigationController?.pushViewController(SPCurrentJobsViewController(), animated: false)
+        case 2:
+            navigationController?.pushViewController(SPNewJobsViewController(), animated: false)
+        default:
+            print("current view controller")
+        }
+    }
+    
+    public func selectedViewControllerFromMenu(indexNumber : Int) {
+        if  UserDefaults.standard.value(forKey: IS_SERVICE_PROVIDER) as! Bool == true {
+            switch indexNumber {
+            case 0:
+                self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(SPCurrentJobsViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(SPProfileViewController(), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(SPServiceHistoryViewController(), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(SPContactViewController(), animated: true)
+            case 5:
+                Alert.logOutConfirmationAlert(on: self)
+            default:
+                print("Wrong Index")
+            }
+        }
     }
     
 }
@@ -95,12 +217,10 @@ extension SPRequestedJobsViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            let destination = SPRequestedJobDetailsViewController()
-            destination.selectedIndex = indexPath.item
-            destination.object = self.serviceProviderDashboardData
-            self.present(destination, animated: true, completion: nil)
-        }
+        let destination = SPRequestedJobDetailsViewController()
+        destination.selectedIndex = indexPath.item
+        destination.object = self.serviceProviderDashboardData
+        navigationController?.pushViewController(destination, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -58,14 +58,12 @@
 		7775A157214D37A40038C432 /* TermsConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A156214D37A40038C432 /* TermsConditionsViewController.swift */; };
 		7775A159214D37C80038C432 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A158214D37C80038C432 /* PrivacyPolicyViewController.swift */; };
 		7775A15C214D3ABA0038C432 /* SPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A15B214D3ABA0038C432 /* SPLoginViewController.swift */; };
-		7775A15E214D44990038C432 /* SPRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A15D214D44990038C432 /* SPRegisterViewController.swift */; };
 		7775A164214D53F40038C432 /* SPRegisterCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A163214D53F40038C432 /* SPRegisterCompanyViewController.swift */; };
 		7775A166214D54220038C432 /* SPRegisterAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A165214D54220038C432 /* SPRegisterAddressViewController.swift */; };
 		7775A168214D56C90038C432 /* SPRegisterDateTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A167214D56C80038C432 /* SPRegisterDateTimeViewController.swift */; };
 		7775A16A214D56F10038C432 /* SPRegisterServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A169214D56F10038C432 /* SPRegisterServicesViewController.swift */; };
 		7775A16C214DA1820038C432 /* WeekdaySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A16B214DA1820038C432 /* WeekdaySelectCell.swift */; };
 		778F1331214E91F50042A212 /* SPLoginVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1330214E91F50042A212 /* SPLoginVerifyViewController.swift */; };
-		778F1333214EACA30042A212 /* SPHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1332214EACA30042A212 /* SPHomeViewController.swift */; };
 		778F1335214EACDF0042A212 /* SPCurrentJobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1334214EACDF0042A212 /* SPCurrentJobsViewController.swift */; };
 		778F1337214EAD0B0042A212 /* SPNewJobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1336214EAD0B0042A212 /* SPNewJobsViewController.swift */; };
 		778F1339214EAD350042A212 /* SPRequestedJobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1338214EAD350042A212 /* SPRequestedJobsViewController.swift */; };
@@ -170,14 +168,12 @@
 		7775A156214D37A40038C432 /* TermsConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionsViewController.swift; sourceTree = "<group>"; };
 		7775A158214D37C80038C432 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		7775A15B214D3ABA0038C432 /* SPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPLoginViewController.swift; sourceTree = "<group>"; };
-		7775A15D214D44990038C432 /* SPRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterViewController.swift; sourceTree = "<group>"; };
 		7775A163214D53F40038C432 /* SPRegisterCompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterCompanyViewController.swift; sourceTree = "<group>"; };
 		7775A165214D54220038C432 /* SPRegisterAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterAddressViewController.swift; sourceTree = "<group>"; };
 		7775A167214D56C80038C432 /* SPRegisterDateTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterDateTimeViewController.swift; sourceTree = "<group>"; };
 		7775A169214D56F10038C432 /* SPRegisterServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRegisterServicesViewController.swift; sourceTree = "<group>"; };
 		7775A16B214DA1820038C432 /* WeekdaySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaySelectCell.swift; sourceTree = "<group>"; };
 		778F1330214E91F50042A212 /* SPLoginVerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPLoginVerifyViewController.swift; sourceTree = "<group>"; };
-		778F1332214EACA30042A212 /* SPHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPHomeViewController.swift; sourceTree = "<group>"; };
 		778F1334214EACDF0042A212 /* SPCurrentJobsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCurrentJobsViewController.swift; sourceTree = "<group>"; };
 		778F1336214EAD0B0042A212 /* SPNewJobsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNewJobsViewController.swift; sourceTree = "<group>"; };
 		778F1338214EAD350042A212 /* SPRequestedJobsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRequestedJobsViewController.swift; sourceTree = "<group>"; };
@@ -396,13 +392,11 @@
 			isa = PBXGroup;
 			children = (
 				7775A15B214D3ABA0038C432 /* SPLoginViewController.swift */,
-				7775A15D214D44990038C432 /* SPRegisterViewController.swift */,
 				7775A163214D53F40038C432 /* SPRegisterCompanyViewController.swift */,
 				7775A165214D54220038C432 /* SPRegisterAddressViewController.swift */,
 				7775A167214D56C80038C432 /* SPRegisterDateTimeViewController.swift */,
 				7775A169214D56F10038C432 /* SPRegisterServicesViewController.swift */,
 				778F1330214E91F50042A212 /* SPLoginVerifyViewController.swift */,
-				778F1332214EACA30042A212 /* SPHomeViewController.swift */,
 				778F1334214EACDF0042A212 /* SPCurrentJobsViewController.swift */,
 				778F1336214EAD0B0042A212 /* SPNewJobsViewController.swift */,
 				778F1338214EAD350042A212 /* SPRequestedJobsViewController.swift */,
@@ -540,7 +534,6 @@
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/LIHImageSlider/LIHImageSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/Pager/Pager.framework",
 				"${BUILT_PRODUCTS_DIR}/RAMPaperSwitch/RAMPaperSwitch.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -552,7 +545,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LIHImageSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMPaperSwitch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -609,7 +601,6 @@
 			files = (
 				7775A159214D37C80038C432 /* PrivacyPolicyViewController.swift in Sources */,
 				082E5FF22100B6C00081D26D /* ServiceDescriptionOneViewController.swift in Sources */,
-				778F1333214EACA30042A212 /* SPHomeViewController.swift in Sources */,
 				77F0D26221540E3F00E74DA3 /* SPProfileItemCell.swift in Sources */,
 				08320EDB20FDE01400D98704 /* WeDo.xcdatamodeld in Sources */,
 				E9A8CE40210E35E200F4FDF4 /* CustomerSettingsViewController.swift in Sources */,
@@ -674,7 +665,6 @@
 				08320EF620FDF37800D98704 /* SliderImages.swift in Sources */,
 				08743F4B2118491C0077C5EE /* Alert.swift in Sources */,
 				083B2AF32109A372004F9A0F /* RegisterViewController.swift in Sources */,
-				7775A15E214D44990038C432 /* SPRegisterViewController.swift in Sources */,
 				084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */,
 				77F0D2642154114A00E74DA3 /* SPAccountViewController.swift in Sources */,
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,

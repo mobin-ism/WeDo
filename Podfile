@@ -16,5 +16,4 @@ target 'WeDo' do
     pod 'RAMPaperSwitch'
     pod 'SDWebImage'
     pod 'Localize-Swift'
-    pod 'Pager'
 end
