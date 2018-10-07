@@ -11,7 +11,6 @@ PODS:
   - HCSStarRatingView (1.5)
   - LIHImageSlider (1.0.8)
   - Localize-Swift (2.0.0)
-  - RAMPaperSwitch (3.0.0)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
@@ -25,7 +24,6 @@ DEPENDENCIES:
   - HCSStarRatingView (~> 1.5)
   - LIHImageSlider
   - Localize-Swift
-  - RAMPaperSwitch
   - SDWebImage
   - SVProgressHUD
 
@@ -38,7 +36,6 @@ SPEC REPOS:
     - HCSStarRatingView
     - LIHImageSlider
     - Localize-Swift
-    - RAMPaperSwitch
     - SDWebImage
     - SVProgressHUD
 
@@ -50,10 +47,9 @@ SPEC CHECKSUMS:
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   LIHImageSlider: ddf90c3a07e6f571b0e57629177a49eaf5bf15a3
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
-  RAMPaperSwitch: 9b81604ec2e7d6dda3fd2cbac53eb012f7a5cc87
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: e3f286d2044e893f38a92df78c5acafc7a988178
+PODFILE CHECKSUM: f77e37a2568764af2a3f1a33a60b4655322e8d40
 
 COCOAPODS: 1.5.3

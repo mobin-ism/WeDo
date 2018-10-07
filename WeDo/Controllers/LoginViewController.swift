@@ -98,7 +98,7 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.attributedText = NSAttributedString(string: "Register now".localized(), attributes:[.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+        label.attributedText = NSAttributedString(string: "Register now".localized(), attributes:[.underlineStyle: NSUnderlineStyle.single.rawValue])
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false

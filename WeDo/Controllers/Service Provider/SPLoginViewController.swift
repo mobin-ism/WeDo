@@ -97,7 +97,7 @@ class SPLoginViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.attributedText = NSAttributedString(string: "Register".localized(), attributes:[.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+        label.attributedText = NSAttributedString(string: "Register".localized(), attributes:[.underlineStyle: NSUnderlineStyle.single.rawValue])
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -226,7 +226,7 @@ class SPLoginViewController: UIViewController {
     }
     
     @objc private func registerTapped() {
-        navigationController?.pushViewController(SPRegisterViewController(), animated: true)
+        navigationController?.pushViewController(SPRegisterCompanyViewController(), animated: true)
     }
     
     @objc private func handleLoginButton() {

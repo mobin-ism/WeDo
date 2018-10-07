@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
     
     let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
-        indicator.activityIndicatorViewStyle = .gray
+        indicator.style = .gray
         indicator.clipsToBounds = true
         indicator.hidesWhenStopped = true
         indicator.translatesAutoresizingMaskIntoConstraints = false
@@ -171,9 +171,9 @@ class HomeViewController: UIViewController {
         /*slider1.sliderDescriptions = ["God Be Praised", "God Be Praised", "God Be Praised"]*/
         
         self.sliderVc1  = LIHSliderViewController(slider: slider1)
-        self.addChildViewController(self.sliderVc1)
+        self.addChild(self.sliderVc1)
         self.view.addSubview(self.sliderVc1.view)
-        self.sliderVc1.didMove(toParentViewController: self)
+        self.sliderVc1.didMove(toParent: self)
         self.sliderVc1.view.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: sliderHeight)
         
     }

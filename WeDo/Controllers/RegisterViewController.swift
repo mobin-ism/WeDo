@@ -149,7 +149,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
-        label.attributedText = NSAttributedString(string: "Login".localized(), attributes:[.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+        label.attributedText = NSAttributedString(string: "Login".localized(), attributes:[.underlineStyle: NSUnderlineStyle.single.rawValue])
         label.font = UIFont(name: OPENSANS_REGULAR, size: 15)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -475,7 +475,7 @@ class RegisterViewController: UIViewController {
     }
     
     func setAreaFirst() {
-        let refreshAlert = UIAlertController(title: "Please select your area first", message: "You have to select an area first", preferredStyle: UIAlertControllerStyle.alert)
+        let refreshAlert = UIAlertController(title: "Please select your area first", message: "You have to select an area first", preferredStyle: UIAlertController.Style.alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Select Area", style: .default, handler: { (action: UIAlertAction!) in
             self.navigationController?.pushViewController(CustomerSettingsViewController(), animated: false)
@@ -495,7 +495,7 @@ class RegisterViewController: UIViewController {
     
     private func registrationSuccessfullyDoneAlert(securityCode : String, phoneNumber: String, memberID : Int, memberName : String) {
         
-        let alert = UIAlertController(title: "Congratulations!!!", message: "Registration Successfully Done", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Congratulations!!!", message: "Registration Successfully Done", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Close", style: .default, handler: { action in
             let verificationVC = VerificationCodeViewController()
             verificationVC.securityCode = securityCode
@@ -510,8 +510,8 @@ class RegisterViewController: UIViewController {
     }
     private func registrationFailedAlert(){
         
-        let alert = UIAlertController(title: "Ooops!!", message: "Registration failed", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: "Ooops!!", message: "Registration failed", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     

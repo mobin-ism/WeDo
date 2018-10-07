@@ -9,19 +9,7 @@
 import UIKit
 class ContactUsViewController: UIViewController {
     
-    lazy var scrollView: UIScrollView = {
-        let scroll = UIScrollView(frame: .zero)
-        scroll.keyboardDismissMode = .interactive
-        scroll.backgroundColor = UIColor.clear
-        scroll.delegate = self
-        scroll.translatesAutoresizingMaskIntoConstraints = false
-        scroll.isUserInteractionEnabled = true
-        scroll.isScrollEnabled = true
-        scroll.showsVerticalScrollIndicator = true
-        return scroll
-    }()
-    
-    lazy var backgroundImageView : UIImageView = {
+    let backgroundImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
@@ -31,15 +19,97 @@ class ContactUsViewController: UIViewController {
         return imageView
     }()
     
-    let contactUsLabel: UILabel = {
+    lazy var textView: UITextView = {
+        let view = UITextView()
+        view.text = "If you have any queries please let us know".localized()
+        view.backgroundColor = UIColor.clear
+        view.textColor = UIColor.lightGray
+        view.textAlignment = .left
+        view.font = UIFont(name: OPENSANS_REGULAR, size: 12)
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderColor = UIColor.init(white: 0.9, alpha: 0.9).cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 5
+        view.delegate = self
+        return view
+    }()
+    
+    lazy var submitButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("SUBMIT".localized(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = GREENISH_COLOR
+        button.titleLabel?.font = UIFont(name: OPENSANS_REGULAR, size: 16)
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 5
+        button.layer.borderColor = GREENISH_COLOR.cgColor
+        button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    let emailLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
-        label.textColor = UIColor.black
-        label.text = "Contact Us"
-        label.font = UIFont(name: OPENSANS_REGULAR, size: 18)
+        label.textAlignment = .center
+        label.textColor = GREENISH_COLOR
+        label.text = "Email".localized()
+        label.font = UIFont(name: OPENSANS_BOLD, size: 14)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 1
+        return label
+    }()
+    
+    let phoneLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = GREENISH_COLOR
+        label.text = "Phone no.".localized()
+        label.font = UIFont(name: OPENSANS_BOLD, size: 14)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let addressLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = GREENISH_COLOR
+        label.text = "Address".localized()
+        label.font = UIFont(name: OPENSANS_BOLD, size: 14)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let emailValue: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = UIColor.black
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let phoneValue: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = UIColor.black
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let addressValue: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = UIColor.black
+        label.font = UIFont(name: OPENSANS_REGULAR, size: 14)
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -54,21 +124,12 @@ class ContactUsViewController: UIViewController {
         view.backgroundColor = UIColor.white
         setNavigationBar()
         layout()
+        getContactInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Alert.checkInternetConnection(on: self)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        view.layoutIfNeeded()
-        var contentHeight: CGFloat = 0
-        for view in scrollView.subviews {
-            contentHeight = contentHeight + view.frame.size.height
-        }
-        scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 140)
     }
     
     private func setNavigationBar() {
@@ -81,8 +142,14 @@ class ContactUsViewController: UIViewController {
     
     func layout() {
         setupBackgroundImageView()
-        setupScrollView()
-        setupContactUsLabel()
+        setupTextView()
+        setupSubmitButton()
+        setupEmailLabel()
+        setupEmailValue()
+        setupPhoneLabel()
+        setupPhoneValue()
+        setupAddressLabel()
+        setupAddressValue()
     }
     
     func setupBackgroundImageView() {
@@ -93,18 +160,76 @@ class ContactUsViewController: UIViewController {
         backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
     }
     
-    func setupScrollView() {
-        view.addSubview(scrollView)
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: Helper.barHeight+(self.navigationController?.navigationBar.frame.size.height)!).isActive = true
-        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    func setupTextView() {
+        view.addSubview(textView)
+        NSLayoutConstraint.activate([
+            textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            textView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)
+            ])
     }
     
-    func setupContactUsLabel() {
-        scrollView.addSubview(contactUsLabel)
-        contactUsLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        contactUsLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
+    func setupSubmitButton() {
+        view.addSubview(submitButton)
+        NSLayoutConstraint.activate([
+            submitButton.leadingAnchor.constraint(equalTo: textView.leadingAnchor),
+            submitButton.trailingAnchor.constraint(equalTo: textView.trailingAnchor),
+            submitButton.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 16),
+            submitButton.heightAnchor.constraint(equalToConstant: 50)
+            ])
+    }
+    
+    func setupEmailLabel() {
+        view.addSubview(emailLabel)
+        NSLayoutConstraint.activate([
+            emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emailLabel.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: 16)
+            ])
+    }
+    
+    func setupEmailValue() {
+        view.addSubview(emailValue)
+        NSLayoutConstraint.activate([
+            emailValue.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emailValue.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 4)
+            ])
+    }
+    
+    func setupPhoneLabel() {
+        view.addSubview(phoneLabel)
+        NSLayoutConstraint.activate([
+            phoneLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            phoneLabel.topAnchor.constraint(equalTo: emailValue.bottomAnchor, constant: 10)
+            ])
+    }
+    
+    func setupPhoneValue() {
+        view.addSubview(phoneValue)
+        NSLayoutConstraint.activate([
+            phoneValue.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            phoneValue.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor, constant: 4)
+            ])
+    }
+    
+    func setupAddressLabel() {
+        view.addSubview(addressLabel)
+        NSLayoutConstraint.activate([
+            addressLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addressLabel.topAnchor.constraint(equalTo: phoneValue.bottomAnchor, constant: 10)
+            ])
+    }
+    
+    func setupAddressValue() {
+        view.addSubview(addressValue)
+        NSLayoutConstraint.activate([
+            addressValue.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addressValue.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 4)
+            ])
+    }
+    
+    @objc private func submitButtonTapped() {
+        
     }
     
     @objc func menuIconTapped() {
@@ -154,13 +279,46 @@ class ContactUsViewController: UIViewController {
     }
 }
 
-extension ContactUsViewController : UIScrollViewDelegate {
+
+
+extension ContactUsViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "If you have any queries please let us know".localized()
+            textView.textColor = UIColor.lightGray
+        }
+    }
     
 }
 
-
-
-//API CALLS
 extension ContactUsViewController {
+    
+    func getContactInfo() {
+        guard let url = URL(string: "\(BASE_URL)api/v2/general/contact-us") else { return }
+        HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, error) in
+            guard let response = response else { return }
+            if let json = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let contactInfo = try decoder.decode(SPContactModel.self, from: json)
+                    if contactInfo.isSuccess {
+                        self.emailValue.text = contactInfo.data.contact.email
+                        self.phoneValue.text = contactInfo.data.contact.phoneNumber
+                        self.addressValue.text = contactInfo.data.contact.address
+                    }
+                } catch let err {
+                    print(err.localizedDescription)
+                }
+            }
+        }
+    }
     
 }

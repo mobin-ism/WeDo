@@ -26,7 +26,7 @@ class MenuCell: UITableViewCell {
         }
     }
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.backgroundColor = UIColor.clear
@@ -41,7 +41,7 @@ class MenuCell: UITableViewCell {
     func setupTitleLabel() {
         self.addSubview(titleLabel)
         titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

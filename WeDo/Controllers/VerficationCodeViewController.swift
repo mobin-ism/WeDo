@@ -106,6 +106,8 @@ class VerificationCodeViewController: UIViewController {
             contentHeight = contentHeight + view.frame.size.height
         }
         scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight + 140)
+        
+        verificationCodeTextField.text = securityCode ?? ""
     }
     
     private func setNavigationBar() {
@@ -291,7 +293,7 @@ extension VerificationCodeViewController {
         if self.isImageSelected {
             for eachImage in self.imageArray {
                 let image : UIImage = self.resizeImage(image: eachImage, targetSize: CGSize(width: 100, height: 100))
-                let imageData:NSData = UIImagePNGRepresentation(image)! as NSData
+                let imageData:NSData = image.pngData()! as NSData
                 let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
                 self.strBase64Array.append(strBase64)
             }

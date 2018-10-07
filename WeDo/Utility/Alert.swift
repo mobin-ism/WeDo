@@ -13,8 +13,8 @@ import Localize_Swift
 struct Alert {
     
     public static func showBasicAlert(on vc : UIViewController, with title : String, message : String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Okay".localized(), style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Okay".localized(), style: UIAlertAction.Style.default, handler: nil))
         vc.present(alert, animated: true, completion: nil)
     }
         
@@ -26,7 +26,7 @@ struct Alert {
     
     public static func logOutConfirmationAlert(on vc : UIViewController) {
         
-        let alert = UIAlertController(title: "Are you sure?".localized(), message: "", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Are you sure?".localized(), message: "", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Logout".localized(), style: .default, handler: { action in
             //run your function here
             vc.navigationController?.pushViewController(HomeViewController(), animated: false)

@@ -13,7 +13,6 @@ target 'WeDo' do
     pod 'SVProgressHUD'
     pod 'HCSStarRatingView', '~> 1.5'
     pod 'LIHImageSlider'
-    pod 'RAMPaperSwitch'
     pod 'SDWebImage'
     pod 'Localize-Swift'
 end

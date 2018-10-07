@@ -54,6 +54,10 @@
 		08855842210DAFA200533A08 /* JobRequestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855841210DAFA200533A08 /* JobRequestListViewController.swift */; };
 		08855844210DBC3E00533A08 /* JobRequestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855843210DBC3E00533A08 /* JobRequestListTableViewCell.swift */; };
 		08855846210DD08000533A08 /* JobRequestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855845210DD08000533A08 /* JobRequestDetails.swift */; };
+		7757B7002167EE3900DEE934 /* MemberQuoteInfoModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757B6FF2167EE3900DEE934 /* MemberQuoteInfoModal.swift */; };
+		7757B7022169602B00DEE934 /* ActiveOrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757B7012169602B00DEE934 /* ActiveOrderDetailsViewController.swift */; };
+		7757B70421697B7400DEE934 /* JobCompleteRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757B70321697B7400DEE934 /* JobCompleteRequestViewController.swift */; };
+		7757B70621698DA700DEE934 /* JobCompleteRequestFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757B70521698DA700DEE934 /* JobCompleteRequestFormViewController.swift */; };
 		7775A155214D36000038C432 /* FaqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A154214D36000038C432 /* FaqViewController.swift */; };
 		7775A157214D37A40038C432 /* TermsConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A156214D37A40038C432 /* TermsConditionsViewController.swift */; };
 		7775A159214D37C80038C432 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775A158214D37C80038C432 /* PrivacyPolicyViewController.swift */; };
@@ -73,6 +77,8 @@
 		778F1341214EF42A0042A212 /* SPNewJobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1340214EF42A0042A212 /* SPNewJobDetailsViewController.swift */; };
 		778F1343214EF6810042A212 /* SPCustomerDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1342214EF6810042A212 /* SPCustomerDetailCell.swift */; };
 		778F1345214EFF350042A212 /* SPRequestedJobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F1344214EFF350042A212 /* SPRequestedJobDetailsViewController.swift */; };
+		77A5A8F22163B84400D397D2 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5A8F12163B84400D397D2 /* FAQView.swift */; };
+		77E978682166A96200977306 /* MemberOrderDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E978672166A96200977306 /* MemberOrderDataModel.swift */; };
 		77F0D2602154090900E74DA3 /* SPProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D25F2154090900E74DA3 /* SPProfileViewController.swift */; };
 		77F0D26221540E3F00E74DA3 /* SPProfileItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D26121540E3F00E74DA3 /* SPProfileItemCell.swift */; };
 		77F0D2642154114A00E74DA3 /* SPAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F0D2632154114A00E74DA3 /* SPAccountViewController.swift */; };
@@ -164,6 +170,10 @@
 		08855845210DD08000533A08 /* JobRequestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobRequestDetails.swift; sourceTree = "<group>"; };
 		1CD9AB98BE6B45E7F39176FA /* Pods-WeDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.release.xcconfig"; sourceTree = "<group>"; };
 		49DB9D0DB3ABD83CB09CBC25 /* Pods-WeDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeDo/Pods-WeDo.debug.xcconfig"; sourceTree = "<group>"; };
+		7757B6FF2167EE3900DEE934 /* MemberQuoteInfoModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberQuoteInfoModal.swift; sourceTree = "<group>"; };
+		7757B7012169602B00DEE934 /* ActiveOrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderDetailsViewController.swift; sourceTree = "<group>"; };
+		7757B70321697B7400DEE934 /* JobCompleteRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCompleteRequestViewController.swift; sourceTree = "<group>"; };
+		7757B70521698DA700DEE934 /* JobCompleteRequestFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCompleteRequestFormViewController.swift; sourceTree = "<group>"; };
 		7775A154214D36000038C432 /* FaqViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqViewController.swift; sourceTree = "<group>"; };
 		7775A156214D37A40038C432 /* TermsConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionsViewController.swift; sourceTree = "<group>"; };
 		7775A158214D37C80038C432 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +193,8 @@
 		778F1340214EF42A0042A212 /* SPNewJobDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNewJobDetailsViewController.swift; sourceTree = "<group>"; };
 		778F1342214EF6810042A212 /* SPCustomerDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCustomerDetailCell.swift; sourceTree = "<group>"; };
 		778F1344214EFF350042A212 /* SPRequestedJobDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRequestedJobDetailsViewController.swift; sourceTree = "<group>"; };
+		77A5A8F12163B84400D397D2 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		77E978672166A96200977306 /* MemberOrderDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberOrderDataModel.swift; sourceTree = "<group>"; };
 		77F0D25F2154090900E74DA3 /* SPProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPProfileViewController.swift; sourceTree = "<group>"; };
 		77F0D26121540E3F00E74DA3 /* SPProfileItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPProfileItemCell.swift; sourceTree = "<group>"; };
 		77F0D2632154114A00E74DA3 /* SPAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPAccountViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +310,9 @@
 				7775A154214D36000038C432 /* FaqViewController.swift */,
 				7775A156214D37A40038C432 /* TermsConditionsViewController.swift */,
 				7775A158214D37C80038C432 /* PrivacyPolicyViewController.swift */,
+				7757B7012169602B00DEE934 /* ActiveOrderDetailsViewController.swift */,
+				7757B70321697B7400DEE934 /* JobCompleteRequestViewController.swift */,
+				7757B70521698DA700DEE934 /* JobCompleteRequestFormViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -311,6 +326,8 @@
 				E98CCFE720FE7D1B00799029 /* Menu.swift */,
 				E9A8CE7B210E4BEE00F4FDF4 /* Selector.swift */,
 				0847AFC1213BFE890054DE93 /* CalenderSelector.swift */,
+				77A5A8F12163B84400D397D2 /* FAQView.swift */,
+				7757B6FF2167EE3900DEE934 /* MemberQuoteInfoModal.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +368,7 @@
 				77F0D27321567F8D00E74DA3 /* SPProfileModel.swift */,
 				77F0D275215697AE00E74DA3 /* SPServiceHistoryModel.swift */,
 				77F0D2772156A65400E74DA3 /* SPServicesModel.swift */,
+				77E978672166A96200977306 /* MemberOrderDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -481,7 +499,7 @@
 				TargetAttributes = {
 					08320ECE20FDE01400D98704 = {
 						CreatedOnToolsVersion = 9.4;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -534,7 +552,6 @@
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/LIHImageSlider/LIHImageSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/RAMPaperSwitch/RAMPaperSwitch.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
@@ -545,7 +562,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LIHImageSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMPaperSwitch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
@@ -624,12 +640,15 @@
 				08743F51211871600077C5EE /* ServiceModel.swift in Sources */,
 				08666543213D5B84003980BC /* MemberModel.swift in Sources */,
 				77F0D27A2156B11900E74DA3 /* SPServiceHeaderCell.swift in Sources */,
+				7757B70621698DA700DEE934 /* JobCompleteRequestFormViewController.swift in Sources */,
 				08320ED320FDE01400D98704 /* AppDelegate.swift in Sources */,
 				778F133F214EE9800042A212 /* SingleImageCell.swift in Sources */,
 				77F0D270215561C900E74DA3 /* ServiceProviderModel.swift in Sources */,
 				E912818C2103642F0010A242 /* ServiceRequestImageCell.swift in Sources */,
 				E98CCFE420FE797100799029 /* MasterCollectionViewCell.swift in Sources */,
+				7757B7022169602B00DEE934 /* ActiveOrderDetailsViewController.swift in Sources */,
 				08320EED20FDEBC000D98704 /* HomeViewController.swift in Sources */,
+				77A5A8F22163B84400D397D2 /* FAQView.swift in Sources */,
 				E9A8CE7C210E4BEE00F4FDF4 /* Selector.swift in Sources */,
 				77F0D2602154090900E74DA3 /* SPProfileViewController.swift in Sources */,
 				0847AFC2213BFE890054DE93 /* CalenderSelector.swift in Sources */,
@@ -646,9 +665,11 @@
 				778F1339214EAD350042A212 /* SPRequestedJobsViewController.swift in Sources */,
 				778F1343214EF6810042A212 /* SPCustomerDetailCell.swift in Sources */,
 				7775A157214D37A40038C432 /* TermsConditionsViewController.swift in Sources */,
+				77E978682166A96200977306 /* MemberOrderDataModel.swift in Sources */,
 				0885583E210DA2E800533A08 /* OrderHistoryTableViewCell.swift in Sources */,
 				083B2B1A2109CCC3004F9A0F /* ActiveOrderTableViewCell.swift in Sources */,
 				E912818E2103C3D00010A242 /* PaddedText.swift in Sources */,
+				7757B70421697B7400DEE934 /* JobCompleteRequestViewController.swift in Sources */,
 				E9F10167210A6C8A007CEE7F /* OrderHistoryViewController.swift in Sources */,
 				E912818221033BBF0010A242 /* ServiceLocationOneViewController.swift in Sources */,
 				77F0D276215697AE00E74DA3 /* SPServiceHistoryModel.swift in Sources */,
@@ -666,6 +687,7 @@
 				08743F4B2118491C0077C5EE /* Alert.swift in Sources */,
 				083B2AF32109A372004F9A0F /* RegisterViewController.swift in Sources */,
 				084A03F220FF7813000E532E /* ServiceDetailsCell.swift in Sources */,
+				7757B7002167EE3900DEE934 /* MemberQuoteInfoModal.swift in Sources */,
 				77F0D2642154114A00E74DA3 /* SPAccountViewController.swift in Sources */,
 				08320EF320FDF30B00D98704 /* SliderCell.swift in Sources */,
 				E912818821033C1A0010A242 /* ServicePaymentOneViewController.swift in Sources */,
@@ -851,7 +873,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeDo/WeDo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -872,7 +894,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativeitem.WeDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeDo/WeDo-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

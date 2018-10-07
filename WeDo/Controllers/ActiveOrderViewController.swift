@@ -11,6 +11,8 @@ import SDWebImage
 
 class ActiveOrderViewController: UIViewController {
     
+    var memberOrderDataModel: MemberOrderDataModel?
+    
     var listOfActiveOrders = [ActiveOrderNSObject]()
     let serviceDetailsVC = ServiceDetailsViewController()
     lazy var activeOrderButton : UIButton = {
@@ -55,12 +57,18 @@ class ActiveOrderViewController: UIViewController {
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = UIColor.clear
-        table.separatorColor = UIColor.black
+        table.separatorColor = UIColor.lightGray
         table.clipsToBounds = true
         table.translatesAutoresizingMaskIntoConstraints = false
         table.delegate = self
         table.dataSource = self
         return table
+    }()
+    
+    lazy var memberQuoteInfoModal: MemberQuoteInfoModal = {
+        let object = MemberQuoteInfoModal()
+        object.activeOrderVC = self
+        return object
     }()
     
     let cellId = "activeOrderCell"
@@ -133,6 +141,7 @@ class ActiveOrderViewController: UIViewController {
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
     }
+    
     @objc func navigationButtonTapped(_ sender: UIButton) {
         switch sender.tag {
         case 2:
@@ -143,15 +152,25 @@ class ActiveOrderViewController: UIViewController {
             print("Current ViewController")
         }
     }
+    
     @objc func menuTapped() {
         self.menu.show(self)
     }
+    
     @objc func rightBarButtonTapped() {
         
     }
     
     @objc func handleExpandButton(imageURL : String, serviceTitle: String, description: String) {
         serviceDetailsVC.show()
+    }
+    
+    func checkTappedFromModal(index: Int) {
+        guard let data = memberOrderDataModel else { return }
+        let destination = JobCompleteRequestViewController()
+        destination.data = data
+        destination.selectedIndex = index
+        navigationController?.pushViewController(destination, animated: true)
     }
     
     public func selectedViewControllerFromMenu(indexNumber : Int) {
@@ -200,23 +219,26 @@ extension ActiveOrderViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.listOfActiveOrders.count
+        guard let data = memberOrderDataModel else { return 0 }
+        return data.data.jobRequestList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ActiveOrderTableViewCell {
-            
-            if let data = self.listOfActiveOrders as? [ActiveOrderNSObject] {
-                cell.serviceImageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIcon), placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground], completed: nil)
-                cell.titleText = "\(data[indexPath.row].serviceTitle)"
-                cell.statusText = ""
-                cell.subTitleText = "Status: \(data[indexPath.row].status)"
-                cell.quoteNumber = "0"
-                cell.expandButton.addTarget(self, action: #selector(handleExpandButton), for: .touchUpInside)
-                cell.quoteLabel.alpha = 0
-                cell.quoteNumberLabel.alpha = 0
-                cell.expandButton.alpha = 0
+            guard let data = memberOrderDataModel else { return UITableViewCell() }
+            cell.serviceImageView.sd_setImage(with: URL(string: data.data.jobRequestList[indexPath.row].serviceIcon.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!), placeholderImage: UIImage(named: "placeholder"), options: [.continueInBackground], completed: nil)
+            cell.titleText = data.data.jobRequestList[indexPath.row].serviceTitle
+            cell.subTitleText = "Status: ".localized() + "\(data.data.jobRequestList[indexPath.row].status)"
+            if let agent = data.data.jobRequestList[indexPath.row].agents {
+                if agent.count > 0 {
+                    cell.quoteLabel.text = "Quotes".localized() + ": "
+                    cell.quoteNumber = "\(agent.count)"
+                    cell.expandButton.setImage(#imageLiteral(resourceName: "down-arrow"), for: .normal)
+                    cell.expandButton.tag = indexPath.row
+                    cell.expandButton.addTarget(self, action: #selector(expandButtonTapped(_:)), for: .touchUpInside)
+                }
             }
+            
             return cell
         } else {
             let cell = tableView.cellForRow(at: indexPath)!
@@ -225,7 +247,15 @@ extension ActiveOrderViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        guard let data = memberOrderDataModel else { return }
+        if data.data.jobRequestList[indexPath.row].status == "Pending" {
+            let destination = ActiveOrderDetailsViewController()
+            destination.data = data
+            destination.selectedIndex = indexPath.row
+            navigationController?.pushViewController(destination, animated: true)
+        } else {
+            memberQuoteInfoModal.show(data: data, selectedIndex: indexPath.row)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -241,28 +271,48 @@ extension ActiveOrderViewController {
         HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
             guard let response = response else { return }
             
-            if !self.listOfActiveOrders.isEmpty {
-                self.listOfActiveOrders.removeAll()
-            }
-            
+//            if !self.listOfActiveOrders.isEmpty {
+//                self.listOfActiveOrders.removeAll()
+//            }
+//
+//            if let json = response.data {
+//                let decoder = JSONDecoder()
+//                do {
+//                    let activeOrderList = try decoder.decode(ActiveOrderModel.self, from: json)
+//
+//                    for eachOrder in activeOrderList.data.jobRequestList {
+//                        let container = ActiveOrderNSObject(id: eachOrder.id, serviceId: eachOrder.serviceId, parentServiceTitle: eachOrder.parentServiceTitle, serviceTitle: eachOrder.serviceTitle, description: eachOrder.description ?? "", serviceIcon: eachOrder.serviceIcon ?? "https://rabota.a42.ru/front/img/no_image.jpg", status: eachOrder.status ?? "", startDateTime: eachOrder.startDateTime ?? "", bidAmount: eachOrder.bidAmount ?? 0 )
+//                        self.listOfActiveOrders.append(container)
+//                    }
+//
+//                    self.tableView.reloadData()
+//                    if self.listOfActiveOrders.count == 0 {
+//                        Alert.showBasicAlert(on: self, with: "No Order Found".localized(), message: "There is no order".localized())
+//                    }
+//                } catch let err {
+//                    print(err)
+//                }
+//            }
             if let json = response.data {
                 let decoder = JSONDecoder()
                 do {
-                    let activeOrderList = try decoder.decode(ActiveOrderModel.self, from: json)
-                    
-                    for eachOrder in activeOrderList.data.jobRequestList {
-                        let container = ActiveOrderNSObject(id: eachOrder.id, serviceId: eachOrder.serviceId, parentServiceTitle: eachOrder.parentServiceTitle, serviceTitle: eachOrder.serviceTitle, description: eachOrder.description ?? "", serviceIcon: eachOrder.serviceIcon ?? "https://rabota.a42.ru/front/img/no_image.jpg", status: eachOrder.status ?? "", startDateTime: eachOrder.startDateTime ?? "", bidAmount: eachOrder.bidAmount ?? 0 )
-                        self.listOfActiveOrders.append(container)
-                    }
-                    
+                    let data = try decoder.decode(MemberOrderDataModel.self, from: json)
+                    self.memberOrderDataModel = data
                     self.tableView.reloadData()
-                    if self.listOfActiveOrders.count == 0 {
-                        Alert.showBasicAlert(on: self, with: "No Order Found", message: "There is no order")
-                    }
-                }catch let err {
+                } catch let err {
                     print(err)
                 }
             }
+        }
+    }
+}
+
+extension ActiveOrderViewController {
+    
+    @objc func expandButtonTapped(_ sender: UIButton) {
+        guard let data = memberOrderDataModel else { return }
+        if data.data.jobRequestList[sender.tag].status == "Running" {
+            memberQuoteInfoModal.show(data: data, selectedIndex: sender.tag)
         }
     }
 }

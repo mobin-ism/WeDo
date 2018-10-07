@@ -10,7 +10,9 @@ import UIKit
 class OrderHistoryViewController: UIViewController {
     
     let serviceDetailsVC = ServiceDetailsViewController()
-    var listOfOrders = [ActiveOrderNSObject]()
+    
+    var responseData: MemberOrderDataModel?
+    
     lazy var activeOrderButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +55,7 @@ class OrderHistoryViewController: UIViewController {
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = UIColor.clear
-        table.separatorColor = UIColor.black
+        table.separatorColor = UIColor.init(white: 0.9, alpha: 0.7)
         table.clipsToBounds = true
         table.translatesAutoresizingMaskIntoConstraints = false
         table.delegate = self
@@ -192,19 +194,16 @@ extension OrderHistoryViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.listOfOrders.count
+        guard let data = responseData else { return 0 }
+        return data.data.jobRequestList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? OrderHistoryTableViewCell {
-            if let data = listOfOrders as? [ActiveOrderNSObject] {
-                cell.serviceImageView.sd_setImage(with: URL(string: data[indexPath.row].serviceIcon), placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground], completed: nil)
-                cell.titleText = "\(data[indexPath.row].parentServiceTitle)"
-                cell.subTitleText = "(\(data[indexPath.row].serviceTitle)"
-                cell.dateTimeText = "\(data[indexPath.row].startDateTime)"
-                cell.jobText = "\(data[indexPath.row].description)"
-                cell.serviceChargeText = "AED \(data[indexPath.row].bidAmount)"
-            }
+            guard let data = responseData else { return UITableViewCell() }
+            cell.serviceImageView.sd_setImage(with: URL(string: data.data.jobRequestList[indexPath.row].serviceIcon.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!), placeholderImage: UIImage(named: "cloud-download"), options: [.continueInBackground], completed: nil)
+            cell.titleLabel.text = data.data.jobRequestList[indexPath.row].serviceTitle
+            cell.subTitleLabel.text = data.data.jobRequestList[indexPath.row].startDateTime
             return cell
         } else {
             let cell = tableView.cellForRow(at: indexPath)!
@@ -230,25 +229,13 @@ extension OrderHistoryViewController {
         HTTPRequestHandler.makeGetHttpRequest(url: url, parameter: [:]) { (response, nil) in
             guard let response = response else { return }
             
-            if !self.listOfOrders.isEmpty {
-                self.listOfOrders.removeAll()
-            }
-            
             if let json = response.data {
                 let decoder = JSONDecoder()
                 do {
-                    let activeOrderList = try decoder.decode(ActiveOrderModel.self, from: json)
-                    
-                    for eachOrder in activeOrderList.data.jobRequestList {
-                        let container = ActiveOrderNSObject(id: eachOrder.id, serviceId: eachOrder.serviceId, parentServiceTitle: eachOrder.parentServiceTitle, serviceTitle: eachOrder.serviceTitle, description: eachOrder.description ?? "", serviceIcon: eachOrder.serviceIcon ?? "https://rabota.a42.ru/front/img/no_image.jpg", status: eachOrder.status ?? "", startDateTime: eachOrder.startDateTime ?? "", bidAmount: eachOrder.bidAmount ?? 0 )
-                        self.listOfOrders.append(container)
-                    }
-                    
+                    let data = try decoder.decode(MemberOrderDataModel.self, from: json)
+                    self.responseData = data
                     self.tableView.reloadData()
-                    if self.listOfOrders.count == 0 {
-                        Alert.showBasicAlert(on: self, with: "No Order History Found", message: "There is no order history")
-                    }
-                }catch let err {
+                } catch let err {
                     print(err)
                 }
             }

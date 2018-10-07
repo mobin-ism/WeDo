@@ -20,8 +20,6 @@ class Menu: NSObject {
     var faqVC = HelpAndFAQViewController()
     var contactUsVC = ContactUsViewController()
     var editProfileVC = EditProfileViewController()
-    var spRegisterVC = SPRegisterViewController()
-    //var spHomeVC = SPHomeViewController()
     var spCurrentJobsVC = SPCurrentJobsViewController()
     var spNewJobsVC = SPNewJobsViewController()
     var spRequestedJobsVC = SPRequestedJobsViewController()
@@ -159,8 +157,8 @@ class Menu: NSObject {
             })
             // constraints
             backgroundView.topAnchor.constraint(equalTo: window.topAnchor).isActive = true
-            backgroundView.leftAnchor.constraint(equalTo: window.leftAnchor).isActive = true
-            backgroundView.rightAnchor.constraint(equalTo: window.rightAnchor).isActive = true
+            backgroundView.leadingAnchor.constraint(equalTo: window.leadingAnchor).isActive = true
+            backgroundView.trailingAnchor.constraint(equalTo: window.trailingAnchor).isActive = true
             backgroundView.bottomAnchor.constraint(equalTo: window.bottomAnchor).isActive = true
             
             // adding the container view
@@ -171,7 +169,11 @@ class Menu: NSObject {
     func setupContainerView(window: UIWindow) {
         window.addSubview(containerView)
         let width = window.frame.width * 0.85
-        containerView.frame = CGRect(x: -window.frame.width, y: 0, width: width, height: window.frame.height)
+        if UserDefaults.standard.value(forKey: LANGUAGE) as! String == "ar" {
+           containerView.frame = CGRect(x: window.frame.width, y: 0, width: width, height: window.frame.height)
+        } else {
+            containerView.frame = CGRect(x: -window.frame.width, y: 0, width: width, height: window.frame.height)
+        }
         
         setupLogoImageView()
         setupWelcomeLabel()
@@ -180,7 +182,11 @@ class Menu: NSObject {
         setupTableView()
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.containerView.frame = CGRect(x: 0, y: 0, width: self.containerView.frame.width, height: self.containerView.frame.height)
+            if UserDefaults.standard.value(forKey: LANGUAGE) as! String == "ar" {
+                self.containerView.frame = CGRect(x: window.frame.width - width, y: 0, width: self.containerView.frame.width, height: self.containerView.frame.height)
+            } else {
+                self.containerView.frame = CGRect(x: 0, y: 0, width: self.containerView.frame.width, height: self.containerView.frame.height)
+            }
         }, completion: nil)
     }
     
@@ -197,12 +203,12 @@ class Menu: NSObject {
     func setupWelcomeLabel() {
         containerView.addSubview(welcomeLabel)
         welcomeLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 70).isActive = true
-        welcomeLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 20).isActive = true
+        welcomeLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
     }
     func setupNameLabel() {
         containerView.addSubview(nametLabel)
         nametLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor).isActive = true
-        nametLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 20).isActive = true
+        nametLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
     }
     func setupCopyrightLabels() {
         containerView.addSubview(copyrightLabel)
@@ -224,7 +230,11 @@ class Menu: NSObject {
     @objc func hide() {
         if let window = UIApplication.shared.keyWindow {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.containerView.frame = CGRect(x: -window.frame.width, y: 0, width: self.containerView.frame.width, height: self.containerView.frame.height)
+                if UserDefaults.standard.value(forKey: LANGUAGE) as! String == "ar" {
+                    self.containerView.frame = CGRect(x: window.frame.width, y: 0, width: self.containerView.frame.width, height: self.containerView.frame.height)
+                } else {
+                    self.containerView.frame = CGRect(x: -window.frame.width, y: 0, width: self.containerView.frame.width, height: self.containerView.frame.height)
+                }
                 self.backgroundView.alpha = 0
             }, completion: nil)
         }
@@ -300,8 +310,6 @@ extension Menu: UITableViewDelegate, UITableViewDataSource {
             self.spProfileVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         case "SPContactViewController":
             self.spContactVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
-        case "SPRegisterViewController":
-            self.spRegisterVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         case "SPCurrentJobsViewController":
             self.spCurrentJobsVC.selectedViewControllerFromMenu(indexNumber: indexPath.row)
         case "SPNewJobsViewController":
